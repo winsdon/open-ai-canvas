@@ -1,0 +1,157 @@
+/* Short-drama library: the shared navigation stays in workspace-navigation-theme.css. */
+.app-user-workspace .studio-collection-page.drama-library {
+    --drama-library-ink: #10164d;
+    --drama-library-muted: #6573a3;
+    --drama-library-soft: #6677a1;
+    --drama-library-accent: #3473ff;
+    --drama-library-border: #c4d3ff;
+    --drama-library-glass: rgb(255 255 255 / 45%);
+    --drama-library-glass-edge: rgb(255 255 255 / 90%);
+    --drama-library-count-bg: #dce8ff;
+    --drama-library-button-bg: #171e36;
+    --drama-library-button-hover: #283760;
+    --drama-library-button-ink: #fff;
+    --drama-library-secondary-bg: rgb(255 255 255 / 84%);
+    --drama-library-shadow: 0 8px 28px rgb(72 110 201 / 7%);
+    --drama-library-background: #edf4ff url('/images/home/aurora-background.png') center / cover no-repeat;
+    --foreground: var(--drama-library-ink);
+    --user-ink: var(--drama-library-ink);
+    --user-ink-muted: var(--drama-library-muted);
+    --user-ink-soft: var(--drama-library-soft);
+    --user-accent: var(--drama-library-accent);
+    --user-border: var(--drama-library-border);
+    --user-surface: var(--drama-library-secondary-bg);
+    --workspace-accent: var(--drama-library-accent);
+    background: var(--drama-library-background) !important;
+    color: var(--drama-library-ink);
+    font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
+    scrollbar-color: var(--drama-library-border) transparent;
+}
+
+.app-user-workspace .studio-collection-page.drama-library > div {
+    width: 100%;
+    margin: 0;
+    padding: 18px 28px 32px;
+}
+
+.drama-library .drama-root {
+    --drama-muted: var(--drama-library-muted);
+    position: relative;
+    width: 100%;
+    max-width: 1520px;
+    min-height: 100%;
+    margin: 0 auto;
+}
+
+.drama-library-topline { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.drama-library-breadcrumb { display: flex; min-width: 0; align-items: center; gap: 10px; color: var(--drama-library-muted); font-size: 13px; }
+.drama-library-breadcrumb a { display: grid; width: 32px; height: 32px; place-items: center; border-radius: var(--r-md); color: inherit; }
+.drama-library-breadcrumb a:hover { background: var(--drama-library-glass); color: var(--drama-library-accent); }
+.drama-library-breadcrumb svg { width: 18px; height: 18px; }
+.drama-library-breadcrumb strong { color: var(--drama-library-ink); font-weight: 600; }
+.drama-library .drama-library-history.ant-btn { height: 38px; padding-inline: 14px; border: 1px solid var(--drama-library-border); border-radius: 12px; background: var(--drama-library-secondary-bg); color: var(--drama-library-ink); box-shadow: none; }
+.drama-library-history svg { width: 17px; height: 17px; }
+
+.drama-library-heading { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 12px 0 24px; text-align: center; }
+.drama-library-title { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.drama-library-title h1 { margin: 0; color: var(--drama-library-ink); font-size: clamp(30px, 2.5vw, 44px); font-weight: 700; line-height: 1.4; }
+.drama-library-count { display: inline-flex; min-width: 58px; height: 32px; align-items: center; justify-content: center; padding-inline: 13px; border-radius: var(--r-full); background: var(--drama-library-count-bg); color: var(--drama-library-accent); font-size: 15px; font-weight: 500; }
+.drama-library-heading > p { margin: 0; color: var(--drama-library-muted); font-size: clamp(14px, 1.2vw, 18px); line-height: 1.8; }
+.drama-library-heading .collection-header-actions { margin-top: 8px; }
+
+.drama-library-upload {
+    position: relative;
+    display: flex;
+    min-height: clamp(360px, 44vh, 520px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 26px 26px;
+    border: 1px solid var(--drama-library-glass-edge);
+    border-radius: 20px;
+    background: var(--drama-library-glass);
+    box-shadow: var(--drama-library-shadow);
+    text-align: center;
+}
+.drama-library-upload::before { position: absolute; inset: 6px; border: 1px dashed var(--drama-library-border); border-radius: 15px; content: ""; pointer-events: none; }
+.drama-library-book { display: block; width: clamp(138px, 10vw, 200px); height: auto; flex: 0 0 auto; margin: -8px 0 8px; object-fit: contain; }
+.drama-library-upload h2 { margin: 0 0 12px; color: var(--drama-library-ink); font-size: clamp(24px, 2vw, 34px); font-weight: 700; line-height: 1.5; }
+.drama-library-upload p { margin: 0; color: var(--drama-library-muted); font-size: clamp(14px, 1.15vw, 18px); line-height: 1.8; }
+.drama-library-explainer { max-width: 1000px; }
+.drama-library-upload-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin: 26px 0 16px; }
+.drama-library .drama-library-upload-actions .ant-btn { display: inline-flex; min-width: 180px; height: 50px; align-items: center; justify-content: center; gap: 10px; padding: 0 24px; border-radius: 11px; font-size: 16px; font-weight: 500; box-shadow: none; }
+.drama-library .drama-library-upload-actions .ant-btn svg { width: 21px; height: 21px; }
+.drama-library .drama-library-upload-actions .drama-library-pick.ant-btn { border-color: var(--drama-library-button-bg); background: var(--drama-library-button-bg); color: var(--drama-library-button-ink); }
+.drama-library .drama-library-upload-actions .drama-library-pick.ant-btn:hover { border-color: var(--drama-library-button-hover); background: var(--drama-library-button-hover); }
+.drama-library .drama-library-upload-actions .drama-library-paste.ant-btn { border-color: var(--drama-library-ink); background: var(--drama-library-secondary-bg); color: var(--drama-library-ink); }
+.drama-library .drama-library-upload-actions .drama-library-paste.ant-btn:hover { border-color: var(--drama-library-accent); color: var(--drama-library-accent); }
+.drama-library-drop-hint { color: var(--drama-library-soft); font-size: 13px; line-height: 1.8; }
+
+.drama-library-pipeline { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; margin: 18px 0 0; padding: 0; list-style: none; }
+.drama-library-pipeline > li { position: relative; min-width: 0; text-align: center; }
+.drama-library-pipeline > li > img { display: block; width: clamp(89.6px, 8vw, 144px); max-width: 80%; height: auto; margin: 0 auto 4px; object-fit: contain; }
+.drama-library-step-copy { display: flex; align-items: flex-start; justify-content: center; gap: 9px; text-align: left; }
+.drama-library-step-copy > div { min-width: 0; padding-top: 2px; }
+.drama-library-step-number { display: grid; width: 29px; height: 29px; flex: 0 0 29px; place-items: center; border: 2px solid var(--drama-library-glass-edge); border-radius: var(--r-full); background: var(--drama-library-accent); box-shadow: 0 2px 7px color-mix(in srgb, var(--drama-library-accent) 24%, transparent); color: var(--drama-library-button-ink); font-size: 16px; line-height: 1; }
+.drama-library-step-copy h3 { margin: 0; color: var(--drama-library-ink); font-size: clamp(12px, .95vw, 16px); font-weight: 600; line-height: 1.7; }
+.drama-library-step-copy p { margin: 6px 0 0; color: var(--drama-library-muted); font-size: clamp(12px, .85vw, 14px); line-height: 1.7; }
+.drama-library-pipeline .drama-library-step-arrow { position: absolute; top: 38%; right: -21px; width: 20px; height: 20px; color: var(--drama-library-muted); stroke-width: 1.5; }
+.drama-library .drama-library-drop { position: fixed; inset: 76px 24px 24px; border-color: var(--drama-library-accent); background: color-mix(in srgb, var(--drama-library-secondary-bg) 94%, transparent); }
+.drama-library .drama-library-status { background: var(--drama-library-glass); }
+.drama-library .drama-library-status-item[aria-checked="true"] { background: var(--drama-library-count-bg); color: var(--drama-library-accent); }
+.drama-library .drama-library-card { border-color: var(--drama-library-glass-edge); background: var(--drama-library-secondary-bg); }
+
+@media (min-width: 1800px) {
+    .drama-library-heading { margin-block: 10px 24px; }
+    .drama-library-upload { min-height: 530px; }
+    .drama-library .drama-library-upload-actions .ant-btn { min-width: 210px; }
+    .drama-library-pipeline { margin-top: 24px; }
+}
+@media (max-width: 1100px) {
+    .app-user-workspace .studio-collection-page.drama-library > div { padding-inline: 20px; }
+    .drama-library-pipeline { gap: 14px; }
+    .drama-library-step-copy { gap: 6px; }
+    .drama-library-step-number { width: 24px; height: 24px; flex-basis: 24px; font-size: 13px; }
+    .drama-library-pipeline .drama-library-step-arrow { right: -15px; width: 16px; }
+}
+@media (max-width: 720px) {
+    .app-user-workspace .studio-collection-page.drama-library > div { padding: 14px 16px 28px; }
+    .drama-library-heading { margin-top: 20px; gap: 8px; }
+    .drama-library-upload { min-height: 0; padding: 24px 20px; }
+    .drama-library-book { width: 140px; }
+    .drama-library-upload h2 { font-size: 24px; }
+    .drama-library-pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; }
+    .drama-library-pipeline > li:last-child { grid-column: 1 / -1; }
+    .drama-library-pipeline > li > img { width: 112px; }
+    .drama-library-pipeline .drama-library-step-arrow { display: none; }
+    .drama-library-step-copy h3 { font-size: 14px; }
+}
+@media (max-width: 480px) {
+    .app-user-workspace .studio-collection-page.drama-library > div { padding-inline: 12px; }
+    .drama-library-topline { gap: 8px; }
+    .drama-library-breadcrumb { gap: 6px; font-size: 12px; }
+    .drama-library .drama-library-history.ant-btn { padding-inline: 10px; font-size: 12px; }
+    .drama-library-heading > p { max-width: 28em; font-size: 14px; }
+    .drama-library-upload { padding-inline: 18px; }
+    .drama-library-upload h2 { font-size: 21px; }
+    .drama-library-upload-actions { width: 100%; margin-block: 22px 14px; gap: 10px; }
+    .drama-library .drama-library-upload-actions .ant-btn { width: 100%; min-width: 0; font-size: 16px; }
+    .drama-library-pipeline { grid-template-columns: minmax(0, 1fr); gap: 12px; padding-inline: 12px; }
+    .drama-library-pipeline > li { display: flex; align-items: center; gap: 12px; }
+    .drama-library-pipeline > li > img { width: 72px; flex: 0 0 72px; margin: 0; }
+    .drama-library-step-copy { flex: 1; justify-content: flex-start; gap: 9px; }
+}
+
+.dark .app-user-workspace .studio-collection-page.drama-library {
+    --drama-library-ink: #e5edff;
+    --drama-library-muted: #a8b9df;
+    --drama-library-soft: #9aacd2;
+    --drama-library-border: #4b6395;
+    --drama-library-glass: rgb(24 39 71 / 62%);
+    --drama-library-glass-edge: rgb(162 188 242 / 23%);
+    --drama-library-count-bg: #273f6d;
+    --drama-library-button-bg: #3976f3;
+    --drama-library-button-hover: #5089ff;
+    --drama-library-secondary-bg: rgb(30 47 81 / 88%);
+    --drama-library-background: linear-gradient(rgb(9 18 44 / 88%), rgb(9 18 44 / 88%)), url('/images/home/aurora-background.png') center / cover no-repeat;
+}

@@ -1,7 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { App, Button, Spin } from "antd";
 import { Tooltip } from "@/components/ui/base/tooltip";
-import { History, Maximize2, PenLine } from "lucide-react";
+import { History, Home, Maximize2, PenLine } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -1285,6 +1285,7 @@ export default function CreatePage() {
                     </motion.div> : null}
                 </AnimatePresence>
                 <main ref={threadScrollRef} onScroll={handleThreadScroll} className="creation-home-scroll creation-scrollbar">
+                <nav className="creation-page-trail" aria-label={t("shell.breadcrumb")}><Home aria-hidden="true" /><span>{brandName}</span><span aria-hidden="true">/</span><strong>{t("nav.pageTitles.home")}</strong></nav>
                 <section ref={launchpadRef} className="creation-launchpad" aria-label={t("create.page.launchpadLabel")}>
                     <header className="creation-start-heading">
                         <div>

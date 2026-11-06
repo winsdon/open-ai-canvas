@@ -1,11 +1,11 @@
 import { useDeferredValue, useEffect, useRef, useState, type DragEvent } from "react";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { App, Button, Dropdown, Input } from "antd";
-import { BookOpenText, ClipboardPaste, Clapperboard, ExternalLink, FileUp, MoreHorizontal, Plus, Search, Trash2 } from "lucide-react";
+import { ChevronRight, ClipboardPaste, Clapperboard, ExternalLink, FileUp, History, Home, MoreHorizontal, Plus, Search, Trash2 } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 
 import { CollectionToolbar } from "@/components/layout/collection-toolbar";
-import { PageHeader, PaginationBar, WorkspacePage } from "@/components/layout/workspace-page";
+import { PaginationBar, WorkspacePage } from "@/components/layout/workspace-page";
 import { WorkspaceErrorState, WorkspaceLoadingState, WorkspaceNoResultsState } from "@/components/layout/workspace-state";
 import { deleteDrama, listDramas, type DramaListItem, type DramaStatus } from "@/services/api/drama";
 
@@ -13,9 +13,16 @@ import { formatCredits, MediaThumb, STATUS_LABEL } from "./drama-shared";
 import { progressFillStyle } from "@/lib/progress-fill";
 import { RelativeTime } from "@/components/ui/product/relative-time";
 import "./drama.css";
+import "./drama-library.css";
 
 const PAGE_SIZES = [24, 48, 96];
-const PIPELINE = ["解析章节", "建立角色、道具与场景", "分集改编与段提示词", "按剧情段生成视频", "合成成片"];
+const PIPELINE = [
+    { image: "chapters", title: "解析章节", description: "智能提取小说结构" },
+    { image: "cast", title: "建立角色、道具与场景", description: "自动生成角色设定与世界观" },
+    { image: "script", title: "分集改编与段提示词", description: "按剧情拆集，生成分镜提示词" },
+    { image: "video", title: "按剧情段生成视频", description: "多模态模型生成分镜画面" },
+    { image: "film", title: "合成成片", description: "自动剪辑，输出成片" },
+];
 const STATUS_FILTERS: Array<{ value: DramaStatus | "all"; label: string }> = [
     { value: "all", label: "全部" },
     { value: "running", label: "制作中" },
@@ -80,8 +87,8 @@ export default function DramaListPage() {
         },
     };
 
-    if (query.isLoading) return <WorkspacePage className="studio-collection-page"><WorkspaceLoadingState label="正在读取作品" /></WorkspacePage>;
-    if (query.isError && !data) return <WorkspacePage className="studio-collection-page"><WorkspaceErrorState description="作品列表暂时无法读取。" onRetry={() => void query.refetch()} /></WorkspacePage>;
+    if (query.isLoading) return <WorkspacePage className="studio-collection-page drama-library"><WorkspaceLoadingState label="正在读取作品" /></WorkspacePage>;
+    if (query.isError && !data) return <WorkspacePage className="studio-collection-page drama-library"><WorkspaceErrorState description="作品列表暂时无法读取。" onRetry={() => void query.refetch()} /></WorkspacePage>;
 
     const actions = (
         <div className="collection-header-actions">
@@ -93,8 +100,19 @@ export default function DramaListPage() {
     return (
         <WorkspacePage className="studio-collection-page drama-library">
             <div className="drama-root" {...dragProps}>
+                <div className="drama-library-topline">
+                    <nav className="drama-library-breadcrumb" aria-label="短剧导航">
+                        <Link to="/" aria-label="返回创作"><Home aria-hidden="true" /></Link>
+                        <span>短剧</span><span aria-hidden="true">/</span><strong>{total ? "我的作品" : "创建"}</strong>
+                    </nav>
+                    <Button className="drama-library-history" icon={<History />} onClick={() => navigate("/tasks")}>创作历史</Button>
+                </div>
                 <div className="studio-band">
-                    <PageHeader title="短剧" description="上传一本小说，流水线自动改编、拆集、建角色、出分镜并合成成片。" meta={<span className="app-projects-header-meta">{total} 部</span>} actions={total ? actions : undefined} />
+                    <header className="drama-library-heading">
+                        <div className="drama-library-title"><h1>短剧</h1><span className="drama-library-count">{total} 部</span></div>
+                        <p>上传一本小说，流水线自动改编、拆集、建角色、出分镜并合成成片。</p>
+                        {total ? actions : null}
+                    </header>
                     {total ? (
                         <CollectionToolbar label="短剧浏览工具" active={filtered} onReset={() => { setKeyword(""); setStatus("all"); }}>
                             <Input prefix={<Search />} value={keyword} allowClear placeholder="搜索作品名" aria-label="搜索作品名" onChange={(event) => setKeyword(event.target.value)} />
@@ -140,16 +158,26 @@ export default function DramaListPage() {
 /** 还没有作品时的上传引导；有作品后整页都可拖入，不再常驻占位。 */
 function UploadHero({ onPick, onPaste }: { onPick: () => void; onPaste: () => void }) {
     return (
-        <div className="drama-drop drama-library-hero">
-            <span className="drama-drop-icon"><BookOpenText className="size-7" /></span>
-            <h2>拖入一本小说，开始做短剧</h2>
-            <p>支持 TXT / Markdown，最多 600 万字。确认风格、参考图方案和审阅方式后，系统自动改编、拆集、建角色、出分镜并合成成片。</p>
-            <div className="flex flex-wrap justify-center gap-2">
-                <Button type="primary" size="large" icon={<FileUp className="size-4" />} onClick={onPick}>选择小说文件</Button>
-                <Button size="large" icon={<ClipboardPaste className="size-4" />} onClick={onPaste}>粘贴正文</Button>
+        <section className="drama-library-onboarding" aria-label="开始制作短剧">
+            <div className="drama-library-upload">
+                <img className="drama-library-book" src="/images/drama/book.png" alt="" width={220} height={195} />
+                <h2>拖入一本小说，开始做短剧</h2>
+                <p className="drama-library-formats">支持 TXT / Markdown，最多 600 万字。</p>
+                <p className="drama-library-explainer">确认风格、参考图方案和审阅方式后，系统自动改编、拆集、建角色、出分镜并合成成片。</p>
+                <div className="drama-library-upload-actions">
+                    <Button className="drama-library-pick" type="primary" size="large" icon={<FileUp />} onClick={onPick}>选择小说文件</Button>
+                    <Button className="drama-library-paste" size="large" icon={<ClipboardPaste />} onClick={onPaste}>粘贴正文</Button>
+                </div>
+                <span className="drama-library-drop-hint">或直接将文件拖拽到此处</span>
             </div>
-            <div className="drama-drop-steps">{PIPELINE.map((step, index) => <span key={step}><b>{index + 1}</b>{step}</span>)}</div>
-        </div>
+            <ol className="drama-library-pipeline" aria-label="短剧制作流程">
+                {PIPELINE.map((step, index) => <li key={step.image}>
+                    <img src={`/images/drama/${step.image}-v2.png`} alt="" width={200} height={166} decoding="async" />
+                    <div className="drama-library-step-copy"><span className="drama-library-step-number" aria-hidden="true">{index + 1}</span><div><h3>{step.title}</h3><p>{step.description}</p></div></div>
+                    {index < PIPELINE.length - 1 ? <ChevronRight className="drama-library-step-arrow" aria-hidden="true" /> : null}
+                </li>)}
+            </ol>
+        </section>
     );
 }
 

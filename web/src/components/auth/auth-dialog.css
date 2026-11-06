@@ -1,13 +1,15 @@
 /* 登录弹窗：左侧品牌舞台 + 右侧登录面板。品牌舞台属于设计规范允许装饰渐变的登录品牌区域；
-   暖色光晕是组件级 token，底色仍来自 --auth-panel-bg，跟随皮肤与明暗主题。 */
+   蓝紫光晕是组件级 token，底色仍来自 --auth-panel-bg，跟随皮肤与明暗主题。 */
 
 .auth-dialog {
-    --auth-dialog-glow: rgba(240, 206, 170, 0.62);
+    --auth-dialog-glow-blue: rgba(125, 170, 255, 0.62);
+    --auth-dialog-glow-purple: rgba(169, 143, 242, 0.4);
     --auth-dialog-orb: rgba(255, 255, 255, 0.5);
 }
 
 .dark .auth-dialog {
-    --auth-dialog-glow: rgba(176, 128, 82, 0.16);
+    --auth-dialog-glow-blue: rgba(83, 127, 224, 0.24);
+    --auth-dialog-glow-purple: rgba(142, 103, 218, 0.18);
     --auth-dialog-orb: rgba(255, 255, 255, 0.025);
 }
 
@@ -26,7 +28,7 @@
     gap: var(--space-8);
     overflow: hidden;
     padding: var(--space-12);
-    background: radial-gradient(120% 90% at 0% 0%, var(--auth-dialog-glow), transparent 62%), var(--auth-panel-bg);
+    background: radial-gradient(120% 90% at 0% 0%, var(--auth-dialog-glow-blue), var(--auth-dialog-glow-purple) 36%, transparent 72%), var(--auth-panel-bg);
     color: var(--foreground);
 }
 

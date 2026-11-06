@@ -1,6 +1,6 @@
 import { Popover } from "antd";
 import { ShoppingBag } from "lucide-react";
-import { ChevronDown, ChevronRight, CircleUserRound, History as HistoryIcon, Image as ImageIcon, Infinity as InfinityIcon, PanelLeftClose, PanelLeftOpen, Plus, Video } from "lucide-react";
+import { ChevronDown, ChevronRight, CircleUserRound, History as HistoryIcon, Image as ImageIcon, PanelLeftClose, PanelLeftOpen, Plus, Video } from "lucide-react";
 import { LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useRef, useState, type ComponentType, type CSSProperties } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 
 import { AuthLoginLink } from "@/components/auth/auth-login-link";
-import { BrandLogoFrame } from "@/components/brand/brand-logo";
 import { UserAvatar } from "@/components/layout/user-avatar";
 import { UserGroupAvatarRing, UserGroupBadge } from "@/components/layout/user-group-badge";
 import { Kbd } from "@/components/ui/base/kbd";
@@ -18,7 +17,6 @@ import { aceternityMotion } from "@/lib/aceternity-motion";
 import { cn } from "@/lib/utils";
 import { preloadWorkspaceRoute } from "@/lib/workspace-route-modules";
 import { useUserStore, type FeatureAvailability } from "@/stores/use-user-store";
-import { useAppearanceStore } from "@/stores/use-appearance-store";
 import { WorkspaceAccountCard } from "./workspace-account-card";
 import { WorkspaceSidebarCheckin } from "./workspace-sidebar-checkin";
 import { WorkspaceSidebarStorageMeter } from "./workspace-sidebar-storage-meter";
@@ -142,44 +140,6 @@ function WorkspaceSidebarProfile({ collapsed, user, onExpand, onCollapse }: { co
                     <PanelLeftOpen className="size-4" strokeWidth={1.7} />
                 </button>
             ) : null}
-        </div>
-    );
-}
-
-function WorkspaceSwitcher({ collapsed, onNavigate }: { collapsed: boolean; onNavigate: () => void; onExpand: () => void; onCollapse: () => void }) {
-    const appearance = useAppearanceStore((state) => state.appearance);
-    const { t } = useTranslation();
-    if (collapsed) {
-        return (
-            <div className="app-workspace-sidebar-brand-row relative shrink-0 flex items-center justify-center px-3 pt-3">
-                <Link to="/" onClick={onNavigate} className="app-workspace-sidebar-brand-button group" aria-label={t("shell.brandHome", { brand: appearance.brandName })}>
-                    <BrandLogoFrame
-                        className="app-workspace-brand-mark grid size-8 shrink-0 place-items-center rounded-[var(--r-sm)] shadow-sm"
-                        logoClassName="size-5 object-contain"
-                        alt=""
-                        fallback={<InfinityIcon className="size-4" strokeWidth={2.2} />}
-                    />
-                </Link>
-            </div>
-        );
-    }
-
-    return (
-        <div className="app-workspace-sidebar-brand-row relative shrink-0 px-3 pt-3">
-            <Link to="/" onClick={onNavigate} className="app-workspace-sidebar-brand-button group" aria-label={t("shell.brandHome", { brand: appearance.brandName })}>
-                <span className="flex min-w-0 items-center gap-2">
-                    <BrandLogoFrame
-                        className="app-workspace-brand-mark grid size-8 shrink-0 place-items-center rounded-[var(--r-sm)] shadow-sm"
-                        logoClassName="size-5 object-contain"
-                        alt=""
-                        fallback={<InfinityIcon className="size-4" strokeWidth={2.2} />}
-                    />
-                    <span className="flex min-w-0 flex-col">
-                        <span className="app-workspace-brand-wordmark truncate text-[var(--fs-body)] leading-none font-semibold">{appearance.brandName}</span>
-                        <span className="mt-1 truncate text-[var(--fs-label)] leading-none text-foreground/60">{t("shell.workbench")}</span>
-                    </span>
-                </span>
-            </Link>
         </div>
     );
 }
@@ -386,8 +346,6 @@ export function WorkspaceSidebarNav({ collapsed, onNavigate, onOpenSearch, onExp
 
     return (
         <div className={cn("app-workspace-sidebar-nav flex h-full shrink-0 flex-col", collapsed && "is-collapsed")}>
-            <WorkspaceSwitcher collapsed={collapsed} onNavigate={onNavigate} onExpand={onExpand} onCollapse={onCollapse} />
-
             <LayoutGroup id="workspace-sidebar-nav">
                 <div
                     ref={scrollRef}

@@ -1,4 +1,4 @@
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { ExternalLink, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { currentLocale } from "@/i18n";
@@ -15,22 +15,8 @@ import { useUserStore } from "@/stores/use-user-store";
 import { useAppearanceStore } from "@/stores/use-appearance-store";
 import { useWalletBalance } from "@/hooks/use-wallet-balance";
 import { openWorkspaceWallet } from "@/lib/workspace-wallet";
-
-const PAGE_TITLE_KEYS: Record<string, string> = {
-    home: "nav.pageTitles.home",
-    create: "nav.pageTitles.home",
-    projects: "nav.pageTitles.projects",
-    canvas: "nav.pageTitles.canvas",
-    tasks: "nav.pageTitles.tasks",
-    assets: "nav.pageTitles.assets",
-    skills: "nav.pageTitles.skills",
-    plugins: "nav.pageTitles.plugins",
-    settings: "nav.pageTitles.settings",
-};
-const TOOLBOX_TITLE_KEYS: Record<string, string> = {
-    image: "nav.pageTitles.toolboxImage",
-    video: "nav.pageTitles.toolboxVideo",
-};
+import { BrandLogo } from "@/components/brand/brand-logo";
+import { CreationBrandMark } from "@/components/brand/creation-brand-mark";
 
 export function WorkspaceTopBar({ sidebarOpen, onToggleSidebar }: { sidebarOpen: boolean; onToggleSidebar: () => void }) {
     const brandName = useAppearanceStore((state) => state.appearance.brandName);
@@ -40,11 +26,7 @@ export function WorkspaceTopBar({ sidebarOpen, onToggleSidebar }: { sidebarOpen:
     const user = useUserStore((state) => state.user);
     const creditsEnabled = useUserStore((state) => state.features.creditsEnabled);
     const { availableMicrocredits } = useWalletBalance(user?.id, creditsEnabled);
-    const { pathname } = useLocation();
-    const [slug, subSlug] = pathname.split("/").filter(Boolean);
-    // /toolbox/image 和 /toolbox/video 共用 toolbox 首段，标题按第二段区分。
-    const sectionKey = slug === "toolbox" ? TOOLBOX_TITLE_KEYS[subSlug ?? ""] : PAGE_TITLE_KEYS[slug ?? ""];
-    const pageTitle = slug ? (sectionKey ? t(sectionKey) : brandName) : t(PAGE_TITLE_KEYS.home);
+    const { pathname, search, hash } = useLocation();
     const balance = availableMicrocredits === null ? "--" : (availableMicrocredits / 1_000_000).toLocaleString(currentLocale(), { maximumFractionDigits: 2 });
 
     return (
@@ -52,13 +34,10 @@ export function WorkspaceTopBar({ sidebarOpen, onToggleSidebar }: { sidebarOpen:
             <button type="button" className="app-workspace-mobile-menu app-workspace-topbar-icon-button" aria-label={sidebarOpen ? t("shell.collapseSidebar") : t("shell.expandSidebar")} onClick={onToggleSidebar}>
                 {sidebarOpen ? <PanelLeftClose className="size-4" /> : <PanelLeftOpen className="size-4" />}
             </button>
-            <nav className="app-workspace-topbar-breadcrumb" aria-label={t("shell.breadcrumb")}>
-                <Link to="/" className="font-medium text-foreground/65 transition-colors hover:text-foreground">
-                    {brandName}
-                </Link>
-                <span aria-hidden="true">/</span>
-                <span className="truncate font-medium text-foreground">{pageTitle}</span>
-            </nav>
+            <Link to="/" className="creation-platform-brand" aria-label={t("shell.brandHome", { brand: brandName })}>
+                <BrandLogo className="creation-platform-mark" fallback={<CreationBrandMark className="creation-platform-mark" />} />
+                <span>{brandName}<span className="creation-platform-brand-divider"> / </span><span className="creation-platform-name">图像视频创作平台</span></span>
+            </Link>
             <WorkspaceTopBarExtensionSlot />
             <div className="app-workspace-topbar-actions">
                 <LanguageMenu />
@@ -72,6 +51,7 @@ export function WorkspaceTopBar({ sidebarOpen, onToggleSidebar }: { sidebarOpen:
                 ) : null}
                 {user ? <SystemAnnouncementCenter userId={user.id} className="app-workspace-topbar-icon-button" autoOpen /> : null}
                 <AnimatedThemeToggler className="app-workspace-topbar-icon-button" theme={theme} onThemeChange={setTheme} aria-label={t("shell.toggleTheme")} />
+                <a href={`${pathname}${search}${hash}`} target="_blank" rel="noopener noreferrer" className="creation-open-window" aria-label="在新窗口打开"><ExternalLink aria-hidden="true" /><span>新窗口打开</span></a>
                 <WorkspaceAccountMenu />
             </div>
         </header>

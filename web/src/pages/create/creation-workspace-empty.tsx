@@ -103,11 +103,10 @@ export const creationEmptySuggestions: Array<{ mode: CreationMode; icon: typeof 
 export function CreationEmptySuggest({ onStartPrompt, onOpenLibrary }: { onStartPrompt: (mode: CreationMode, prompt: string) => void; onOpenLibrary: () => void }) {
     const { t } = useTranslation();
     const reducedMotion = useReducedMotion();
-    const [hovered, setHovered] = useState<string | null>(null);
     return (
         <LayoutGroup id="creation-empty-suggest">
             <div className="creation-empty-suggest" aria-label={t("create.empty.suggestLabel")}>
-                {creationEmptySuggestions.map((item) => {
+                {creationEmptySuggestions.map((item, index) => {
                     const Icon = item.icon;
                     const start = () => {
                         if (item.openLibrary) onOpenLibrary();
@@ -117,14 +116,11 @@ export function CreationEmptySuggest({ onStartPrompt, onOpenLibrary }: { onStart
                         <motion.button
                             key={item.title}
                             type="button"
-                            className="suggest-card"
+                            className={`suggest-card suggest-card-${index}`}
                             onClick={start}
-                            onHoverStart={() => setHovered(item.title)}
-                            onHoverEnd={() => setHovered(null)}
                             whileHover={reducedMotion ? undefined : { y: -2 }}
                             transition={aceternityMotion.spring.surface}
                         >
-                            {hovered === item.title ? <motion.span layoutId="creation-suggest-hover" className="suggest-card-hover" aria-hidden transition={reducedMotion ? { duration: 0 } : aceternityMotion.spring.surface} /> : null}
                             <span className="library-icon-tile suggest-icon">
                                 <Icon size={18} strokeWidth={2} />
                             </span>
@@ -132,6 +128,7 @@ export function CreationEmptySuggest({ onStartPrompt, onOpenLibrary }: { onStart
                                 <strong>{item.title}</strong>
                                 <span>{item.hint}</span>
                             </span>
+                            <img className="suggest-art" src={`/images/home/${["first-shot", "reference", "story", "skills"][index]}-card.png`} alt="" aria-hidden="true" width="1200" height="600" />
                         </motion.button>
                     );
                 })}

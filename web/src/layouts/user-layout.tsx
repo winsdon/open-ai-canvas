@@ -11,6 +11,8 @@ import { preloadWorkspaceNavigationPages } from "@/lib/workspace-route-modules";
 import { useUserStore } from "@/stores/use-user-store";
 import "@/styles/workspace-product.css";
 import "@/styles/workspace-menus.css";
+import "@/styles/workspace-navigation-theme.css";
+import "@/styles/creation-home-theme.css";
 
 const workspaceTheme = getWorkspaceAntThemeConfig();
 // 平台唯一的 Agent 面板按需加载，不拖慢首屏；画布编辑器只发布画布上下文，不再自己渲染面板。
@@ -18,6 +20,7 @@ const GlobalAgentPanel = lazy(() => import("@/components/canvas/canvas-cloud-age
 
 export default function UserLayout({ children }: { children: ReactNode }) {
     const { pathname } = useLocation();
+    const homeWorkspace = pathname === "/" || pathname === "/create";
     const adminWorkspace = pathname === "/admin" || pathname.startsWith("/admin/");
     const spatialWorkbench = isSpatialWorkbenchPath(pathname);
     const canvasEditor = /^\/canvas\/[^/]+(?:\/|$)/.test(pathname);
@@ -66,7 +69,7 @@ export default function UserLayout({ children }: { children: ReactNode }) {
             popover={productWorkspace ? { classNames: { root: "workspace-quiet-popup" } } : undefined}
         >
             <div
-                className={cn("app-user-workspace h-dvh overflow-hidden text-foreground", spatialWorkbench && "app-spatial-workspace", productWorkspace && "app-product-workspace")}
+                className={cn("app-user-workspace h-dvh overflow-hidden text-foreground", spatialWorkbench && "app-spatial-workspace", productWorkspace && "app-product-workspace", homeWorkspace && "app-home-workspace")}
                 style={agentDocked ? { paddingRight: agentDock.width } : undefined}
                 data-agent-docked={agentDocked || undefined}
             >
