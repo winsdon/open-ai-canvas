@@ -6,7 +6,9 @@ import { formatAbsoluteDateTime, formatRelativeTime } from "../src/lib/relative-
 import { skillAccent, skillAccentNames, skillGlyph } from "../src/pages/skills/skill-catalog";
 
 const read = (path: string) => readFileSync(new URL(path, import.meta.url), "utf8");
-const css = read("../src/styles/workspace-product.css").replace(/\/\*[\s\S]*?\*\//g, "");
+const css = read("../src/styles/workspace-product.css")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\s+/g, " ");
 
 describe("relative time", () => {
     const now = Date.parse("2026-10-24T12:00:00+08:00");

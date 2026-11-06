@@ -113,14 +113,7 @@ export function CreationEmptySuggest({ onStartPrompt, onOpenLibrary }: { onStart
                         else onStartPrompt(item.mode, item.prompt);
                     };
                     return (
-                        <motion.button
-                            key={item.title}
-                            type="button"
-                            className={`suggest-card suggest-card-${index}`}
-                            onClick={start}
-                            whileHover={reducedMotion ? undefined : { y: -2 }}
-                            transition={aceternityMotion.spring.surface}
-                        >
+                        <motion.button key={item.title} type="button" className={`suggest-card suggest-card-${index}`} onClick={start} whileHover={reducedMotion ? undefined : { y: -2 }} transition={aceternityMotion.spring.surface}>
                             <span className="library-icon-tile suggest-icon">
                                 <Icon size={18} strokeWidth={2} />
                             </span>

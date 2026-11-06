@@ -36,7 +36,11 @@ export function WorkspaceTopBar({ sidebarOpen, onToggleSidebar }: { sidebarOpen:
             </button>
             <Link to="/" className="creation-platform-brand" aria-label={t("shell.brandHome", { brand: brandName })}>
                 <BrandLogo className="creation-platform-mark" fallback={<CreationBrandMark className="creation-platform-mark" />} />
-                <span>{brandName}<span className="creation-platform-brand-divider"> / </span><span className="creation-platform-name">图像视频创作平台</span></span>
+                <span>
+                    {brandName}
+                    <span className="creation-platform-brand-divider"> / </span>
+                    <span className="creation-platform-name">图像视频创作平台</span>
+                </span>
             </Link>
             <WorkspaceTopBarExtensionSlot />
             <div className="app-workspace-topbar-actions">
@@ -51,7 +55,10 @@ export function WorkspaceTopBar({ sidebarOpen, onToggleSidebar }: { sidebarOpen:
                 ) : null}
                 {user ? <SystemAnnouncementCenter userId={user.id} className="app-workspace-topbar-icon-button" autoOpen /> : null}
                 <AnimatedThemeToggler className="app-workspace-topbar-icon-button" theme={theme} onThemeChange={setTheme} aria-label={t("shell.toggleTheme")} />
-                <a href={`${pathname}${search}${hash}`} target="_blank" rel="noopener noreferrer" className="creation-open-window" aria-label="在新窗口打开"><ExternalLink aria-hidden="true" /><span>新窗口打开</span></a>
+                <a href={`${pathname}${search}${hash}`} target="_blank" rel="noopener noreferrer" className="creation-open-window" aria-label="在新窗口打开">
+                    <ExternalLink aria-hidden="true" />
+                    <span>新窗口打开</span>
+                </a>
                 <WorkspaceAccountMenu />
             </div>
         </header>
