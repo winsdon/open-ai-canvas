@@ -17,9 +17,17 @@
 }
 
 .app-user-workspace.app-product-workspace .app-workspace-shell,
-.app-user-workspace.app-product-workspace .app-workspace-shell.is-creation-workspace { background: var(--workspace-shell-bg) !important; }
-.app-user-workspace.app-product-workspace .app-workspace-main-row { gap: 8px; padding: 0 10px 10px; }
-.app-user-workspace.app-product-workspace .app-workspace-stage { border: 1px solid var(--workspace-shell-border); border-radius: var(--r-2xl); }
+.app-user-workspace.app-product-workspace .app-workspace-shell.is-creation-workspace {
+    background: var(--workspace-shell-bg) !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-main-row {
+    gap: 8px;
+    padding: 0 10px 10px;
+}
+.app-user-workspace.app-product-workspace .app-workspace-stage {
+    border: 1px solid var(--workspace-shell-border);
+    border-radius: var(--r-2xl);
+}
 .app-user-workspace.app-product-workspace :is(.app-workspace-sidebar, .app-workspace-topbar) {
     --user-ink: var(--workspace-nav-ink);
     --user-ink-muted: var(--workspace-nav-muted);
@@ -30,7 +38,11 @@
     --user-surface-hover: var(--workspace-nav-hover);
     --foreground: var(--workspace-nav-ink);
     color: var(--workspace-nav-ink);
-    font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
+    font-family:
+        "Microsoft YaHei",
+        "PingFang SC",
+        -apple-system,
+        sans-serif;
 }
 .app-user-workspace.app-product-workspace .app-workspace-sidebar {
     width: 190px !important;
@@ -39,61 +51,211 @@
     border-radius: var(--r-2xl);
     background: var(--workspace-nav-bg) !important;
 }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar.is-collapsed { width: 72px !important; flex-basis: 72px !important; }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav { background: transparent; }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar-scroll-area { padding: 22px 10px !important; gap: 24px !important; }
-.app-user-workspace.app-product-workspace .app-workspace-nav-group + .app-workspace-nav-group { border-top: 1px solid var(--workspace-nav-border); padding-top: 18px; }
-.app-user-workspace.app-product-workspace .app-workspace-nav-group-toggle { margin-bottom: 8px; color: var(--workspace-nav-soft); }
-.app-user-workspace.app-product-workspace .app-workspace-nav-link { min-height: 45px !important; padding: 8px 12px !important; font-size: 14px !important; font-weight: 400 !important; color: var(--workspace-nav-item) !important; }
-.app-user-workspace.app-product-workspace .app-workspace-nav-link .app-workspace-nav-main { gap: 14px !important; }
+.app-user-workspace.app-product-workspace .app-workspace-sidebar.is-collapsed {
+    width: 72px !important;
+    flex-basis: 72px !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav {
+    background: transparent;
+}
+.app-user-workspace.app-product-workspace .app-workspace-sidebar-scroll-area {
+    padding: 22px 10px !important;
+    gap: 24px !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-nav-content {
+    gap: 24px;
+}
+.app-user-workspace.app-product-workspace .app-workspace-nav-group + .app-workspace-nav-group {
+    border-top: 1px solid var(--workspace-nav-border);
+    padding-top: 18px;
+}
+.app-user-workspace.app-product-workspace .app-workspace-nav-group-toggle {
+    margin-bottom: 8px;
+    color: var(--workspace-nav-soft);
+}
+.app-user-workspace.app-product-workspace .app-workspace-nav-link {
+    min-height: 45px !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: var(--workspace-nav-item) !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-nav-link .app-workspace-nav-main {
+    gap: 14px !important;
+}
 .app-user-workspace.app-product-workspace .app-workspace-nav-link .app-workspace-nav-icon svg,
-.app-user-workspace.app-product-workspace .app-workspace-nav-link .app-workspace-nav-main > svg { width: 21px !important; height: 21px !important; }
-.app-user-workspace.app-product-workspace .app-workspace-nav-active-pill { background: var(--workspace-nav-selected); }
-.app-user-workspace.app-product-workspace .app-workspace-nav-link.is-active { background: var(--workspace-nav-selected); color: var(--workspace-nav-accent) !important; font-weight: 600 !important; }
+.app-user-workspace.app-product-workspace .app-workspace-nav-link .app-workspace-nav-main > svg {
+    width: 21px !important;
+    height: 21px !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-nav-active-pill {
+    background: var(--workspace-nav-selected);
+}
+.app-user-workspace.app-product-workspace .app-workspace-nav-link.is-active {
+    color: var(--workspace-nav-accent) !important;
+    font-weight: 600 !important;
+}
 .app-user-workspace.app-product-workspace .app-workspace-nav-link:hover:not(.is-active),
-.app-user-workspace.app-product-workspace .app-workspace-nav-link:focus-visible:not(.is-active) { background: var(--workspace-nav-hover); }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar-footer { margin: 0 10px; padding: 12px 2px !important; border-top: 1px solid var(--workspace-nav-border) !important; }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar-profile { background: transparent; color: var(--workspace-nav-item); }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar-profile-avatar { background: transparent; color: var(--workspace-nav-icon); }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav.is-collapsed .app-workspace-sidebar-scroll-area { padding-inline: 8px !important; }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav.is-collapsed .app-workspace-nav-link { min-height: 52px !important; padding: 4px 0 !important; }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav.is-collapsed .app-workspace-nav-main { gap: 2px !important; }
-.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav.is-collapsed .app-workspace-nav-link.is-active .app-workspace-nav-title { color: var(--workspace-nav-accent); }
-.app-user-workspace.app-product-workspace .app-workspace-topbar { height: 62px !important; min-height: 62px !important; padding: 0 24px !important; flex-shrink: 0; background: var(--workspace-shell-bg) !important; }
-.app-user-workspace.app-product-workspace .app-workspace-topbar-actions { margin-left: auto; gap: 12px; color: var(--workspace-nav-muted); }
-.app-user-workspace.app-product-workspace .app-workspace-topbar-icon-button { color: var(--workspace-nav-icon); }
+.app-user-workspace.app-product-workspace .app-workspace-nav-link:focus-visible:not(.is-active) {
+    background: var(--workspace-nav-hover);
+}
+.app-user-workspace.app-product-workspace .app-workspace-sidebar-footer {
+    margin: 0 10px;
+    padding: 12px 2px !important;
+    border-top: 1px solid var(--workspace-nav-border) !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-sidebar-profile {
+    background: transparent;
+    color: var(--workspace-nav-item);
+}
+.app-user-workspace.app-product-workspace .app-workspace-sidebar-profile-avatar {
+    background: transparent;
+    color: var(--workspace-nav-icon);
+}
+.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav.is-collapsed .app-workspace-sidebar-scroll-area {
+    padding-inline: 8px !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav.is-collapsed .app-workspace-nav-link {
+    min-height: 52px !important;
+    padding: 4px 0 !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav.is-collapsed .app-workspace-nav-main {
+    gap: 2px !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-sidebar-nav.is-collapsed .app-workspace-nav-link.is-active .app-workspace-nav-title {
+    color: var(--workspace-nav-accent);
+}
+.app-user-workspace.app-product-workspace .app-workspace-topbar {
+    height: 62px !important;
+    min-height: 62px !important;
+    padding: 0 24px !important;
+    flex-shrink: 0;
+    background: var(--workspace-shell-bg) !important;
+}
+.app-user-workspace.app-product-workspace .app-workspace-topbar-actions {
+    margin-left: auto;
+    gap: 12px;
+    color: var(--workspace-nav-muted);
+}
+.app-user-workspace.app-product-workspace .app-workspace-topbar-icon-button {
+    color: var(--workspace-nav-icon);
+}
 .app-user-workspace.app-product-workspace .app-workspace-topbar-feedback-pill,
-.app-user-workspace.app-product-workspace .app-workspace-topbar-credit-pill { border: 0; background: transparent; box-shadow: none; color: var(--workspace-nav-icon); }
-.creation-platform-brand { display: inline-flex; min-width: 0; align-items: center; gap: 12px; color: var(--workspace-nav-ink); font-size: 19px; font-weight: 600; white-space: nowrap; }
-.creation-platform-mark { width: 36px; height: 36px; flex: 0 0 36px; object-fit: contain; }
-.creation-platform-brand-divider { margin-inline: 4px; color: var(--workspace-nav-soft); font-weight: 400; }
-.creation-platform-name { font-size: 18px; }
-.creation-open-window { display: inline-flex; min-height: 36px; align-items: center; gap: 8px; padding: 0 12px; border-inline: 1px solid var(--workspace-nav-border); color: var(--workspace-nav-muted); font-size: 13px; }
-.creation-open-window svg { width: 17px; height: 17px; }
-.creation-open-window:hover { color: var(--workspace-nav-accent); }
-.app-user-workspace.app-product-workspace :is(.app-workspace-sidebar, .app-workspace-topbar) :is(button, a):focus-visible { outline: 2px solid var(--workspace-nav-focus); outline-offset: 3px; }
+.app-user-workspace.app-product-workspace .app-workspace-topbar-credit-pill {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--workspace-nav-icon);
+}
+.creation-platform-brand {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+    color: var(--workspace-nav-ink);
+    font-size: 19px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.creation-platform-mark {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    object-fit: contain;
+}
+.creation-platform-brand-divider {
+    margin-inline: 4px;
+    color: var(--workspace-nav-soft);
+    font-weight: 400;
+}
+.creation-platform-name {
+    font-size: 18px;
+}
+.creation-open-window {
+    display: inline-flex;
+    min-height: 36px;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border-inline: 1px solid var(--workspace-nav-border);
+    color: var(--workspace-nav-muted);
+    font-size: 13px;
+}
+.creation-open-window svg {
+    width: 17px;
+    height: 17px;
+}
+.creation-open-window:hover {
+    color: var(--workspace-nav-accent);
+}
+.app-user-workspace.app-product-workspace :is(.app-workspace-sidebar, .app-workspace-topbar) :is(button, a):focus-visible {
+    outline: 2px solid var(--workspace-nav-focus);
+    outline-offset: 3px;
+}
 
 @media (min-width: 1800px) {
-    .app-user-workspace.app-product-workspace .app-workspace-sidebar { width: 210px !important; flex-basis: 210px !important; }
+    .app-user-workspace.app-product-workspace .app-workspace-sidebar {
+        width: 210px !important;
+        flex-basis: 210px !important;
+    }
 }
 @media (max-width: 1350px) {
-    .app-user-workspace.app-product-workspace .app-workspace-sidebar { width: 168px !important; flex-basis: 168px !important; }
+    .app-user-workspace.app-product-workspace .app-workspace-sidebar {
+        width: 168px !important;
+        flex-basis: 168px !important;
+    }
 }
 @media (max-width: 1023px) {
-    .app-user-workspace.app-product-workspace .app-workspace-sidebar { z-index: 110; height: calc(100dvh - 80px); top: 68px; left: 10px; }
-    .app-user-workspace.app-product-workspace .app-workspace-sidebar.is-mobile-expanded { width: 210px !important; flex-basis: 210px !important; }
-    .app-user-workspace.app-product-workspace .app-workspace-topbar { padding-inline: 16px !important; }
-    .creation-platform-brand { gap: 8px; font-size: 17px; }
-    .creation-platform-name { font-size: 15px; }
-    .creation-open-window { display: none; }
+    .app-user-workspace.app-product-workspace .app-workspace-sidebar {
+        z-index: 110;
+        height: calc(100dvh - 80px);
+        top: 68px;
+        left: 10px;
+    }
+    .app-user-workspace.app-product-workspace .app-workspace-sidebar.is-mobile-expanded {
+        width: 210px !important;
+        flex-basis: 210px !important;
+    }
+    .app-user-workspace.app-product-workspace .app-workspace-topbar {
+        padding-inline: 16px !important;
+    }
+    .creation-platform-brand {
+        gap: 8px;
+        font-size: 17px;
+    }
+    .creation-platform-name {
+        font-size: 15px;
+    }
+    .creation-open-window {
+        display: none;
+    }
 }
 @media (max-width: 640px) {
-    .app-user-workspace.app-product-workspace .app-workspace-main-row { padding: 0 6px 6px; }
-    .app-user-workspace.app-product-workspace .app-workspace-topbar { min-height: 56px !important; height: 56px !important; padding-inline: 10px !important; gap: 6px; }
-    .app-user-workspace.app-product-workspace .app-workspace-topbar-actions { gap: 4px; }
-    .app-user-workspace.app-product-workspace .app-workspace-sidebar { top: 62px; height: calc(100dvh - 74px); }
-    .creation-platform-name, .creation-platform-brand-divider { display: none; }
-    .creation-platform-mark { width: 30px; height: 30px; flex-basis: 30px; }
+    .app-user-workspace.app-product-workspace .app-workspace-main-row {
+        padding: 0 6px 6px;
+    }
+    .app-user-workspace.app-product-workspace .app-workspace-topbar {
+        min-height: 56px !important;
+        height: 56px !important;
+        padding-inline: 10px !important;
+        gap: 6px;
+    }
+    .app-user-workspace.app-product-workspace .app-workspace-topbar-actions {
+        gap: 4px;
+    }
+    .app-user-workspace.app-product-workspace .app-workspace-sidebar {
+        top: 62px;
+        height: calc(100dvh - 74px);
+    }
+    .creation-platform-name,
+    .creation-platform-brand-divider {
+        display: none;
+    }
+    .creation-platform-mark {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+    }
 }
 
 .dark .app-user-workspace.app-product-workspace {

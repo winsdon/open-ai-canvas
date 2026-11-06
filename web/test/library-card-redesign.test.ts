@@ -67,11 +67,13 @@ describe("canvas library card", () => {
 
 describe("skills library", () => {
     const page = read("../src/pages/skills/index.tsx");
-    test("uses a single left rail instead of top tabs and a platform select", () => {
+    test("keeps scope navigation in the category rail and filters above results", () => {
         expect(page).toContain('className="skills-rail"');
+        expect(page).toContain('className="skills-rail-group skills-scope-nav"');
+        expect(page).toContain('className="skills-results-header"');
         expect(page).not.toContain("SegmentedControl");
         expect(page).not.toContain("SkillCurationBrowser");
-        expect(page).not.toContain("skills-tabs");
+        expect(page).toContain("<SkillIcon");
     });
     test("cards label their stats and keep add as a compact toggle", () => {
         expect(page).toContain("人加入");

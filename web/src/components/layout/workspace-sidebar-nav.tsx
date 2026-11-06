@@ -1,9 +1,8 @@
 import { Popover } from "antd";
 import { ShoppingBag } from "lucide-react";
 import { ChevronDown, ChevronRight, CircleUserRound, History as HistoryIcon, Image as ImageIcon, PanelLeftClose, PanelLeftOpen, Plus, Video } from "lucide-react";
-import { LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useRef, useState, type ComponentType, type CSSProperties } from "react";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
+import { Link, useLocation, useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 
@@ -13,13 +12,13 @@ import { UserGroupAvatarRing, UserGroupBadge } from "@/components/layout/user-gr
 import { Kbd } from "@/components/ui/base/kbd";
 import { navigationTools, type NavigationToolSlug } from "@/constant/navigation-tools";
 import { useWorkspaceLogout } from "@/hooks/use-workspace-logout";
-import { aceternityMotion } from "@/lib/aceternity-motion";
 import { cn } from "@/lib/utils";
 import { preloadWorkspaceRoute } from "@/lib/workspace-route-modules";
 import { useUserStore, type FeatureAvailability } from "@/stores/use-user-store";
 import { WorkspaceAccountCard } from "./workspace-account-card";
 import { WorkspaceSidebarCheckin } from "./workspace-sidebar-checkin";
 import { WorkspaceSidebarStorageMeter } from "./workspace-sidebar-storage-meter";
+import { useWorkspaceNavIndicator } from "./workspace-sidebar-indicator";
 import { openWorkspaceWallet } from "@/lib/workspace-wallet";
 
 export type WorkspaceNavItem = {
@@ -165,7 +164,6 @@ function NavItem({
     const isActive = activeId === item.id || (item.id === "settings" && activeId.startsWith("settings:"));
     const hasChildren = Boolean(item.children?.length);
     const [isOpen, setIsOpen] = useState(false);
-    const reducedMotion = useReducedMotion();
 
     // 激活分支自动展开（如设置分区子项），保证当前位置可见。
     useEffect(() => {
@@ -201,7 +199,6 @@ function NavItem({
         collapsed && "is-collapsed",
         isActive ? "is-active font-medium" : "text-foreground/62 hover:bg-surface-hover hover:text-foreground",
     );
-    const activePill = isActive ? <motion.span layoutId="workspace-nav-active-pill" className="app-workspace-nav-active-pill" aria-hidden transition={reducedMotion ? { duration: 0 } : aceternityMotion.spring.dock} /> : null;
 
     const handleClick = () => {
         if (item.action === "search") {
@@ -230,6 +227,7 @@ function NavItem({
                     className={rowClassName}
                     data-nav-id={item.id}
                     style={rowStyle}
+                    aria-current={isActive ? "page" : undefined}
                     aria-label={collapsed ? item.title : undefined}
                     title={collapsed ? item.title : undefined}
                     onClick={handleClick}
@@ -237,7 +235,6 @@ function NavItem({
                     onPointerDown={() => preloadWorkspaceRoute(linkTo)}
                     onPointerEnter={() => preloadWorkspaceRoute(linkTo)}
                 >
-                    {activePill}
                     {rowContent}
                 </Link>
             ) : (
@@ -251,7 +248,6 @@ function NavItem({
                     onClick={handleClick}
                     aria-expanded={hasChildren ? isOpen : undefined}
                 >
-                    {activePill}
                     {rowContent}
                 </button>
             )}
@@ -330,6 +326,9 @@ export function WorkspaceSidebarNav({ collapsed, onNavigate, onOpenSearch, onExp
     const activeId = workspaceNavActiveId(pathname, searchParams.get("section"));
 
     const scrollRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const keyboardNavigation = useRef(false);
+    const indicatorRef = useWorkspaceNavIndicator({ containerRef: contentRef, activeId, collapsed, keyboardNavigation });
     const [scrollState, setScrollState] = useState({ hasTopFade: false, hasBottomFade: false });
     const handleScroll = () => {
         const element = scrollRef.current;
@@ -346,22 +345,24 @@ export function WorkspaceSidebarNav({ collapsed, onNavigate, onOpenSearch, onExp
 
     return (
         <div className={cn("app-workspace-sidebar-nav flex h-full shrink-0 flex-col", collapsed && "is-collapsed")}>
-            <LayoutGroup id="workspace-sidebar-nav">
-                <div
-                    ref={scrollRef}
-                    onScroll={handleScroll}
-                    className={cn(
-                        "app-workspace-sidebar-scroll-area flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-3 pb-3 pt-7",
-                        collapsed && "is-collapsed",
-                        scrollState.hasTopFade && "has-top-fade",
-                        scrollState.hasBottomFade && "has-bottom-fade",
-                    )}
-                >
+            <div
+                ref={scrollRef}
+                onScroll={handleScroll}
+                className={cn("app-workspace-sidebar-scroll-area flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-3 pb-3 pt-7", collapsed && "is-collapsed", scrollState.hasTopFade && "has-top-fade", scrollState.hasBottomFade && "has-bottom-fade")}
+                onPointerDownCapture={() => {
+                    keyboardNavigation.current = false;
+                }}
+                onKeyDownCapture={() => {
+                    keyboardNavigation.current = true;
+                }}
+            >
+                <div ref={contentRef} className="app-workspace-nav-content">
+                    <span ref={indicatorRef} className="app-workspace-nav-active-pill" aria-hidden="true" />
                     {groups.map((group, index) => (
                         <NavGroup key={index} group={group} activeId={activeId} onNavigate={onNavigate} onOpenSearch={onOpenSearch} onLogout={() => void handleLogout()} collapsed={collapsed} />
                     ))}
                 </div>
-            </LayoutGroup>
+            </div>
 
             <div className="app-workspace-sidebar-footer shrink-0 px-3 py-3">
                 <WorkspaceSidebarProfile collapsed={collapsed} user={user} onExpand={onExpand} onCollapse={onCollapse} />
