@@ -7,6 +7,7 @@ import { Button, Popover } from "antd";
 import { useWorkspaceTopBarMount } from "@/components/layout/workspace-top-bar-extension";
 import { Tooltip } from "@/components/ui/base/tooltip";
 import { Reorder, LayoutGroup, motion, useReducedMotion } from "motion/react";
+import type { Transition } from "motion/react";
 import { ArrowUp, ChevronDown, ChevronLeft, ChevronRight, Clapperboard, Clock3, Film, History, Image as ImageIcon, LoaderCircle, Maximize2, MessageSquareText, Minimize2, Plus, SlidersHorizontal, Trash2, Waves, X, Lightbulb, Orbit, PenLine } from "lucide-react";
 
 import { WorkingGlow } from "@/components/ai/working-indicator";
@@ -296,8 +297,9 @@ export function CreationComposer(props: ComposerProps) {
         }
         return undefined;
     };
-    const composer = <HoverBorderGradient as="div" duration={2.2} containerClassName="creation-composer-shell" className="creation-composer-shell-inner">
-        <div className={`relative isolate creation-chat-composer is-${props.variant}`}>
+    // 首页空态的外框由 CreationModeCard 提供；输入框不添加指针高光。
+    const embedded = props.variant === "empty";
+    const surface = <div className={`relative isolate creation-chat-composer is-${props.variant}`}>
         <div className="creation-chat-writing-surface">
             <div className="creation-chat-editor">
                 <CanvasResourceMentionTextarea ref={props.composerFocusRef} value={props.prompt} references={props.references} mentionMenuWidth={400} sendOnEnter onFocus={props.onPromptFocus} onChange={props.setPrompt} onSubmit={props.onSubmit} containerClassName="creation-chat-mention-container" className="creation-chat-mention-editor creation-scrollbar" style={{ color: "var(--creation-text)" }} placeholder={props.placeholderOverride || (props.variant === "empty" ? emptyPlaceholder : placeholder)} aria-label="创作提示词，可使用 @ 引用当前参考内容或技能；回车发送，Shift+回车换行" spellCheck disabled={interactionBusy} activeDropReferenceId={dropTargetReferenceId} onReferenceFilesDrop={(reference, files) => { const target = props.references.find((item) => item.id === reference.id); if (target?.attachmentId) props.onReplaceReferenceFiles(target.attachmentId, files); }} />
@@ -428,8 +430,8 @@ export function CreationComposer(props: ComposerProps) {
             </Button>
         </footer>
         <CreationMediaPreviewModal url={previewUrl} type={previewType} onClose={() => setPreviewUrl("")} />
-        </div>
-    </HoverBorderGradient>;
+        </div>;
+    const composer = embedded ? surface : <HoverBorderGradient as="div" duration={2.2} containerClassName="creation-composer-shell" className="creation-composer-shell-inner">{surface}</HoverBorderGradient>;
 
     if (!promptOptimizerOpen) return composer;
 
@@ -452,13 +454,52 @@ export function CreationComposer(props: ComposerProps) {
     );
 }
 
-export function CreationModeTabs({ mode, onModeChange, agentActive = false, onAgentSelect, orientation = "horizontal" }: { mode: CreationMode; onModeChange: (mode: CreationMode) => void; agentActive?: boolean; onAgentSelect?: () => void; orientation?: "horizontal" | "vertical" }) {
+const creationModeItems: { mode: CreationMode; icon: ReactNode; label: string }[] = [
+    { mode: "video", icon: <Film />, label: "视频" },
+    { mode: "image", icon: <ImageIcon />, label: "图片" },
+    { mode: "text", icon: <MessageSquareText />, label: "文本" },
+];
+
+type CreationModeKey = CreationMode | "agent";
+
+// 首页页签的拉伸滑动：朝目标一侧的边用更硬的弹簧先到，另一侧稍后跟上，页签先拉长再收拢。
+const folderTabLeadingSpring = { type: "spring", stiffness: 540, damping: 42, mass: 0.6 } as const;
+const folderTabTrailingSpring = { type: "spring", stiffness: 280, damping: 32, mass: 0.8 } as const;
+
+/** 首页创作卡：顶部文件夹页签切换视频 / 图片 / 文本 / Agent，选中页签与下方内容面同色相连。 */
+export function CreationModeCard({ mode, agentActive, onModeChange, onAgentSelect, children }: { mode: CreationMode; agentActive: boolean; onModeChange: (mode: CreationMode) => void; onAgentSelect: () => void; children: ReactNode }) {
     const reducedMotion = useReducedMotion();
-    const items: { mode: CreationMode; icon: ReactNode; label: string }[] = [
-        { mode: "video", icon: <Film />, label: "视频" },
-        { mode: "image", icon: <ImageIcon />, label: "图片" },
-        { mode: "text", icon: <MessageSquareText />, label: "文本" },
-    ];
+    const keys: CreationModeKey[] = [...creationModeItems.map((item) => item.mode), "agent"];
+    const activeKey: CreationModeKey = agentActive ? "agent" : mode;
+    const activeIndex = Math.max(0, keys.indexOf(activeKey));
+    // 记住上一次的位置来判断滑动方向；在渲染期调整状态，切换当帧就拿到新方向。
+    const [slide, setSlide] = useState({ index: activeIndex, direction: 0 });
+    if (slide.index !== activeIndex) setSlide({ index: activeIndex, direction: Math.sign(activeIndex - slide.index) });
+    const step = 100 / keys.length;
+    const tabTransition: Transition = reducedMotion ? { duration: 0 } : {
+        left: slide.direction < 0 ? folderTabLeadingSpring : folderTabTrailingSpring,
+        right: slide.direction > 0 ? folderTabLeadingSpring : folderTabTrailingSpring,
+    };
+    return <HoverBorderGradient as="div" duration={2.2} containerClassName="creation-mode-card" className="creation-mode-card-inner">
+        <div className="creation-mode-folder" role="group" aria-label="创作模式" data-active-mode={activeKey} style={{ "--creation-mode-count": keys.length } as CSSProperties}>
+            <motion.span className="creation-mode-folder-tab" aria-hidden initial={false} animate={{ left: `${activeIndex * step}%`, right: `${(keys.length - 1 - activeIndex) * step}%` }} transition={tabTransition}>
+                <CreationModeFolderWing side="start" />
+                <CreationModeFolderWing side="end" />
+            </motion.span>
+            {creationModeItems.map((item) => <button key={item.mode} type="button" className="creation-mode-folder-button" data-mode={item.mode} aria-pressed={activeKey === item.mode} aria-label={`${item.label}生成`} onClick={() => onModeChange(item.mode)}>{item.icon}<span>{item.label}</span></button>)}
+            <button type="button" className="creation-mode-folder-button" data-mode="agent" aria-pressed={agentActive} onClick={onAgentSelect}><Orbit /><span>Agent</span><i className="creation-mode-spark" aria-hidden /></button>
+        </div>
+        <div className="creation-mode-panel">{children}</div>
+    </HoverBorderGradient>;
+}
+
+// 选中页签两侧的 S 形翼片：顶边水平切入、底边水平落到内容面；与页签主体重叠 1px，避免亚像素接缝。
+function CreationModeFolderWing({ side }: { side: "start" | "end" }) {
+    return <svg className={`creation-mode-folder-wing is-${side}`} viewBox="0 0 30 48" preserveAspectRatio="none" aria-hidden focusable="false"><path d="M30 0H28C14 0 14 48 0 48H30Z" /></svg>;
+}
+
+function CreationModeTabs({ mode, onModeChange, orientation = "horizontal" }: { mode: CreationMode; onModeChange: (mode: CreationMode) => void; orientation?: "horizontal" | "vertical" }) {
+    const reducedMotion = useReducedMotion();
     const indicator = (pressed: boolean) => pressed ? (
         <motion.span
             layoutId={`creation-mode-indicator-${orientation}`}
@@ -468,15 +509,14 @@ export function CreationModeTabs({ mode, onModeChange, agentActive = false, onAg
         />
     ) : null;
     return <LayoutGroup id={`creation-mode-tabs-${orientation}`}>
-        <div className="creation-mode-tabs" role="group" aria-label="创作模式" data-active-mode={agentActive ? "agent" : mode} data-orientation={orientation} style={{ gridTemplateColumns: orientation === "vertical" ? "minmax(0, 1fr)" : `repeat(${onAgentSelect ? 4 : 3}, minmax(0, 1fr))` }}>
-        {items.map((item) => (
-            <button key={item.mode} type="button" className="creation-mode-button" data-mode={item.mode} aria-pressed={!agentActive && item.mode === mode} aria-label={`${item.label}生成`} onClick={() => onModeChange(item.mode)}>
-                {indicator(!agentActive && item.mode === mode)}
+        <div className="creation-mode-tabs" role="group" aria-label="创作模式" data-active-mode={mode} data-orientation={orientation} style={{ gridTemplateColumns: orientation === "vertical" ? "minmax(0, 1fr)" : "repeat(3, minmax(0, 1fr))" }}>
+        {creationModeItems.map((item) => (
+            <button key={item.mode} type="button" className="creation-mode-button" data-mode={item.mode} aria-pressed={item.mode === mode} aria-label={`${item.label}生成`} onClick={() => onModeChange(item.mode)}>
+                {indicator(item.mode === mode)}
                 {item.icon}
                 <span>{item.label}</span>
             </button>
         ))}
-        {onAgentSelect ? <button type="button" className="creation-mode-button" data-mode="agent" aria-pressed={agentActive} onClick={onAgentSelect}>{indicator(agentActive)}<Orbit /><span>Agent</span><i className="creation-mode-spark" aria-hidden /></button> : null}
         </div>
     </LayoutGroup>;
 }
