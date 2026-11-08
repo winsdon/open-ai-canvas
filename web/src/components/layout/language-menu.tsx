@@ -21,7 +21,7 @@ export function LanguageMenu({ variant = "topbar", className }: { variant?: "top
         <Dropdown
             trigger={["click"]}
             placement="bottomRight"
-            rootClassName="language-menu-dropdown"
+            rootClassName={cn("language-menu-dropdown", variant === "topbar" && "workspace-language-popup")}
             menu={{
                 selectedKeys: [locale],
                 items: SUPPORTED_LOCALES.map((item) => ({

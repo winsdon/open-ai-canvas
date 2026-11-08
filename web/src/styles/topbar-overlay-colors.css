@@ -1,0 +1,139 @@
+/* Account settings and portal surfaces share home colors; components own geometry. */
+body.app-product-overlays :is(.workspace-language-popup, .workspace-account-popover, .workspace-wallet-modal, .workspace-announcement-modal, .app-changelog-modal, .settings-page) {
+    --topbar-overlay-bg: #f1f6ff;
+    --topbar-overlay-paper: #fff;
+    --topbar-overlay-muted: #e2eaff;
+    --topbar-overlay-hover: #d7e4ff;
+    --topbar-overlay-ink: #10164d;
+    --topbar-overlay-secondary: #626d9c;
+    --topbar-overlay-soft: #7a85ac;
+    --topbar-overlay-edge: #dce4f7;
+    --topbar-overlay-accent: #3473ff;
+    --user-page-bg: var(--topbar-overlay-bg);
+    --user-surface: var(--topbar-overlay-paper);
+    --user-surface-raised: var(--topbar-overlay-paper);
+    --user-surface-muted: var(--topbar-overlay-muted);
+    --user-surface-hover: var(--topbar-overlay-hover);
+    --user-card-hover: var(--topbar-overlay-hover);
+    --user-ink: var(--topbar-overlay-ink);
+    --user-ink-muted: var(--topbar-overlay-secondary);
+    --user-ink-soft: var(--topbar-overlay-soft);
+    --user-border: var(--topbar-overlay-edge);
+    --user-border-strong: var(--topbar-overlay-accent);
+    --user-accent: var(--topbar-overlay-accent);
+    --user-accent-soft: var(--topbar-overlay-muted);
+    --background: var(--topbar-overlay-bg);
+    --foreground: var(--topbar-overlay-ink);
+    --muted: var(--topbar-overlay-muted);
+    --muted-foreground: var(--topbar-overlay-secondary);
+    --text-primary: var(--topbar-overlay-ink);
+    --text-secondary: var(--topbar-overlay-secondary);
+    --text-tertiary: var(--topbar-overlay-soft);
+    --border: var(--topbar-overlay-edge);
+    --input: var(--topbar-overlay-edge);
+    --surface-hover: var(--topbar-overlay-hover);
+    --surface-secondary: var(--topbar-overlay-paper);
+    --surface-tertiary: var(--topbar-overlay-muted);
+    --surface-strong: var(--topbar-overlay-paper);
+    --library-surface: var(--topbar-overlay-paper);
+    --library-surface-hover: var(--topbar-overlay-hover);
+    --card: var(--topbar-overlay-paper);
+    --card-foreground: var(--topbar-overlay-ink);
+    --primary: var(--topbar-overlay-accent);
+    --primary-foreground: #fff;
+    --workspace-accent: var(--topbar-overlay-accent);
+    --control-selected-bg: var(--topbar-overlay-muted);
+    --control-selected-fg: var(--topbar-overlay-accent);
+    --control-selected-border: var(--topbar-overlay-accent);
+    --control-focus-ring: var(--topbar-overlay-accent);
+    --ring: var(--topbar-overlay-accent);
+    --button-primary-bg: #3473ff;
+    --button-primary-hover-bg: #2463ed;
+    --button-primary-active-bg: #1b55d7;
+    --button-primary-fg: #fff;
+    --button-secondary-bg: var(--topbar-overlay-paper);
+    --button-secondary-hover-bg: var(--topbar-overlay-muted);
+    --button-secondary-fg: var(--topbar-overlay-ink);
+    --button-secondary-border: var(--topbar-overlay-edge);
+    --button-secondary-hover-border: var(--topbar-overlay-accent);
+    --button-ghost-fg: var(--topbar-overlay-secondary);
+    --unified-input-surface: var(--topbar-overlay-paper);
+    --unified-input-surface-hover: var(--topbar-overlay-muted);
+    --unified-input-surface-focus: var(--topbar-overlay-paper);
+    --unified-input-placeholder: var(--topbar-overlay-soft);
+    color: var(--topbar-overlay-ink);
+}
+.dark body.app-product-overlays :is(.workspace-language-popup, .workspace-account-popover, .workspace-wallet-modal, .workspace-announcement-modal, .app-changelog-modal, .settings-page) {
+    --topbar-overlay-bg: #101b38;
+    --topbar-overlay-paper: #222e50;
+    --topbar-overlay-muted: #253451;
+    --topbar-overlay-hover: #304367;
+    --topbar-overlay-ink: #e5edff;
+    --topbar-overlay-secondary: #a7b6dc;
+    --topbar-overlay-soft: #8c9fc8;
+    --topbar-overlay-edge: #3e507a;
+    --topbar-overlay-accent: #9abbff;
+}
+body.app-product-overlays :is(.workspace-wallet-modal, .workspace-announcement-modal, .app-changelog-modal) .ant-modal-container {
+    background: var(--topbar-overlay-bg) !important;
+    border-color: var(--topbar-overlay-edge);
+    color: var(--topbar-overlay-ink);
+}
+body.app-product-overlays :is(.workspace-wallet-modal, .workspace-announcement-modal, .app-changelog-modal) .ant-modal-header {
+    background: var(--topbar-overlay-paper);
+    color: var(--topbar-overlay-ink);
+}
+body.app-product-overlays :is(.workspace-wallet-modal, .workspace-announcement-modal, .app-changelog-modal) .ant-modal-close {
+    color: var(--topbar-overlay-secondary);
+}
+body.app-product-overlays .workspace-language-popup .ant-dropdown-menu {
+    background: var(--topbar-overlay-paper) !important;
+    border-color: var(--topbar-overlay-edge);
+}
+body.app-product-overlays .workspace-language-popup .ant-dropdown-menu-item {
+    color: var(--topbar-overlay-ink);
+}
+body.app-product-overlays .workspace-language-popup .ant-dropdown-menu-item:hover {
+    background: var(--topbar-overlay-hover);
+}
+body.app-product-overlays .workspace-language-popup .ant-dropdown-menu-item-selected {
+    background: var(--topbar-overlay-muted);
+    color: var(--topbar-overlay-accent);
+}
+body.app-product-overlays .workspace-wallet-modal .ant-modal-container::before,
+body.app-product-overlays .workspace-wallet-modal .workspace-wallet-shell::before {
+    background: radial-gradient(ellipse at 25% 25%, color-mix(in srgb, var(--topbar-overlay-accent) 16%, transparent), transparent 70%);
+}
+
+body.app-product-overlays .settings-page {
+    background: var(--topbar-overlay-bg) url("/images/home/aurora-background.png") center / cover !important;
+}
+.dark body.app-product-overlays .settings-page {
+    background:
+        linear-gradient(rgb(16 27 56 / 94%), rgb(16 27 56 / 97%)),
+        url("/images/home/aurora-background.png") center / cover !important;
+}
+body.app-product-overlays .settings-page .settings-library-frame,
+body.app-product-overlays .settings-page .settings-content {
+    background: color-mix(in srgb, var(--topbar-overlay-paper) 80%, transparent) !important;
+}
+body.app-product-overlays .settings-page .settings-nav-panel {
+    background: color-mix(in srgb, var(--topbar-overlay-muted) 70%, var(--topbar-overlay-paper)) !important;
+}
+body.app-product-overlays .settings-page .settings-nav-item:hover {
+    background: var(--topbar-overlay-hover);
+}
+body.app-product-overlays .workspace-wallet-modal .workspace-wallet-content:is(.is-redeem, .is-history) {
+    color: var(--topbar-overlay-ink);
+}
+body.app-product-overlays .workspace-wallet-modal .workspace-wallet-redeem-row .ant-input {
+    background: var(--topbar-overlay-muted) !important;
+    color: var(--topbar-overlay-ink);
+}
+body.app-product-overlays .workspace-wallet-modal .workspace-wallet-ledger-icon.is-consume {
+    color: var(--topbar-overlay-secondary);
+}
+body.app-product-overlays .workspace-wallet-modal .workspace-wallet-pagination button:not(:disabled):hover {
+    background: var(--topbar-overlay-muted);
+    color: var(--topbar-overlay-accent);
+}

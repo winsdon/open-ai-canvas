@@ -34,15 +34,20 @@ export function AnnouncementTimelineModal({ open, announcements, loading = false
 
     return (
         <Modal
+            rootClassName="workspace-announcement-modal"
             open={open}
             width={960}
             centered
-            footer={automaticPrompt ? (
-                <div className="flex flex-wrap justify-end gap-2">
-                    <Button onClick={onDismissToday}>{t("account.ui.announcements.dismissToday")}</Button>
-                    <Button type="primary" onClick={onDismissOnce}>{t("account.ui.announcements.dismissOnce")}</Button>
-                </div>
-            ) : null}
+            footer={
+                automaticPrompt ? (
+                    <div className="flex flex-wrap justify-end gap-2">
+                        <Button onClick={onDismissToday}>{t("account.ui.announcements.dismissToday")}</Button>
+                        <Button type="primary" onClick={onDismissOnce}>
+                            {t("account.ui.announcements.dismissOnce")}
+                        </Button>
+                    </div>
+                ) : null
+            }
             onCancel={onClose}
             title={
                 <div className="flex min-w-0 items-center gap-3 pr-8">
@@ -57,11 +62,7 @@ export function AnnouncementTimelineModal({ open, announcements, loading = false
             }
             styles={{ body: { paddingTop: 8, maxHeight: "min(72vh, 720px)", overflowY: "auto", overscrollBehavior: "contain" } }}
             modalRender={(node) => (
-                <motion.div
-                    initial={reducedMotion ? false : { opacity: 0, y: 14, scale: 0.975 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: aceternityMotion.duration.panel, ease: aceternityMotion.easing.enter }}
-                >
+                <motion.div initial={reducedMotion ? false : { opacity: 0, y: 14, scale: 0.975 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: aceternityMotion.duration.panel, ease: aceternityMotion.easing.enter }}>
                     {node}
                 </motion.div>
             )}
@@ -70,7 +71,12 @@ export function AnnouncementTimelineModal({ open, announcements, loading = false
                 {loading ? (
                     <motion.div key="loading" role="status" className="grid min-h-60 place-items-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                         <div className="flex flex-col items-center gap-3 text-sm text-foreground/50">
-                            <motion.span aria-hidden className="size-7 rounded-full border-2 border-foreground/15 border-t-foreground/70" animate={reducedMotion ? undefined : { rotate: 360 }} transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }} />
+                            <motion.span
+                                aria-hidden
+                                className="size-7 rounded-full border-2 border-foreground/15 border-t-foreground/70"
+                                animate={reducedMotion ? undefined : { rotate: 360 }}
+                                transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                            />
                             {t("account.ui.announcements.loading")}
                         </div>
                     </motion.div>
@@ -80,7 +86,15 @@ export function AnnouncementTimelineModal({ open, announcements, loading = false
                             <CircleAlert className="mx-auto size-7 text-red-500" />
                             <p className="mt-3 text-sm font-medium text-foreground">{t("account.ui.announcements.loadFailed")}</p>
                             <p className="mt-1 max-w-sm text-xs leading-5 text-foreground/50">{error}</p>
-                            {onRetry ? <button type="button" className="mt-4 h-8 rounded-md border border-border px-3 text-xs font-medium text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" onClick={onRetry}>{t("account.layout.state.reload")}</button> : null}
+                            {onRetry ? (
+                                <button
+                                    type="button"
+                                    className="mt-4 h-8 rounded-md border border-border px-3 text-xs font-medium text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                    onClick={onRetry}
+                                >
+                                    {t("account.layout.state.reload")}
+                                </button>
+                            ) : null}
                         </div>
                     </motion.div>
                 ) : announcements.length ? (
@@ -92,7 +106,9 @@ export function AnnouncementTimelineModal({ open, announcements, loading = false
                 ) : (
                     <motion.div key="empty" className="grid min-h-60 place-items-center text-center" initial={reducedMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
                         <div>
-                            <span className="mx-auto grid size-12 place-items-center rounded-full border border-border bg-muted/40 text-foreground/45"><BellOff className="size-5" /></span>
+                            <span className="mx-auto grid size-12 place-items-center rounded-full border border-border bg-muted/40 text-foreground/45">
+                                <BellOff className="size-5" />
+                            </span>
                             <p className="mt-3 text-sm font-medium text-foreground">{t("account.ui.announcements.empty")}</p>
                             <p className="mt-1 text-xs text-foreground/45">{t("account.ui.announcements.emptyHint")}</p>
                         </div>
@@ -120,12 +136,29 @@ function AnnouncementTimelineItem({ announcement, last, reducedMotion }: { annou
             <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                     <h3 className="text-[var(--fs-body-lg)] font-semibold leading-6 tracking-normal text-foreground sm:text-base">{announcement.title}</h3>
-                    <span className="inline-flex items-center gap-1 text-[var(--fs-label)] font-medium text-foreground/45"><Icon className="size-3" />{t(`account.ui.announcements.levels.${meta.label}`)}</span>
-                    {announcement.pinned ? <span className="inline-flex items-center gap-1 text-[var(--fs-label)] font-medium text-amber-500"><Pin className="size-3" />{t("account.ui.announcements.pinned")}</span> : null}
+                    <span className="inline-flex items-center gap-1 text-[var(--fs-label)] font-medium text-foreground/45">
+                        <Icon className="size-3" />
+                        {t(`account.ui.announcements.levels.${meta.label}`)}
+                    </span>
+                    {announcement.pinned ? (
+                        <span className="inline-flex items-center gap-1 text-[var(--fs-label)] font-medium text-amber-500">
+                            <Pin className="size-3" />
+                            {t("account.ui.announcements.pinned")}
+                        </span>
+                    ) : null}
                 </div>
-                {announcement.imageUrl ? <AntImage src={announcementImageUrl(announcement)} alt={t("account.ui.announcements.imageAlt", { title: announcement.title })} preview className="mt-3 max-h-36 w-56 max-w-full rounded-lg border border-border/70 bg-muted/20 object-contain p-1" /> : null}
+                {announcement.imageUrl ? (
+                    <AntImage
+                        src={announcementImageUrl(announcement)}
+                        alt={t("account.ui.announcements.imageAlt", { title: announcement.title })}
+                        preview
+                        className="mt-3 max-h-36 w-56 max-w-full rounded-lg border border-border/70 bg-muted/20 object-contain p-1"
+                    />
+                ) : null}
                 {announcement.content ? <AnnouncementContent content={announcement.content} className="mt-1 text-sm leading-6 text-foreground/75 sm:text-[var(--fs-body-lg)]" /> : null}
-                <time dateTime={announcement.publishedAt} className="mt-2 block text-xs tabular-nums text-foreground/40">{relativeTime(announcement.publishedAt)} · {formatDateTime(announcement.publishedAt)}</time>
+                <time dateTime={announcement.publishedAt} className="mt-2 block text-xs tabular-nums text-foreground/40">
+                    {relativeTime(announcement.publishedAt)} · {formatDateTime(announcement.publishedAt)}
+                </time>
             </div>
         </motion.article>
     );

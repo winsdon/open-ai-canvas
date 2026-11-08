@@ -1,0 +1,90 @@
+/* Library pages retain their layout and use the skills library palette. */
+.app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) {
+    --library-ink: #10164d;
+    --library-muted: #737fa9;
+    --library-accent: #3478ff;
+    --library-selected: #dce8ff;
+    --library-edge: #dbe5ff;
+    --library-card: rgb(255 255 255 / 92%);
+    --library-card-hover: #fff;
+    --library-primary: #1b1e2a;
+    --library-primary-hover: #30374e;
+    --library-background: #edf4ff url("/images/home/aurora-background.png") center / cover fixed;
+    --user-ink: var(--library-ink);
+    --user-ink-muted: var(--library-muted);
+    --user-ink-soft: var(--library-muted);
+    --user-accent: var(--library-accent);
+    --user-accent-soft: var(--library-selected);
+    --user-surface: var(--library-card);
+    --user-surface-muted: var(--library-selected);
+    --user-surface-hover: var(--library-selected);
+    --user-card-hover: var(--library-card-hover);
+    --user-border: var(--library-edge);
+    --user-border-strong: var(--library-accent);
+    --workspace-accent: var(--library-accent);
+    --workspace-border: var(--library-edge);
+    --workspace-surface-strong: var(--library-card);
+    --foreground: var(--library-ink);
+    --muted-foreground: var(--library-muted);
+    --control-focus-ring: var(--library-accent);
+    --control-selected-bg: var(--library-selected);
+    --control-selected-hover-bg: color-mix(in srgb, var(--library-selected) 85%, var(--library-accent));
+    --control-selected-fg: var(--library-accent);
+    --button-primary-bg: var(--library-primary);
+    --button-primary-hover-bg: var(--library-primary-hover);
+    --button-primary-active-bg: var(--library-primary-hover);
+    --button-primary-fg: #fff;
+    --button-secondary-bg: var(--library-card);
+    --button-secondary-hover-bg: var(--library-selected);
+    --button-secondary-active-bg: var(--library-selected);
+    --button-secondary-fg: var(--library-ink);
+    --button-secondary-border: var(--library-edge);
+    --button-secondary-hover-border: var(--library-accent);
+    --button-ghost-fg: var(--library-muted);
+    --unified-input-surface: var(--library-card);
+    --unified-input-surface-hover: var(--library-card-hover);
+    --unified-input-surface-focus: var(--library-card-hover);
+    --unified-input-placeholder: var(--library-muted);
+    --unified-input-focus: var(--library-accent);
+    background: var(--library-background) !important;
+    color: var(--library-ink);
+    scrollbar-color: var(--library-edge) transparent;
+}
+
+.dark .app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) {
+    --library-ink: #e5edff;
+    --library-muted: #a4b3d6;
+    --library-accent: #88adff;
+    --library-selected: #263c66;
+    --library-edge: #34486f;
+    --library-card: #1a2a49;
+    --library-card-hover: #203357;
+    --library-primary: #4177e9;
+    --library-primary-hover: #5688ef;
+    --library-background: radial-gradient(ellipse at top left, #233d6a, transparent 65%), #101c35;
+}
+
+.app-user-workspace .assets-library-page .assets-filter-item {
+    color: var(--library-muted);
+}
+.app-user-workspace .assets-library-page .assets-filter-item:hover {
+    background: var(--library-selected);
+    color: var(--library-ink);
+}
+.app-user-workspace .assets-library-page .assets-filter-item.is-active {
+    background: var(--library-selected);
+    color: var(--library-accent);
+}
+.app-user-workspace .assets-library-page .assets-filter-count {
+    background: var(--library-selected);
+    color: var(--library-muted);
+}
+.app-user-workspace .assets-library-page .assets-filter-item.is-active .assets-filter-count {
+    color: var(--library-accent);
+}
+.app-user-workspace .task-center-page .app-segmented-item[aria-checked="true"] {
+    color: var(--library-accent);
+}
+.app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) .collection-toolbar :is(.ant-input-affix-wrapper, .ant-select) {
+    background: var(--library-card) !important;
+}

@@ -61,13 +61,17 @@ export default function CanvasPage() {
         queryKey: ["canvas-library", userId, projectFilter, sort, debouncedKeyword],
         queryFn: ({ pageParam, signal }) => listRemoteCanvasProjectsPage({ page: pageParam, pageSize: 40, projectId: projectFilter, sort, query: debouncedKeyword, signal }),
         initialPageParam: 1,
-        getNextPageParam: (last) => last.hasMore ? last.page + 1 : undefined,
+        getNextPageParam: (last) => (last.hasMore ? last.page + 1 : undefined),
         placeholderData: keepPreviousData,
         enabled: Boolean(userId) && sessionHydrated,
     });
-    const projects = useMemo<CanvasLibrarySummary[]>(() => userId
-        ? libraryQuery.data?.pages.flatMap((page) => page.projects) || []
-        : localProjects.map((project) => ({ ...project, nodeCount: project.nodes.length, previewNodes: project.nodes.filter((node) => node.type === CanvasNodeType.Image || node.type === CanvasNodeType.Video).slice(0, 4) })), [libraryQuery.data, localProjects, userId]);
+    const projects = useMemo<CanvasLibrarySummary[]>(
+        () =>
+            userId
+                ? libraryQuery.data?.pages.flatMap((page) => page.projects) || []
+                : localProjects.map((project) => ({ ...project, nodeCount: project.nodes.length, previewNodes: project.nodes.filter((node) => node.type === CanvasNodeType.Image || node.type === CanvasNodeType.Video).slice(0, 4) })),
+        [libraryQuery.data, localProjects, userId],
+    );
     const totalProjects = userId ? libraryQuery.data?.pages[0]?.total || 0 : projects.length;
     const importProject = useCanvasStore((state) => state.importProject);
     const selectedIds = useCanvasUiStore((state) => state.selectedProjectIds);
@@ -162,7 +166,9 @@ export default function CanvasPage() {
                 selected.push(project);
             }
             await exportCanvasProjects(selected, `${brandName}画布-${selected.length}个画布`);
-        } catch (error) { message.error(error instanceof Error ? error.message : "导出失败"); }
+        } catch (error) {
+            message.error(error instanceof Error ? error.message : "导出失败");
+        }
     };
     const importCanvas = async (file?: File) => {
         if (!file) return;
@@ -276,7 +282,14 @@ export default function CanvasPage() {
                                       ? {
                                             ...clip,
                                             // 旧素材不引用新资源，保留会被后端判为素材与资源不匹配；清空后由下方重新登记。
-                                            directMedia: { ...directMedia, assetId: undefined, storageKey: mapped.storageKey, url: mapped.url, dataUrl: directMedia.dataUrl ? mapped.url : directMedia.dataUrl, content: directMedia.content ? mapped.url : directMedia.content },
+                                            directMedia: {
+                                                ...directMedia,
+                                                assetId: undefined,
+                                                storageKey: mapped.storageKey,
+                                                url: mapped.url,
+                                                dataUrl: directMedia.dataUrl ? mapped.url : directMedia.dataUrl,
+                                                content: directMedia.content ? mapped.url : directMedia.content,
+                                            },
                                         }
                                       : clip;
                               }),
@@ -423,7 +436,7 @@ export default function CanvasPage() {
     if (hydrated && !libraryQuery.isError && (mode === "new" || mode === "recent" || mode === "handoff")) return <main className="flex h-full items-center justify-center bg-background text-sm text-stone-500">正在打开画布...</main>;
 
     return (
-        <WorkspacePage className="studio-collection-page">
+        <WorkspacePage className="studio-collection-page canvas-library-colors">
             <div className="studio-band">
                 <PageHeader
                     title="我的画布"
@@ -444,15 +457,27 @@ export default function CanvasPage() {
                 <CollectionToolbar
                     label="画布浏览工具"
                     active={Boolean(keyword || projectFilter !== "all" || sort !== "updated")}
-                    onReset={() => { setKeyword(""); setProjectFilter("all"); setSort("updated"); }}
-                    trailing={<Button type="text" icon={<History />} onClick={() => setHistoryOpen(true)}>创作历史</Button>}
+                    onReset={() => {
+                        setKeyword("");
+                        setProjectFilter("all");
+                        setSort("updated");
+                    }}
+                    trailing={
+                        <Button type="text" icon={<History />} onClick={() => setHistoryOpen(true)}>
+                            创作历史
+                        </Button>
+                    }
                 >
                     <Input prefix={<Search />} value={keyword} allowClear placeholder="搜索画布" aria-label="搜索画布" onChange={(event) => setKeyword(event.target.value)} />
                     <Dropdown trigger={["click"]} placement="bottomLeft" menu={{ items: projectFilterItems, selectedKeys: [projectFilter], onClick: ({ key }) => setProjectFilter(String(key)) }}>
-                        <Button icon={<SlidersHorizontal />} aria-label="按所属项目筛选">{projectFilterLabel}</Button>
+                        <Button icon={<SlidersHorizontal />} aria-label="按所属项目筛选">
+                            {projectFilterLabel}
+                        </Button>
                     </Dropdown>
                     <Dropdown trigger={["click"]} placement="bottomLeft" menu={{ items: sortItems, selectedKeys: [sort], onClick: ({ key }) => setSort(key as typeof sort) }}>
-                        <Button icon={sort === "updated" ? <Clock3 /> : sort === "name" ? <ArrowDownAZ /> : <ListFilter />} aria-label="画布排序">{sortLabel}</Button>
+                        <Button icon={sort === "updated" ? <Clock3 /> : sort === "name" ? <ArrowDownAZ /> : <ListFilter />} aria-label="画布排序">
+                            {sortLabel}
+                        </Button>
                     </Dropdown>
                 </CollectionToolbar>
             </div>
@@ -510,14 +535,32 @@ export default function CanvasPage() {
                                 />
                             ))}
                         </CollectionGrid>
-                        {libraryQuery.isError ? <p role="status" className="mt-3 text-center text-xs text-foreground/55">{libraryQuery.error instanceof Error ? libraryQuery.error.message : "正在显示上次缓存的画布列表"}</p> : null}
+                        {libraryQuery.isError ? (
+                            <p role="status" className="mt-3 text-center text-xs text-foreground/55">
+                                {libraryQuery.error instanceof Error ? libraryQuery.error.message : "正在显示上次缓存的画布列表"}
+                            </p>
+                        ) : null}
                     </>
+                ) : keyword || projectFilter !== "all" ? (
+                    <WorkspaceNoResultsState
+                        icon="canvas"
+                        query={keyword}
+                        onClear={() => {
+                            setKeyword("");
+                            setProjectFilter("all");
+                        }}
+                    />
                 ) : (
-                    keyword || projectFilter !== "all" ? (
-                        <WorkspaceNoResultsState icon="canvas" query={keyword} onClear={() => { setKeyword(""); setProjectFilter("all"); }} />
-                    ) : (
-                        <WorkspaceState icon="canvas" title="让第一个想法落在画布上" description="图片、分镜和灵感，都可以在这里自由组织。" action={<Button type="primary" icon={<Plus />} disabled={!hydrated} title={hydrated ? undefined : "正在恢复本地画布，完成后可新建"} onClick={createAndEnter}>新建画布</Button>} />
-                    )
+                    <WorkspaceState
+                        icon="canvas"
+                        title="让第一个想法落在画布上"
+                        description="图片、分镜和灵感，都可以在这里自由组织。"
+                        action={
+                            <Button type="primary" icon={<Plus />} disabled={!hydrated} title={hydrated ? undefined : "正在恢复本地画布，完成后可新建"} onClick={createAndEnter}>
+                                新建画布
+                            </Button>
+                        }
+                    />
                 )}
                 {/* 无限滚动哨兵：只在加载中显示安静的 spinner、失败时给重试；全部加载后不再输出总数文案。 */}
                 {hydrated && visibleProjects.length && (hasMore || libraryQuery.isFetchNextPageError) ? (
@@ -551,7 +594,11 @@ export default function CanvasPage() {
                 />
             </Modal>
             <CanvasHistoryDrawer open={historyOpen} onClose={() => setHistoryOpen(false)} />
-            {deleteDialogOpen ? <Suspense fallback={null}><CanvasDeleteProjectsDialog /></Suspense> : null}
+            {deleteDialogOpen ? (
+                <Suspense fallback={null}>
+                    <CanvasDeleteProjectsDialog />
+                </Suspense>
+            ) : null}
         </WorkspacePage>
     );
 }

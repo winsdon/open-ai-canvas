@@ -1,4 +1,103 @@
 /* 意见反馈弹窗：类型卡片、按类型的填写指引、附件和底栏。颜色和圆角都取主题 token，明暗主题自动适配。 */
+.feedback-modal-root {
+    --feedback-background: linear-gradient(rgb(241 246 255 / 86%), rgb(241 246 255 / 94%)), url("/images/home/aurora-background.png") center / cover;
+    --feedback-paper: rgb(255 255 255 / 80%);
+    --feedback-edge: #dce4f7;
+    --feedback-selected: #e0e8ff;
+    --feedback-accent: #3473ff;
+    --feedback-ink: #10164d;
+    --feedback-muted: #626d9c;
+    --feedback-soft: #7a85ac;
+    --background: #f1f6ff;
+    --foreground: var(--feedback-ink);
+    --text-primary: var(--feedback-ink);
+    --text-secondary: var(--feedback-muted);
+    --text-tertiary: var(--feedback-soft);
+    --muted-foreground: var(--feedback-muted);
+    --muted: var(--feedback-selected);
+    --border: var(--feedback-edge);
+    --input: var(--feedback-edge);
+    --ring: var(--feedback-accent);
+    --surface-hover: var(--feedback-selected);
+    --surface-tertiary: var(--feedback-selected);
+    --surface-strong: var(--feedback-paper);
+    --library-surface: var(--feedback-paper);
+    --workspace-accent: var(--feedback-accent);
+    --control-selected-bg: var(--feedback-selected);
+    --control-selected-fg: var(--feedback-accent);
+    --control-selected-border: var(--feedback-accent);
+    --control-focus-ring: var(--feedback-accent);
+    --button-primary-bg: #3473ff;
+    --button-primary-hover-bg: #2463ed;
+    --button-primary-active-bg: #1b55d7;
+    --button-primary-fg: #fff;
+    --button-secondary-bg: var(--feedback-paper);
+    --button-secondary-fg: var(--feedback-ink);
+    --button-secondary-border: var(--feedback-edge);
+    --button-secondary-hover-bg: var(--feedback-selected);
+    --button-secondary-hover-border: var(--feedback-accent);
+    --button-ghost-fg: var(--feedback-muted);
+    --unified-input-surface: var(--feedback-paper);
+    --unified-input-surface-hover: var(--feedback-paper);
+    --unified-input-surface-focus: var(--feedback-paper);
+    --unified-input-placeholder: var(--feedback-soft);
+}
+.dark .feedback-modal-root {
+    --feedback-background: linear-gradient(rgb(16 27 56 / 94%), rgb(16 27 56 / 97%)), url("/images/home/aurora-background.png") center / cover;
+    --feedback-paper: rgb(29 39 73 / 88%);
+    --feedback-edge: #3e507a;
+    --feedback-selected: #30446f;
+    --feedback-accent: #9abbff;
+    --feedback-ink: #e5edff;
+    --feedback-muted: #a7b6dc;
+    --feedback-soft: #8c9fc8;
+    --background: #101b38;
+}
+.feedback-modal-root .feedback-modal .ant-modal-container {
+    background: var(--feedback-background) !important;
+    border-color: var(--feedback-edge);
+    color: var(--feedback-ink);
+}
+.feedback-modal-root .feedback-tabs {
+    background: var(--feedback-selected);
+}
+.feedback-modal-root .feedback-tabs .app-segmented-thumb {
+    background: var(--feedback-paper);
+}
+.feedback-modal-root .feedback-tabs .app-segmented-item[aria-checked="true"] {
+    color: var(--feedback-accent);
+}
+.feedback-modal-root .feedback-type:not([aria-checked="true"]),
+.feedback-modal-root .feedback-dropzone {
+    background: var(--feedback-paper);
+}
+.feedback-modal-root .feedback-type:hover,
+.feedback-modal-root .feedback-dropzone:hover:not(:disabled),
+.feedback-modal-root .feedback-dropzone[data-dragging] {
+    background: var(--feedback-selected);
+    border-color: var(--feedback-accent);
+}
+.feedback-modal-root .ant-input,
+.feedback-modal-root .ant-input-textarea-show-count::after {
+    color: var(--feedback-ink);
+}
+.feedback-modal-root .feedback-header,
+.feedback-modal-root .feedback-footer {
+    background: var(--feedback-paper);
+}
+.feedback-modal-root .feedback-body .ant-segmented {
+    background: var(--feedback-selected);
+    color: var(--feedback-muted);
+}
+.feedback-modal-root .feedback-body .ant-segmented-item-selected,
+.feedback-modal-root .feedback-body .ant-segmented-thumb {
+    background: var(--feedback-paper);
+    color: var(--feedback-accent);
+}
+.feedback-modal-root .feedback-body .ant-btn-link {
+    color: var(--feedback-accent);
+}
+
 .feedback-shell {
     display: flex;
     flex-direction: column;
