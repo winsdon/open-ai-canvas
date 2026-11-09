@@ -101,4 +101,3 @@ Use case: logo-brand. Create a production-ready LOGO SPRITE SHEET, exactly 1600 
 | critique.webp | `ai-art-critique` | #8A63BC | AI Art Critique: a bold stylized eye with a tilted diamond pupil and one check-shaped lower contour. |
 | conversion.webp | `media-conversion` | #5483BD | Media Conversion: two thick opposing bent arrows forming an open square, with distinctive squared ends. |
 | editor.webp | `editor-shell` | #DC852E | Editing Workspace: a bold geometric film-strip cut with a sharp diagonal blade, three large rectangular apertures. |
-

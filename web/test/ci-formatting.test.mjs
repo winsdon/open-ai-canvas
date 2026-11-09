@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test } from "bun:test";
+import { afterEach, describe, expect, setDefaultTimeout, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
@@ -6,6 +6,8 @@ import path from "node:path";
 import { checkChangedFormatting } from "../scripts/check-changed-formatting.mjs";
 
 const temporaryDirectories = [];
+// These integration tests start several Git processes, which take longer on Windows.
+setDefaultTimeout(30000);
 afterEach(() => {
     for (const directory of temporaryDirectories.splice(0)) rmSync(directory, { recursive: true, force: true });
 });

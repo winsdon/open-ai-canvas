@@ -29,24 +29,28 @@ function fixture(overrides = {}) {
     writeFileSync(output, "");
     const env = {
         ...process.env,
-        PATH: `${bin}:${process.env.PATH}`,
-        GITHUB_OUTPUT: output,
+        PATH: `${bin}${path.delimiter}${process.env.PATH}`,
+        GITHUB_OUTPUT: output.replaceAll("\\", "/"),
         GITHUB_SHA: sha,
         GITHUB_REF: "refs/heads/main",
         GITHUB_REPOSITORY: "fixture/repo",
         IMAGE: "ghcr.io/fixture/image",
         VERSION_TAG: "1.5.5",
         EXPECTED_DIGESTS: "1",
-        DIGEST_DIR: digests,
+        DIGEST_DIR: digests.replaceAll("\\", "/"),
         MOCK_DIGEST: `sha256:${digest}`,
         MOCK_ERROR: "",
         MOCK_GH_ERROR: "",
         MOCK_MAIN: sha,
-        MOCK_CALL: path.join(root, "docker-call"),
+        MOCK_CALL: path.join(root, "docker-call").replaceAll("\\", "/"),
         ...overrides,
     };
     return {
-        run: (script, ...args) => spawnSync("bash", [path.join(scripts, script), ...args], { env, encoding: "utf8" }),
+        run: (script, ...args) => {
+            const executable = path.join(root, script);
+            writeFileSync(executable, readFileSync(path.join(scripts, script), "utf8").replaceAll("\r\n", "\n"));
+            return spawnSync("bash", [executable.replaceAll("\\", "/"), ...args], { env, encoding: "utf8" });
+        },
         output: () => readFileSync(output, "utf8"),
         call: () => (existsSync(env.MOCK_CALL) ? readFileSync(env.MOCK_CALL, "utf8") : ""),
     };
