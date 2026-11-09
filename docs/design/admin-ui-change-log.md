@@ -2,6 +2,12 @@
 
 本文档是管理后台 UI 的追踪与回滚台账。后续每批 UI 调整都必须在实施时追加，不覆盖历史记录。
 
+## 系统字号调整
+
+- 按用户指定的字号表，共享后台基础文字及按钮调整为 14px，辅助小字保留 12px。颜色、数据和操作逻辑保持现状。
+- 修改前副本在 `.local/ui-change-backups/typography-scale/`：`admin-ant-theme.ts` 的 SHA-256 为 `47d0dee27e21340def7de7bea33ce432ec5d735913b627d6e627bb2de0703a88`；`admin-tokens.css` 为 `5a039ec61003af1d82f05eb0f0ffe15fed77a69200bbcabd626f87a1bfbfe4eb`。
+- 字号源由全局 `--fs-label`、`--fs-ui` 和按钮 token 提供；主题配置同步数值。真实后台页面的窄屏和表格密度仍待视觉验收。
+
 ## 用户登录日志筛选布局收敛
 
 - 问题：用户搜索与嵌套筛选容器分别换行，IP 输入被基础样式撑满一行，实际 1280px 视口占四排、工具栏高 168px。

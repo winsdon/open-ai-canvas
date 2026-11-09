@@ -83,15 +83,15 @@
     --space-20: 80px;
     --space-24: 96px;
 
-    /* --- 3. 字号：6 档（11/12/13/14/16/22）+ display（只给 hero 数字/营销标题）---
+    /* --- 3. 字号：标签/说明 12、控件/正文 14、区块 16、页面 22、展示 32 ---
        层级靠字号和颜色拉开，不靠加粗；字重只用 400/500/600。
        --fs-micro / --fs-tiny / --fs-body-lg / --fs-heading-lg 是旧名，并入相邻档。 */
     --fs-nano: 7px; /* 仅缩略图里的示意文字（画框内节点预览），不是可读 UI 文字 */
-    --fs-label: 11px; /* 1 档：标签、徽章、角标 */
+    --fs-label: 12px; /* 标签、徽章、角标 */
     --fs-micro: var(--fs-label);
     --fs-tiny: var(--fs-label);
     --fs-caption: 12px; /* 2 档：说明、元信息 */
-    --fs-ui: 13px; /* 3 档：控件、导航、紧凑正文 */
+    --fs-ui: 14px; /* 控件、导航、紧凑正文 */
     --fs-body: 14px; /* 4 档：正文 */
     --fs-body-lg: var(--fs-body);
     --fs-heading: 16px; /* 5 档：区块标题、弹窗标题 */
@@ -116,8 +116,8 @@
     --typ-title-sm: 16px; /* title-sm */
     --typ-body-md: 16px; /* body-md */
     --typ-body-sm: 14px; /* body-sm */
-    --typ-caption: 13px; /* caption */
-    --typ-caption-uppercase: 11px; /* caption-uppercase */
+    --typ-caption: var(--fs-caption); /* caption */
+    --typ-caption-uppercase: var(--fs-label); /* caption-uppercase */
     --typ-code: 13px; /* code */
     --typ-button: 14px; /* button */
     --typ-nav-link: 14px; /* nav-link */
@@ -3181,7 +3181,7 @@
     }
 
     .creation-reference-tile span {
-        font-size: 11px;
+        font-size: var(--fs-label);
         font-weight: 600;
     }
 
@@ -3353,7 +3353,7 @@
         background: color-mix(in srgb, var(--creation-surface-muted) 70%, transparent);
         color: var(--creation-text);
         padding: 0 8px;
-        font-size: 11px;
+        font-size: var(--fs-label);
         font-weight: 600;
         white-space: nowrap;
         box-shadow: inset 0 1px 0 color-mix(in srgb, white 40%, transparent);
@@ -3550,7 +3550,7 @@
         justify-content: space-between;
         padding: 8px 4px 0;
         color: var(--creation-muted);
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
 
     .creation-composer-meta a {
@@ -3660,7 +3660,7 @@
         gap: 4px;
         border-radius: 8px;
         color: #3f454d;
-        font-size: 13px;
+        font-size: var(--fs-ui);
         box-shadow: inset 0 1px 0 transparent;
         transition:
             background-color 150ms ease,
@@ -3689,7 +3689,7 @@
 
     .creation-segmented-grid button small {
         color: #9ba2ac;
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
 
     .dark .creation-segmented-grid button small {
@@ -3712,7 +3712,7 @@
     .creation-segmented-grid.is-resolution button,
     .creation-segmented-grid.is-count button {
         min-height: 42px;
-        font-size: 13px;
+        font-size: var(--fs-ui);
     }
 
     .creation-duration-panel {
@@ -3961,7 +3961,7 @@
         height: 23px;
     }
     .creation-studio-reference span {
-        font-size: 11px;
+        font-size: var(--fs-label);
         font-weight: 600;
     }
 
@@ -4286,7 +4286,7 @@
         height: 18px;
     }
     .creation-chat-reference.is-paper span {
-        font-size: 11px;
+        font-size: var(--fs-label);
         font-weight: 600;
     }
 
@@ -4422,7 +4422,7 @@
         background: rgba(30, 33, 39, 0.78);
         color: #e6e9ed;
         padding: 0 8px;
-        font-size: 11px;
+        font-size: var(--fs-label);
         font-weight: 600;
         white-space: nowrap;
         box-shadow: none;
@@ -4482,7 +4482,7 @@
     .creation-parameter-section h3 {
         margin: 0 0 8px;
         color: #858c97;
-        font-size: 11px;
+        font-size: var(--fs-label);
         font-weight: 500;
     }
     .creation-choice-grid {
@@ -4509,7 +4509,7 @@
         gap: 4px;
         border-radius: 8px;
         color: #cdd1d7;
-        font-size: 11px;
+        font-size: var(--fs-label);
         transition:
             background-color 150ms ease,
             color 150ms ease;
@@ -4544,7 +4544,7 @@
         justify-content: space-between;
         margin-bottom: 8px;
         color: #858c97;
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
     .creation-duration-menu strong {
         color: #f3f4f6;
@@ -4573,7 +4573,7 @@
     }
     .creation-range-labels {
         margin-top: 4px;
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
     html:not(.dark) .creation-control-popover-surface {
         background: #fff !important;
@@ -4779,7 +4779,7 @@
         .creation-chat-control {
             height: 34px;
             padding: 0 8px;
-            font-size: 11px;
+            font-size: var(--fs-label);
         }
         .creation-thread-stage {
             padding-top: 28px;
@@ -4830,7 +4830,7 @@
         }
 
         .creation-reference-tile span {
-            font-size: 11px;
+            font-size: var(--fs-label);
         }
 
         .creation-prompt-editor textarea {
@@ -4889,7 +4889,7 @@
         .creation-settings-section h3,
         .creation-duration-panel h3 {
             margin-bottom: 8px;
-            font-size: 11px;
+            font-size: var(--fs-label);
         }
 
         .creation-segmented-grid.is-ratio {
@@ -4971,7 +4971,7 @@
             height: 19px;
         }
         .creation-studio-reference span {
-            font-size: 11px;
+            font-size: var(--fs-label);
         }
         .creation-studio-editor textarea {
             min-height: 150px;
@@ -6328,7 +6328,7 @@
     .settings-preference-heading h3 {
         margin: 0;
         color: color-mix(in srgb, var(--foreground) 62%, transparent);
-        font-size: 13px;
+        font-size: var(--fs-ui);
         font-weight: 600;
     }
     .settings-preference-heading p {
@@ -7770,7 +7770,7 @@
         height: 20px;
         padding: 0 8px;
         border-radius: 999px;
-        font-size: 11px;
+        font-size: var(--fs-label);
         font-weight: 600;
         line-height: 1;
         white-space: nowrap;
@@ -7817,7 +7817,7 @@
         padding: 0 12px;
         border-radius: 8px;
         color: var(--user-ink-muted, color-mix(in srgb, var(--foreground) 48%, transparent));
-        font-size: 13px;
+        font-size: var(--fs-ui);
         font-weight: 500;
         line-height: 1;
         white-space: nowrap;
@@ -9768,7 +9768,7 @@
         background: transparent;
         padding-inline: 8px;
         color: var(--user-ink-muted, color-mix(in srgb, var(--foreground) 62%, transparent));
-        font-size: 13px;
+        font-size: var(--fs-ui);
         font-weight: 500;
         line-height: 1;
         font-variant-numeric: tabular-nums;
@@ -9815,7 +9815,7 @@
         align-items: center;
         justify-content: center;
         color: var(--user-ink-soft, color-mix(in srgb, var(--foreground) 34%, transparent));
-        font-size: 13px;
+        font-size: var(--fs-ui);
         letter-spacing: 0.1em;
     }
     .app-pagination-jump {
@@ -15356,7 +15356,7 @@ html:not(.dark) .creation-chat-reference:hover:not(:disabled) {
     background: transparent;
     color: var(--creation-muted);
     padding: 0 8px;
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-weight: 500;
     box-shadow: none;
     transition:
@@ -15502,7 +15502,7 @@ html:not(.dark) .creation-chat-control[aria-pressed="true"] > svg {
 .creation-parameter-section h3 {
     margin: 8px 0 0;
     color: var(--creation-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-weight: 500;
 }
 .creation-choice-grid {
@@ -15532,7 +15532,7 @@ html:not(.dark) .creation-chat-control[aria-pressed="true"] > svg {
     border-radius: 4px;
     background: transparent;
     color: #989ea7;
-    font-size: 11px;
+    font-size: var(--fs-label);
     line-height: 1;
     transition:
         color 150ms ease,
@@ -15549,7 +15549,7 @@ html:not(.dark) .creation-chat-control[aria-pressed="true"] > svg {
 .creation-choice-grid.is-resolution button,
 .creation-choice-grid.is-count button {
     min-height: 30px;
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .creation-choice-grid .creation-ratio-preview {
     width: 20px;
@@ -15573,7 +15573,7 @@ html:not(.dark) .creation-chat-control[aria-pressed="true"] > svg {
     flex-direction: column;
     gap: 2px;
     color: var(--creation-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .creation-duration-menu strong {
     color: #f1f2f3;
@@ -15607,7 +15607,7 @@ html:not(.dark) .creation-chat-control[aria-pressed="true"] > svg {
 .creation-range-labels {
     margin-top: 2px;
     color: var(--creation-faint);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .creation-thread-stage {
@@ -15708,7 +15708,7 @@ html:not(.dark) .creation-duration-menu strong {
     .creation-chat-control {
         height: 29px;
         padding: 0 8px;
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
     .creation-thread-stage,
     .creation-thread-composer {
@@ -16299,7 +16299,7 @@ html:not(.dark) .app-workspace-shell.is-creation-workspace .app-workspace-stage 
 .creation-chat-intro p {
     margin: 0 0 8px;
     color: var(--creation-faint);
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-weight: 500;
     letter-spacing: 0.12em;
 }
@@ -16345,7 +16345,7 @@ html:not(.dark) .app-workspace-shell.is-creation-workspace .app-workspace-stage 
 }
 .creation-chat-reference.is-paper span {
     display: block;
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-weight: 500;
     line-height: 1;
     white-space: nowrap;
@@ -16758,7 +16758,7 @@ html:not(.dark) .app-workspace-shell.is-creation-workspace .app-workspace-stage 
     height: var(--space-4);
 }
 .creation-home .creation-reference-track.is-empty .creation-reference-add-button span {
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .creation-home .creation-reference-track.is-expanded .creation-reference-add-button {
     width: 52px;
@@ -16779,7 +16779,7 @@ html:not(.dark) .app-workspace-shell.is-creation-workspace .app-workspace-stage 
     height: var(--space-5);
 }
 .creation-home .creation-reference-add-button span {
-    font-size: 11px;
+    font-size: var(--fs-label);
     line-height: 1;
 }
 .creation-home .creation-reference-filter-empty {
@@ -16937,7 +16937,7 @@ html:not(.dark) .creation-home .creation-reference-add-button:hover:not(:disable
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.045);
     color: var(--creation-faint);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .creation-custom-value span {
@@ -16950,7 +16950,7 @@ html:not(.dark) .creation-home .creation-reference-add-button:hover:not(:disable
     outline: 0;
     background: transparent;
     color: #edf0f2;
-    font-size: 11px;
+    font-size: var(--fs-label);
     line-height: 1;
 }
 
@@ -16976,7 +16976,7 @@ html:not(.dark) .creation-home .creation-reference-add-button:hover:not(:disable
     flex-direction: column;
     gap: 2px;
     color: var(--creation-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .creation-duration-heading strong {
     color: #f1f2f3;
@@ -16997,7 +16997,7 @@ html:not(.dark) .creation-home .creation-reference-add-button:hover:not(:disable
     border-radius: 4px;
     background: transparent;
     color: #969ca5;
-    font-size: 11px;
+    font-size: var(--fs-label);
     transition:
         color 150ms ease,
         background-color 150ms ease;
@@ -17190,7 +17190,7 @@ html:not(.dark) .creation-home .creation-chat-control[aria-expanded="true"] {
     background: rgba(255, 255, 255, 0.075);
     padding: 0 8px;
     color: var(--creation-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
     line-height: 1;
 }
 .creation-user-message-reference img,
@@ -17284,7 +17284,7 @@ html:not(.dark) .creation-user-message-reference {
 .creation-message-heading {
     gap: 8px;
     color: var(--creation-faint);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .creation-message-mark {
     width: 26px;
@@ -17307,7 +17307,7 @@ html:not(.dark) .creation-user-message-reference {
     background: rgba(255, 255, 255, 0.06);
     padding: 2px 4px;
     color: var(--creation-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .creation-message-content {
@@ -17325,7 +17325,7 @@ html:not(.dark) .creation-user-message-reference {
     gap: 8px;
     padding: 16px 0 0 32px;
     color: var(--palette-status-error);
-    font-size: 13px;
+    font-size: var(--fs-ui);
     line-height: 1.6;
 }
 .creation-message-error button {
@@ -17338,7 +17338,7 @@ html:not(.dark) .creation-user-message-reference {
     background: color-mix(in srgb, var(--palette-status-error) 12%, transparent);
     color: var(--palette-status-error);
     padding: 0 8px;
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .creation-message-error button:hover {
     background: color-mix(in srgb, var(--palette-status-error) 20%, transparent);
@@ -17432,7 +17432,7 @@ html:not(.dark) .creation-user-message-reference {
     align-items: center;
     gap: 4px;
     padding: 0 8px;
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .creation-media-actions {
     display: flex;
@@ -17441,7 +17441,7 @@ html:not(.dark) .creation-user-message-reference {
     gap: 8px;
     margin-top: 8px;
     color: var(--creation-faint);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .creation-media-actions > span {
     margin-right: 2px;
@@ -17454,7 +17454,7 @@ html:not(.dark) .creation-user-message-reference {
     border: 0;
     background: transparent;
     color: var(--creation-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
     text-decoration: none;
 }
 .creation-media-actions a:hover,
@@ -17572,7 +17572,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
     .creation-parameter-section h3 {
         margin: 0 0 8px;
         color: var(--creation-muted);
-        font-size: 11px;
+        font-size: var(--fs-label);
         font-weight: 500;
     }
 
@@ -17591,7 +17591,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
         border-radius: 8px;
         background: transparent;
         color: #959ca5;
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
 
     .creation-choice-grid button:hover {
@@ -17608,7 +17608,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
     .creation-choice-grid.is-resolution button,
     .creation-choice-grid.is-count button {
         min-height: 32px;
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
 
     .creation-custom-trigger {
@@ -17619,7 +17619,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
         background: transparent;
         color: #8bcfe0;
         padding: 0 4px;
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
 
     .creation-custom-trigger:hover {
@@ -17636,7 +17636,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
         background: rgba(255, 255, 255, 0.055);
         padding: 0 8px;
         color: var(--creation-muted);
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
 
     .creation-custom-value input {
@@ -17660,12 +17660,12 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
         justify-content: space-between;
         margin-bottom: 8px;
         color: var(--creation-muted);
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
 
     .creation-duration-heading strong {
         color: #f1f3f4;
-        font-size: 13px;
+        font-size: var(--fs-ui);
         font-weight: 600;
     }
     .creation-duration-choices {
@@ -17679,7 +17679,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
         border-radius: 8px;
         background: transparent;
         color: #969ca5;
-        font-size: 11px;
+        font-size: var(--fs-label);
     }
 
     .creation-duration-choices button:hover {
@@ -17785,7 +17785,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
 .creation-duration-heading > span {
     margin: 0 !important;
     color: var(--creation-muted) !important;
-    font-size: 11px !important;
+    font-size: var(--fs-label) !important;
     font-weight: 500 !important;
     letter-spacing: 0 !important;
 }
@@ -17793,7 +17793,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
 .creation-parameter-section > header > span,
 .creation-duration-heading strong {
     color: var(--creation-text) !important;
-    font-size: 11px !important;
+    font-size: var(--fs-label) !important;
     font-weight: 600 !important;
 }
 
@@ -17820,7 +17820,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
     border-radius: 8px !important;
     background: transparent !important;
     color: var(--creation-muted) !important;
-    font-size: 11px !important;
+    font-size: var(--fs-label) !important;
     font-weight: 500;
     transition:
         background-color 160ms var(--motion-ease-out),
@@ -17864,7 +17864,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
     background: transparent !important;
     padding: 0 2px !important;
     color: var(--creation-muted) !important;
-    font-size: 11px !important;
+    font-size: var(--fs-label) !important;
     transition:
         color 160ms var(--motion-ease-out),
         background-color 160ms var(--motion-ease-out) !important;
@@ -17892,7 +17892,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
     background: rgba(255, 255, 255, 0.055) !important;
     padding: 0 8px !important;
     color: var(--creation-muted) !important;
-    font-size: 11px !important;
+    font-size: var(--fs-label) !important;
 }
 
 .creation-custom-value input {
@@ -17902,12 +17902,12 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
     outline: 0 !important;
     background: transparent !important;
     color: var(--creation-text) !important;
-    font-size: 11px !important;
+    font-size: var(--fs-label) !important;
 }
 
 .creation-custom-value em {
     color: var(--creation-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-style: normal;
 }
 
@@ -17935,7 +17935,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
     gap: 4px;
     margin-left: auto;
     color: var(--creation-text);
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-variant-numeric: tabular-nums;
 }
 
@@ -17969,7 +17969,7 @@ html:not(.dark) .creation-media-preview-modal .ant-modal-container {
     border-radius: 8px !important;
     background: transparent !important;
     color: var(--creation-muted) !important;
-    font-size: 11px !important;
+    font-size: var(--fs-label) !important;
     font-weight: 500;
     transition:
         background-color 160ms var(--motion-ease-out),
@@ -18220,7 +18220,7 @@ html:not(.dark) .creation-custom-value {
 .creation-history-item-heading {
     width: 100%;
     overflow: hidden;
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 500;
     line-height: 1.4;
     text-overflow: ellipsis;
@@ -18333,7 +18333,7 @@ html:not(.dark) .creation-custom-value {
     padding: 8px;
     color: var(--user-ink);
     font: inherit;
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 500;
 }
 .creation-history-rename-input::selection {
@@ -19302,7 +19302,7 @@ html:not(.dark) .creation-custom-value {
 .app-story-options > summary {
     padding: 16px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: var(--fs-ui);
 }
 
 .app-story-options > summary:hover {
@@ -19831,7 +19831,7 @@ html:not(.dark) .creation-custom-value {
     padding: 8px 12px;
     color: color-mix(in srgb, var(--foreground) 56%, transparent);
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 11px;
+    font-size: var(--fs-label);
     line-height: 1.6;
     white-space: pre-wrap;
 }
@@ -21138,7 +21138,7 @@ html:not(.dark) .creation-custom-value {
     padding: 0 8px;
     border-radius: var(--r-md);
     color: color-mix(in srgb, var(--foreground) 56%, transparent);
-    font-size: var(--fs-label);
+    font-size: var(--fs-ui);
     transition:
         background-color 160ms ease-out,
         color 160ms ease-out;
@@ -21700,7 +21700,7 @@ html:not(.dark) .creation-custom-value {
     right: 0;
     bottom: -22px;
     text-align: center;
-    color: color-mix(in srgb, var(--foreground) 44%, transparent);
+    color: var(--user-ink-muted);
     font-size: var(--fs-micro);
     letter-spacing: 0.1em;
     z-index: 3;
@@ -21764,7 +21764,7 @@ html:not(.dark) .creation-custom-value {
     font-weight: 600;
 }
 .assets-empty-card > span:last-child {
-    color: color-mix(in srgb, var(--foreground) 48%, transparent);
+    color: var(--user-ink-muted);
     font-size: var(--fs-label);
     line-height: 1.55;
 }
@@ -21890,7 +21890,7 @@ html:not(.dark) .creation-custom-value {
     background: transparent;
     color: rgba(255, 255, 255, 0.86);
     cursor: pointer;
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .asset-zoom-controls button:hover {
     background: rgba(255, 255, 255, 0.12);
@@ -23687,7 +23687,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     min-height: var(--workspace-reference-row);
     padding: 0 12px;
     border-radius: 12px;
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 500;
     letter-spacing: -0.01em;
 }
@@ -23772,7 +23772,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     gap: 8px;
     margin-right: auto;
     color: rgba(0, 0, 0, 0.42);
-    font-size: 13px;
+    font-size: var(--fs-ui);
 }
 
 .app-user-workspace .app-workspace-topbar-breadcrumb > span:not(.truncate) {
@@ -23910,7 +23910,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 
 .app-user-workspace .app-workspace-sidebar-checkin-title {
     color: #171717;
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.01em;
@@ -23919,7 +23919,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 .app-user-workspace .app-workspace-sidebar-checkin-offer {
     margin-top: 4px;
     color: #8a8a8a;
-    font-size: 11px;
+    font-size: var(--fs-label);
     line-height: 1.2;
 }
 
@@ -24305,13 +24305,13 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 }
 
 .app-user-workspace .app-workspace-sidebar-profile-copy strong {
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 600;
 }
 
 .app-user-workspace .app-workspace-sidebar-profile-copy span {
     color: rgba(0, 0, 0, 0.42);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .app-user-workspace .app-workspace-sidebar-notification,
@@ -24428,12 +24428,12 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 }
 
 .app-user-workspace .app-workspace-sidebar-profile-summary strong {
-    font-size: 13px;
+    font-size: var(--fs-ui);
 }
 
 .app-user-workspace .app-workspace-sidebar-profile-summary span:not(.app-workspace-sidebar-profile-avatar) {
     color: rgba(0, 0, 0, 0.46);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .app-user-workspace .app-workspace-sidebar-profile-menu {
@@ -24530,7 +24530,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 .app-user-workspace .creation-home-heading p {
     margin: 0;
     color: rgba(0, 0, 0, 0.42);
-    font-size: 13px;
+    font-size: var(--fs-ui);
 }
 
 .app-user-workspace .creation-empty-workspace > .creation-mode-capsule {
@@ -24550,7 +24550,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     justify-content: center;
     border-radius: 999px;
     color: rgba(0, 0, 0, 0.54);
-    font-size: 13px;
+    font-size: var(--fs-ui);
 }
 
 .app-user-workspace .creation-empty-workspace > .creation-mode-capsule .creation-chat-control[aria-selected="true"] {
@@ -24667,7 +24667,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 .app-user-workspace .creation-empty-suggest .creation-hero-prompt-text {
     display: -webkit-box;
     overflow: hidden;
-    font-size: 11px;
+    font-size: var(--fs-label);
     line-height: 1.45;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -24846,7 +24846,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     display: block;
     margin-bottom: 4px;
     color: color-mix(in srgb, var(--foreground) 42%, transparent);
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -24959,7 +24959,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     background: rgba(25, 25, 28, 0.58);
     padding: 4px 8px;
     color: #fff;
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-weight: 600;
     backdrop-filter: blur(12px);
 }
@@ -24993,7 +24993,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 .creation-featured-copy > span {
     overflow: hidden;
     color: rgba(24, 24, 27, 0.48);
-    font-size: 11px;
+    font-size: var(--fs-label);
     line-height: 1.5;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -25005,7 +25005,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     gap: 4px;
     margin-top: 4px;
     color: #6b5ee7;
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-style: normal;
     font-weight: 600;
 }
@@ -25175,7 +25175,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 .workspace-wallet-balance span,
 .workspace-wallet-balance small {
     color: var(--user-ink-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .workspace-wallet-balance strong {
@@ -25208,7 +25208,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     background: transparent;
     padding: 0 16px;
     color: var(--user-ink-muted);
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 500;
     transition:
         background-color 180ms ease,
@@ -25294,7 +25294,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 .workspace-wallet-history-toolbar p {
     margin: 4px 0 0;
     color: var(--user-ink-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .workspace-wallet-redeem-link {
@@ -25305,7 +25305,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     background: var(--user-accent-soft);
     padding: 4px 8px;
     color: var(--user-accent) !important;
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 600;
     line-height: 1.5;
     text-decoration: none;
@@ -25368,7 +25368,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 .workspace-wallet-product small {
     overflow: hidden;
     color: var(--user-ink-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -25413,7 +25413,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     background: var(--user-surface-muted);
     padding: 0 12px;
     color: var(--user-ink-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .workspace-wallet-providers button.is-selected {
@@ -25486,7 +25486,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 .workspace-wallet-ledger-row time {
     overflow: hidden;
     color: var(--user-ink-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -25528,7 +25528,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 
 .workspace-wallet-inline-state > div,
 .workspace-wallet-empty {
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .workspace-wallet-inline-state strong,
@@ -25612,7 +25612,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 .workspace-wallet-payment > span:not(.workspace-wallet-payment-icon) {
     margin: 0;
     color: color-mix(in srgb, var(--foreground) 48%, transparent);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .workspace-wallet-payment-status {
@@ -25622,7 +25622,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     background: color-mix(in srgb, var(--foreground) 4%, transparent);
     padding: 8px 12px;
     color: color-mix(in srgb, var(--foreground) 62%, transparent);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .workspace-wallet-payment-status.is-success {
@@ -25754,7 +25754,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     padding: 0 12px;
     border-radius: 12px;
     color: #66666d;
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 500;
 }
 
@@ -25785,7 +25785,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     min-height: 26px;
     padding: 0 12px 4px;
     color: #929299;
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-weight: 600;
     letter-spacing: 0.04em;
 }
@@ -25840,7 +25840,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 
 .app-user-workspace .app-workspace-sidebar-profile-summary-copy span {
     color: var(--user-ink-soft);
-    font-size: 11px;
+    font-size: var(--fs-label);
     line-height: 1.25;
 }
 
@@ -25858,7 +25858,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     padding: 0 8px;
     border-radius: 8px;
     color: #45454c;
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 500;
 }
 
@@ -25975,7 +25975,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 
 .app-user-workspace .app-page-header p {
     color: var(--user-ink-muted);
-    font-size: 13px;
+    font-size: var(--fs-caption);
 }
 
 .app-user-workspace .library-page .library-toolbar,
@@ -26188,7 +26188,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 
 .app-user-workspace .skill-card-footer {
     color: var(--user-ink-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 
 .app-user-workspace .skill-card-tag {
@@ -26521,7 +26521,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
     padding: 4px 8px !important;
     border-radius: 12px !important;
     color: var(--user-ink-muted) !important;
-    font-size: 13px !important;
+    font-size: var(--fs-ui) !important;
     font-weight: 500 !important;
     transition:
         background var(--user-motion),
@@ -26968,7 +26968,7 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 }
 .app-user-workspace .creation-featured-heading span {
     color: var(--user-ink-soft) !important;
-    font-size: 13px !important;
+    font-size: var(--fs-caption) !important;
 }
 .app-user-workspace .creation-featured-heading h2 {
     color: var(--user-ink) !important;

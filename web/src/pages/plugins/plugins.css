@@ -1,7 +1,7 @@
 .app-user-workspace .plugins-page {
     --plugins-ink: #10164d;
-    --plugins-muted: #737fa9;
-    --plugins-accent: #3478ff;
+    --plugins-muted: var(--product-text-muted);
+    --plugins-accent: var(--product-text-accent);
     --plugins-selected: #dce8ff;
     --plugins-edge: #dbe5ff;
     --plugins-card: rgb(255 255 255 / 92%);
@@ -12,6 +12,13 @@
     --plugins-primary-hover: #30374e;
     --plugins-primary-ink: #fff;
     --plugins-success: #299b68;
+    --plugins-tab-background: rgb(98 109 156 / 6%);
+    --plugins-tab-active: #000;
+    --plugins-tab-active-ink: #fff;
+    --plugins-card-shadow: 0 2px 12px rgb(45 104 252 / 4%);
+    --plugins-card-hover-shadow: 0 6px 24px rgb(45 104 252 / 12%);
+    --collection-grid-min-width: 260px;
+    --user-control-height: 40px;
     --user-ink: var(--plugins-ink);
     --user-ink-muted: var(--plugins-muted);
     --user-ink-soft: var(--plugins-muted);
@@ -37,8 +44,8 @@
 
 .dark .app-user-workspace .plugins-page {
     --plugins-ink: #e5edff;
-    --plugins-muted: #a4b3d6;
-    --plugins-accent: #88adff;
+    --plugins-muted: var(--product-text-muted);
+    --plugins-accent: var(--product-text-accent);
     --plugins-selected: #263c66;
     --plugins-edge: #34486f;
     --plugins-card: #1a2a49;
@@ -48,6 +55,7 @@
     --plugins-primary: #4177e9;
     --plugins-primary-hover: #5688ef;
     --plugins-success: #7bd6a8;
+    --plugins-tab-background: rgb(255 255 255 / 5%);
 }
 
 .plugin-trust-label {
@@ -60,9 +68,9 @@
 
 .app-user-workspace .plugins-page-heading {
     width: 100%;
-    max-width: 1920px;
+    max-width: var(--product-content-max);
     margin: 0 auto;
-    padding: 24px 28px 0;
+    padding: var(--product-page-top) var(--product-page-gutter) 0;
 }
 
 .app-user-workspace .plugins-page-heading .app-page-header {
@@ -77,27 +85,47 @@
     width: auto;
     min-width: 0;
     margin: 0;
-    padding: 0 0 var(--space-8);
+    padding: 0;
 }
 
 .plugins-page-content .collection-toolbar {
-    margin-top: var(--space-2);
+    margin: 0;
+}
+
+.app-user-workspace .plugins-page .collection-toolbar-controls {
+    flex: 1 1 520px;
+    display: grid;
+    grid-template-columns: minmax(200px, 1.8fr) repeat(2, minmax(120px, 0.8fr));
+    gap: var(--product-control-gap);
+}
+
+.plugins-page .collection-toolbar-controls > .plugins-search,
+.plugins-page .collection-toolbar-controls > .plugins-filter {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+}
+
+.plugins-page .collection-toolbar-actions {
+    margin-left: auto;
 }
 
 .plugins-page-layout {
     position: relative;
     isolation: isolate;
     display: grid;
-    width: min(var(--product-content-max), calc(100% - 64px));
-    margin: 24px auto 0;
+    width: min(calc(var(--product-content-max) - 2 * var(--product-page-gutter)), calc(100% - 2 * var(--product-page-gutter)));
+    margin: var(--product-section-gap) auto var(--product-page-bottom);
+    padding: var(--product-panel-padding);
     grid-template-columns: minmax(0, 1fr);
+    gap: var(--product-section-gap);
     align-items: start;
 }
 
 .plugins-page-layout::before {
     content: "";
     position: absolute;
-    inset: -12px;
+    inset: 0;
     z-index: -1;
     border-radius: var(--plugins-card-radius);
     background: var(--plugins-content-background);
@@ -105,11 +133,6 @@
 }
 
 .plugins-page :is(.plugins-sidebar-label, .plugin-author) {
-    color: var(--plugins-muted);
-}
-
-.plugins-page .plugins-results-count {
-    background: var(--plugins-selected);
     color: var(--plugins-muted);
 }
 
@@ -130,7 +153,7 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--product-letter-spacing);
 }
 
 .plugins-sidebar-heading h1 {
@@ -143,7 +166,7 @@
 
 .plugins-sidebar-heading p {
     margin-top: var(--space-2);
-    color: color-mix(in srgb, var(--foreground) 44%, transparent);
+    color: var(--product-text-muted);
     font-size: var(--fs-label);
     line-height: 1.55;
 }
@@ -151,24 +174,27 @@
 .plugins-sidebar-nav {
     display: flex;
     overflow-x: auto;
-    gap: var(--space-1);
+    gap: var(--product-control-gap);
+    padding: var(--space-1);
+    margin: calc(-1 * var(--space-1));
+    scrollbar-width: thin;
 }
 
 .plugins-sidebar-item {
     display: flex;
-    width: auto;
-    flex-shrink: 0;
+    flex: 1 0 auto;
     white-space: nowrap;
-    min-height: 36px;
+    min-height: 44px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: var(--space-2);
     border: 1px solid transparent;
-    border-radius: var(--r-sm);
-    background: transparent;
-    padding: 0 var(--space-2);
-    color: var(--user-ink-muted);
-    font-size: var(--fs-caption);
+    border-radius: var(--user-radius-control);
+    background: var(--plugins-tab-background);
+    padding: var(--space-2) var(--space-3);
+    color: var(--plugins-ink);
+    font-size: var(--fs-body);
+    font-weight: 500;
     text-align: left;
     cursor: pointer;
     transition:
@@ -191,25 +217,22 @@
 .plugins-sidebar-item.is-active {
     border-color: transparent;
     border-radius: var(--user-radius-control);
-    background: var(--user-surface-muted);
-    color: var(--user-accent);
+    background: var(--plugins-tab-active);
+    color: var(--plugins-tab-active-ink);
     box-shadow: none;
 }
 
 .plugins-sidebar-item > span:last-child {
-    min-width: 22px;
-    border-radius: var(--r-sm);
     background: transparent;
-    padding: 2px 4px;
+    padding: 0;
     color: var(--user-ink-muted);
     font-size: var(--fs-label);
     font-variant-numeric: tabular-nums;
-    text-align: right;
+    text-align: center;
 }
 
 .plugins-sidebar-item.is-active > span:last-child {
-    color: var(--user-accent);
-    background: transparent;
+    color: var(--plugins-tab-active-ink);
 }
 
 .plugins-sidebar-item-label {
@@ -234,6 +257,10 @@
     white-space: nowrap;
 }
 
+.plugins-page .plugins-toolbar-actions .ant-btn {
+    height: var(--user-control-height);
+}
+
 .plugins-search,
 .plugins-filter {
     min-width: 0;
@@ -254,7 +281,7 @@
     border-color: color-mix(in srgb, var(--workspace-accent) 48%, var(--workspace-border));
 }
 
-.app-user-workspace .plugins-page :is(.plugins-search.ant-input-affix-wrapper, .plugins-filter.ant-select) {
+.app-user-workspace .plugins-page .collection-toolbar :is(.plugins-search.ant-input-affix-wrapper, .plugins-filter.ant-select) {
     border-color: var(--plugins-edge) !important;
     background: var(--plugins-card) !important;
     color: var(--plugins-ink);
@@ -318,13 +345,13 @@
     place-items: center;
     border-radius: var(--r-lg);
     background: color-mix(in srgb, var(--foreground) 5%, transparent);
-    color: color-mix(in srgb, var(--foreground) 48%, transparent);
+    color: var(--product-text-muted);
 }
 
 .plugins-sections {
     display: grid;
-    gap: var(--space-8);
-    margin-top: var(--space-5);
+    gap: var(--product-section-gap);
+    margin-top: var(--product-section-gap);
 }
 
 .plugin-section {
@@ -336,21 +363,18 @@
     display: flex;
     min-width: 0;
     align-items: center;
+    justify-content: flex-start;
+    text-align: left;
     gap: var(--space-3);
-    padding-bottom: var(--space-3);
+    padding-bottom: 0;
     border-bottom: 0;
 }
 
-.plugin-section-icon {
-    display: grid;
-    width: 34px;
-    height: 34px;
-    flex: 0 0 auto;
-    place-items: center;
-    border: 0;
-    border-radius: var(--r-md);
-    background: var(--user-surface-muted);
-    color: var(--user-accent);
+.plugin-section-title-row {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--space-2);
 }
 
 .plugin-section-heading > div {
@@ -358,29 +382,26 @@
 }
 
 .plugin-section-heading h2 {
+    margin: 0;
     color: var(--foreground);
-    font-size: var(--fs-body-lg);
+    font-size: var(--fs-heading);
     font-weight: 600;
-    line-height: 1.35;
+    line-height: var(--product-heading-line-height);
 }
 
 .plugin-section-heading p {
-    margin-top: var(--space-half);
+    min-width: 0;
+    margin: 0;
     color: var(--user-ink-muted);
     font-size: var(--fs-label);
-    line-height: 1.45;
+    line-height: var(--product-body-line-height);
 }
 
 .plugin-section-count {
-    display: inline-grid;
-    min-width: 28px;
-    height: 24px;
-    margin-left: auto;
-    place-items: center;
-    border-radius: var(--r-full);
-    background: var(--user-surface-muted);
+    background: transparent;
     color: var(--user-ink-muted);
     font-size: var(--fs-label);
+    line-height: var(--product-body-line-height);
     font-variant-numeric: tabular-nums;
 }
 
@@ -388,8 +409,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     align-items: stretch;
-    gap: var(--space-3);
-    margin-top: var(--space-3);
+    gap: var(--product-card-gap);
+    margin-top: var(--space-4);
 }
 
 .plugin-section-empty-hint {
@@ -406,18 +427,29 @@
 }
 
 .plugin-card {
+    position: relative;
     display: flex;
     min-width: 0;
-    min-height: 214px;
+    min-height: 232px;
     flex-direction: column;
-    padding: var(--space-3);
+    padding: var(--space-4);
     border-radius: var(--plugins-card-radius);
     border: 0;
     background: var(--user-surface);
-    transition: background-color var(--motion-state) ease-out;
+    transition:
+        background-color var(--motion-state) ease-out,
+        box-shadow var(--motion-state) ease-out;
 }
 
-/* 悬浮只改变卡片表面颜色，保持现有卡片位置。 */
+.app-user-workspace .plugins-page .plugin-card {
+    border: 1px solid color-mix(in srgb, var(--plugins-edge) 55%, transparent) !important;
+    box-shadow: var(--plugins-card-shadow) !important;
+}
+
+.app-user-workspace .plugins-page .plugin-card:is(:hover, :focus-within) {
+    box-shadow: var(--plugins-card-hover-shadow) !important;
+}
+
 .plugin-card:hover,
 .plugin-card:focus-within {
     background: var(--user-card-hover);
@@ -430,7 +462,8 @@
 
 .plugin-card-main {
     appearance: none;
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     min-width: 0;
     flex: 1 1 auto;
@@ -460,12 +493,26 @@
     min-width: 0;
     align-items: flex-start;
     gap: var(--space-3);
+    width: 100%;
+    padding-right: var(--space-4);
+}
+
+.plugins-page .plugin-card-menu.ant-btn {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-1);
+    z-index: 1;
+    width: 28px;
+    min-width: 28px;
+    height: 32px;
+    padding: 0;
+    color: var(--plugins-muted);
 }
 
 .plugin-icon-tile {
     display: grid;
-    width: 42px;
-    height: 42px;
+    width: 52px;
+    height: 52px;
     flex: 0 0 auto;
     place-items: center;
     border-radius: var(--r-md);
@@ -483,8 +530,34 @@
 }
 
 .plugin-icon-tile.is-trusted {
-    background: var(--user-surface-muted);
+    background: var(--plugins-tab-background);
     color: var(--user-accent);
+}
+
+.plugin-icon-initial {
+    font-size: var(--fs-title);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.plugin-generated-logo {
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.dark .plugin-icon-tile:has(.plugin-generated-logo[data-monochrome]) {
+    background: var(--plugins-primary-ink);
+}
+
+.plugin-author {
+    overflow: hidden;
+    margin-top: var(--space-half);
+    font-size: var(--fs-label);
+    line-height: var(--product-body-line-height);
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .plugin-card-title-row {
@@ -498,9 +571,9 @@
     min-width: 0;
     overflow: hidden;
     color: var(--foreground);
-    font-size: var(--fs-body-lg);
+    font-size: var(--fs-body);
     font-weight: 600;
-    line-height: 1.35;
+    line-height: var(--product-heading-line-height);
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -508,8 +581,10 @@
 .plugin-version {
     flex: 0 0 auto;
     color: var(--user-ink-muted);
-    font-size: var(--fs-tiny);
+    font-size: var(--fs-label);
     font-variant-numeric: tabular-nums;
+    border-left: 1px solid var(--plugins-edge);
+    padding-left: var(--space-3);
 }
 
 .plugin-card-labels,
@@ -552,13 +627,18 @@
 }
 
 .plugin-trust-label {
-    font-size: var(--fs-micro);
+    border-radius: var(--r-sm);
+    padding: var(--space-half) var(--space-2);
+    background: color-mix(in srgb, var(--plugins-success) 10%, transparent);
+    font-size: var(--fs-label);
+    line-height: 1.4;
 }
 
 .plugin-card-description {
     display: -webkit-box;
-    min-height: 2.9em;
-    margin-top: var(--space-3);
+    min-height: 3.2em;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-3);
     overflow: hidden;
     color: var(--user-ink-muted);
     font-size: var(--fs-caption);
@@ -569,7 +649,7 @@
 
 .plugin-card-meta {
     gap: var(--space-3);
-    margin-top: var(--space-3);
+    margin-top: auto;
     color: var(--user-ink-muted);
     font-size: var(--fs-label);
 }
@@ -582,8 +662,20 @@
 }
 
 .plugin-card-tags {
+    flex: 1 1 120px;
+    gap: var(--space-1);
+}
+
+.plugin-card-tags span:last-child {
+    background: var(--plugins-tab-background);
+}
+
+.plugin-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     gap: var(--space-2);
-    margin-top: var(--space-3);
+    margin-top: var(--space-4);
 }
 
 .plugin-card-actions {
@@ -591,13 +683,14 @@
     min-width: 0;
     align-items: center;
     gap: var(--space-2);
-    margin-top: var(--space-3);
-    padding-top: var(--space-2);
+    margin-left: auto;
     border-top: 0;
 }
 
 .plugin-card-actions .settings-channel-status {
-    margin-right: auto;
+    max-width: 130px;
+    font-size: var(--fs-label);
+    overflow-wrap: anywhere;
 }
 
 .plugin-card-actions .ant-switch {
@@ -659,7 +752,7 @@
     border: none;
     border-radius: var(--r-sm);
     background: transparent;
-    color: color-mix(in srgb, var(--foreground) 60%, transparent);
+    color: var(--product-text-muted);
     font-size: var(--fs-label);
     font-weight: 500;
     cursor: pointer;
@@ -684,7 +777,7 @@
     align-items: center;
     gap: 4px;
     font-size: var(--fs-caption);
-    color: color-mix(in srgb, var(--foreground) 50%, transparent);
+    color: var(--product-text-muted);
 }
 
 .plugin-upload-copy-btn {
@@ -725,7 +818,7 @@
     justify-content: center;
     gap: 8px;
     font-size: var(--fs-label);
-    color: color-mix(in srgb, var(--foreground) 45%, transparent);
+    color: var(--product-text-muted);
     margin-top: var(--space-1);
 }
 
@@ -811,7 +904,7 @@
 
 .plugin-upload-panel-heading p {
     margin-top: var(--space-1);
-    color: color-mix(in srgb, var(--foreground) 50%, transparent);
+    color: var(--product-text-muted);
     font-size: var(--fs-label);
     line-height: 1.55;
 }
@@ -858,7 +951,7 @@
 }
 
 .plugin-upload-dropzone .ant-upload-hint {
-    color: color-mix(in srgb, var(--foreground) 45%, transparent);
+    color: var(--product-text-muted);
     font-size: var(--fs-label);
 }
 
@@ -866,7 +959,7 @@
     display: flex;
     align-items: flex-start;
     gap: var(--space-2);
-    color: color-mix(in srgb, var(--foreground) 49%, transparent);
+    color: var(--product-text-muted);
     font-size: var(--fs-label);
     line-height: 1.55;
 }
@@ -954,7 +1047,7 @@
     border-radius: var(--r-sm);
     background: color-mix(in srgb, var(--foreground) 7%, transparent);
     padding: 2px 4px;
-    color: color-mix(in srgb, var(--workspace-accent) 78%, var(--foreground));
+    color: var(--product-text-accent);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     font-size: 0.92em;
 }
@@ -1015,7 +1108,7 @@
     border-radius: var(--r-md);
     background: color-mix(in srgb, var(--workspace-accent) 7%, transparent);
     padding: var(--space-2) var(--space-3);
-    color: color-mix(in srgb, var(--foreground) 64%, transparent);
+    color: var(--product-text-muted);
 }
 
 .plugin-markdown hr {
@@ -1053,7 +1146,7 @@
 .plugin-settings-heading p,
 .plugin-settings-fields p {
     margin-top: var(--space-1);
-    color: color-mix(in srgb, var(--foreground) 44%, transparent);
+    color: var(--product-text-muted);
     font-size: var(--fs-label);
     line-height: 1.55;
 }
@@ -1066,7 +1159,7 @@
 
 .plugin-settings-fields label {
     display: block;
-    color: color-mix(in srgb, var(--foreground) 62%, transparent);
+    color: var(--product-text-muted);
     font-size: var(--fs-label);
     font-weight: 600;
 }
@@ -1097,7 +1190,7 @@
     border-radius: var(--r-lg);
     background: color-mix(in srgb, var(--foreground) 4%, transparent);
     padding: var(--space-3);
-    color: color-mix(in srgb, var(--foreground) 52%, transparent);
+    color: var(--product-text-muted);
     font-size: var(--fs-caption);
 }
 
@@ -1105,7 +1198,7 @@
     display: grid;
     gap: var(--space-2);
     margin-top: var(--space-4);
-    color: color-mix(in srgb, var(--foreground) 52%, transparent);
+    color: var(--product-text-muted);
     font-size: var(--fs-label);
     line-height: 1.6;
 }
@@ -1113,7 +1206,7 @@
 .plugin-permissions span {
     display: inline-block;
     margin-right: var(--space-2);
-    color: color-mix(in srgb, var(--foreground) 36%, transparent);
+    color: var(--product-text-muted);
 }
 
 .plugin-error {
@@ -1122,15 +1215,9 @@
     font-size: var(--fs-label);
 }
 
-@media (max-width: 1199px) {
-    .app-user-workspace .plugins-page-heading {
-        padding: 20px 20px 0;
-    }
-}
-
 @media (max-width: 900px) {
     .plugins-page-layout {
-        display: block;
+        display: grid;
     }
 
     .plugins-sidebar {
@@ -1152,10 +1239,7 @@
     }
 
     .plugins-sidebar-nav {
-        display: flex;
-        gap: var(--space-1);
-        overflow-x: auto;
-        padding-bottom: var(--space-3);
+        padding-bottom: var(--space-2);
     }
 
     .plugins-sidebar-item {
@@ -1167,10 +1251,6 @@
 
     .plugins-toolbar {
         grid-template-columns: minmax(0, 1fr) repeat(2, minmax(120px, 1fr));
-    }
-
-    .plugins-search {
-        grid-column: 1 / -1;
     }
 
     .plugins-filter-icon {
@@ -1196,9 +1276,15 @@
 }
 
 @media (max-width: 640px) {
-    .plugins-page-layout {
-        width: calc(100% - 24px);
+    .app-user-workspace .plugins-page .collection-toolbar-controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        flex-basis: 100%;
     }
+
+    .plugins-page .collection-toolbar-actions {
+        width: 100%;
+    }
+
     .plugins-page-content {
         padding-inline: 0;
     }
@@ -1248,11 +1334,6 @@
         min-height: 210px;
     }
 
-    .plugin-card-actions .settings-channel-status {
-        width: 100%;
-        margin-right: 0;
-    }
-
     .plugin-settings-button {
         flex: 1 1 0;
     }
@@ -1267,12 +1348,6 @@
 
     .plugins-toolbar-actions .ant-btn {
         width: 100%;
-    }
-}
-
-@media (max-width: 620px) {
-    .app-user-workspace .plugins-page-heading {
-        padding: 12px 12px 0;
     }
 }
 

@@ -1,7 +1,8 @@
 import { CollectionToolbar } from "@/components/layout/collection-toolbar";
-import { App, Button, Input, Modal, Typography } from "antd";
+import { App, Button, Dropdown, Input, Modal, Typography } from "antd";
+import { ModelLogo } from "@/components/model-logo";
 import { Switch } from "@/components/ui/base/switch";
-import { AudioLines, CheckCircle2, Clock3, CreditCard, ExternalLink, Film, FolderOpen, Image as ImageIcon, MessageSquareText, PlugZap, RefreshCw, Search, Settings2, ShieldCheck, SlidersHorizontal } from "lucide-react";
+import { AudioLines, CheckCircle2, Clock3, CreditCard, ExternalLink, Film, FolderOpen, Image as ImageIcon, MessageSquareText, MoreVertical, PlugZap, RefreshCw, Search, Settings2, ShieldCheck, SlidersHorizontal } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -21,6 +22,7 @@ import { usePluginStore } from "@/stores/use-plugin-store";
 import { useUserStore } from "@/stores/use-user-store";
 
 import { PluginDetailsModal } from "./plugin-documentation-modals";
+import { generatedPluginLogos } from "./plugin-generated-logos";
 import "./plugins.css";
 import { Select } from "@/components/ui/base/select";
 
@@ -58,6 +60,23 @@ const permissionLabels: Record<string, string> = {
 };
 
 const pluginDateFormatter = new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "short", day: "numeric" });
+
+// Match the plugin's own brand, never a compatible protocol mentioned in its description.
+const pluginBrandIcons: [RegExp, string][] = [
+    [/^anthropic/i, "Anthropic"],
+    [/^antigravity/i, "Antigravity"],
+    [/^atlas/i, "AtlasCloud"],
+    [/^aws|^amazon/i, "Aws"],
+    [/^azure/i, "Azure"],
+    [/^百川|^baichuan/i, "Baichuan"],
+    [/^dashscope|^qwen/i, "Qwen"],
+    [/^deepseek/i, "DeepSeek"],
+    [/^fireworks/i, "Fireworks"],
+    [/^google|^gemini/i, "Google"],
+    [/^openai/i, "OpenAI"],
+    [/^openrouter/i, "OpenRouter"],
+    [/^silicon/i, "SiliconCloud"],
+];
 
 const protocolSectionMeta = [
     { key: "text", label: "文本协议", description: "对话、推理与流式响应", icon: MessageSquareText },
@@ -247,17 +266,12 @@ export default function PluginsPage() {
                     </div>
                     <div className="plugins-page-layout">
                         <aside className="plugins-sidebar" aria-label="插件分类">
-                            <div className="plugins-sidebar-label">分类</div>
                             <nav className="plugins-sidebar-nav" aria-label="按插件类型筛选">
                                 <button type="button" className={`plugins-sidebar-item${categoryFilter === "all" ? " is-active" : ""}`} aria-current={categoryFilter === "all" ? "page" : undefined} onClick={() => selectCategory("all")}>
-                                    <span className="plugins-sidebar-item-label">
-                                        <PlugZap className="size-4" />
-                                        全部插件
-                                    </span>
+                                    <span className="plugins-sidebar-item-label">全部插件</span>
                                     <span>{categoryCounts.all}</span>
                                 </button>
                                 {protocolSectionMeta.map((section) => {
-                                    const SectionIcon = section.icon;
                                     return (
                                         <button
                                             key={section.key}
@@ -266,31 +280,19 @@ export default function PluginsPage() {
                                             aria-current={categoryFilter === section.key ? "page" : undefined}
                                             onClick={() => selectCategory(section.key)}
                                         >
-                                            <span className="plugins-sidebar-item-label">
-                                                <SectionIcon className="size-4" />
-                                                {section.label}
-                                            </span>
+                                            <span className="plugins-sidebar-item-label">{section.label}</span>
                                             <span>{categoryCounts[section.key] || 0}</span>
                                         </button>
                                     );
                                 })}
                                 <button type="button" className={`plugins-sidebar-item${categoryFilter === "other" ? " is-active" : ""}`} aria-current={categoryFilter === "other" ? "page" : undefined} onClick={() => selectCategory("other")}>
-                                    <span className="plugins-sidebar-item-label">
-                                        <PlugZap className="size-4" />
-                                        应用插件
-                                    </span>
+                                    <span className="plugins-sidebar-item-label">应用插件</span>
                                     <span>{categoryCounts.other}</span>
                                 </button>
                             </nav>
                         </aside>
-                        <div className="plugins-page-content" aria-labelledby="plugins-results-title">
+                        <div className="plugins-page-content" aria-label={selectedCategoryLabel}>
                             <div className="plugins-results-header">
-                                <div className="plugins-results-title">
-                                    <h2 id="plugins-results-title">{selectedCategoryLabel}</h2>
-                                    <span className="plugins-results-count" aria-live="polite">
-                                        {filteredPlugins.length} 个
-                                    </span>
-                                </div>
                                 <CollectionToolbar
                                     label="插件筛选"
                                     trailing={
@@ -299,7 +301,7 @@ export default function PluginsPage() {
                                                 刷新插件
                                             </Button>
                                             {user?.role === "admin" ? (
-                                                <Button type="primary" onClick={() => navigate("/admin/plugins")}>
+                                                <Button type="primary" icon={<Settings2 className="size-4" />} onClick={() => navigate("/admin/plugins")}>
                                                     管理员插件管理
                                                 </Button>
                                             ) : null}
@@ -324,7 +326,7 @@ export default function PluginsPage() {
                                             { value: "disabled", label: "已停用" },
                                         ]}
                                         onChange={(value) => setStatusFilter(value as "all" | "enabled" | "disabled")}
-                                        aria-label="按状态筛选"
+                                        ariaLabel="按状态筛选"
                                     />
                                     <Select
                                         className="plugins-filter"
@@ -334,7 +336,7 @@ export default function PluginsPage() {
                                             { value: "trusted", label: "可信插件" },
                                         ]}
                                         onChange={(value) => setTrustFilter(value as "all" | "trusted")}
-                                        aria-label="按来源筛选"
+                                        ariaLabel="按来源筛选"
                                     />
                                 </CollectionToolbar>
                             </div>
@@ -342,7 +344,6 @@ export default function PluginsPage() {
                             {filteredPlugins.length ? (
                                 <div className="plugins-sections">
                                     {pluginSections.map((section) => {
-                                        const SectionIcon = section.icon;
                                         return (
                                             <section
                                                 key={section.key}
@@ -352,14 +353,11 @@ export default function PluginsPage() {
                                                 data-category={section.key === "image" ? "creative" : section.key === "video" ? "drama" : section.key === "audio" ? "social" : section.key === "payment" ? "ecommerce" : undefined}
                                             >
                                                 <header className="plugin-section-heading">
-                                                    <span className="plugin-section-icon">
-                                                        <SectionIcon className="size-4" />
-                                                    </span>
-                                                    <div>
+                                                    <div className="plugin-section-title-row">
                                                         <h2 id={`plugin-section-title-${section.key}`}>{section.label}</h2>
-                                                        <p>{section.description}</p>
+                                                        <span className="plugin-section-count">{section.plugins.length}</span>
                                                     </div>
-                                                    <span className="plugin-section-count">{section.plugins.length}</span>
+                                                    <p>{section.description}</p>
                                                 </header>
                                                 {section.plugins.length ? (
                                                     <div className="plugins-grid">
@@ -371,8 +369,28 @@ export default function PluginsPage() {
                                                             const state = pluginStates[plugin.manifest.id];
                                                             const sourceLabel = pluginSourceLabel(plugin, state);
                                                             const canConfigure = canConfigurePlugin(plugin);
+                                                            const brandIcon = pluginBrandIcons.find(([pattern]) => pattern.test(plugin.manifest.name))?.[1];
+                                                            const generatedLogo = generatedPluginLogos[plugin.manifest.id];
                                                             return (
                                                                 <section key={plugin.manifest.id} className={`product-collection-card plugin-card library-card-surface${trusted ? " is-trusted" : ""}`}>
+                                                                    <Dropdown
+                                                                        trigger={["click"]}
+                                                                        menu={{
+                                                                            items: [
+                                                                                {
+                                                                                    key: "docs",
+                                                                                    label: "查看文档",
+                                                                                    onClick: () => {
+                                                                                        setDetailsRestoreFocus(true);
+                                                                                        setDetailsPluginId(plugin.manifest.id);
+                                                                                    },
+                                                                                },
+                                                                                ...(canConfigure ? [{ key: "settings", label: "插件设置", onClick: () => setSettingsPluginId(plugin.manifest.id) }] : []),
+                                                                            ],
+                                                                        }}
+                                                                    >
+                                                                        <Button type="text" className="plugin-card-menu" icon={<MoreVertical className="size-4" />} aria-label={`${plugin.manifest.name}的更多操作`} />
+                                                                    </Dropdown>
                                                                     <button
                                                                         type="button"
                                                                         className="plugin-card-main"
@@ -386,16 +404,31 @@ export default function PluginsPage() {
                                                                     >
                                                                         <div className="plugin-card-heading">
                                                                             <span className={`plugin-icon-tile${trusted ? " is-trusted" : ""}`} aria-hidden="true">
-                                                                                <SectionIcon className="size-5" />
+                                                                                {brandIcon ? (
+                                                                                    <ModelLogo icon={brandIcon} size={32} />
+                                                                                ) : generatedLogo ? (
+                                                                                    <img
+                                                                                        className="plugin-generated-logo"
+                                                                                        data-monochrome={generatedLogo.monochrome || undefined}
+                                                                                        src={generatedLogo.src}
+                                                                                        alt=""
+                                                                                        width={32}
+                                                                                        height={32}
+                                                                                        decoding="async"
+                                                                                        draggable={false}
+                                                                                    />
+                                                                                ) : (
+                                                                                    <span className="plugin-icon-initial">{plugin.manifest.name.slice(0, 2)}</span>
+                                                                                )}
                                                                             </span>
                                                                             <div className="min-w-0 flex-1">
                                                                                 <div className="plugin-card-title-row">
                                                                                     <h3 title={plugin.manifest.name}>{plugin.manifest.name}</h3>
                                                                                 </div>
+                                                                                <p className="plugin-author" title={`作者：${plugin.manifest.author || "未知作者"}`}>
+                                                                                    {plugin.manifest.author || "未知作者"}
+                                                                                </p>
                                                                                 <div className="plugin-card-labels">
-                                                                                    <span className="plugin-author" title={`作者：${plugin.manifest.author || "未知作者"}`}>
-                                                                                        {plugin.manifest.author || "未知作者"}
-                                                                                    </span>
                                                                                     <span className={`plugin-source-label${sourceLabel === "系统插件" ? " is-system" : ""}`}>{sourceLabel}</span>
                                                                                     {trusted ? (
                                                                                         <span className="plugin-trust-label">
@@ -416,7 +449,9 @@ export default function PluginsPage() {
                                                                             </span>
                                                                             <span className="plugin-version">v{plugin.manifest.version}</span>
                                                                         </div>
+                                                                    </button>
 
+                                                                    <div className="plugin-card-footer">
                                                                         <div className="plugin-card-tags">
                                                                             {(plugin.manifest.surfaces || []).map((surface) => (
                                                                                 <span key={surface}>{surfaceLabels[surface] ?? surface}</span>
@@ -427,33 +462,20 @@ export default function PluginsPage() {
                                                                             {plugin.manifest.contributes.providers?.some((provider) => provider.poll) ? <span>异步轮询</span> : null}
                                                                             <span>{plugin.manifest.permissions.length} 项能力</span>
                                                                         </div>
-                                                                    </button>
-
-                                                                    <div className="plugin-card-actions">
-                                                                        <span role="status" className={`settings-channel-status ${enabled ? "is-ready" : ""}`}>
-                                                                            <i aria-hidden="true" />
-                                                                            {!state?.platformAvailable && state?.blockedReason ? state.blockedReason : enabled ? "已启用" : "已停用"}
-                                                                        </span>
-                                                                        <Switch
-                                                                            className="plugin-state-switch"
-                                                                            size="sm"
-                                                                            disabled={!state?.canToggle}
-                                                                            checked={enabled}
-                                                                            aria-label={`${plugin.manifest.name}，当前${enabled ? "已启用，点击停用" : "已停用，点击启用"}`}
-                                                                            title={state?.blockedReason}
-                                                                            onChange={(checked) => void togglePlugin(plugin, checked)}
-                                                                        />
-                                                                        {canConfigure ? (
-                                                                            <Button
-                                                                                className="plugin-settings-button"
-                                                                                icon={<Settings2 className="size-4" />}
-                                                                                aria-expanded={settingsPluginId === plugin.manifest.id}
-                                                                                aria-haspopup="dialog"
-                                                                                onClick={() => setSettingsPluginId(plugin.manifest.id)}
-                                                                            >
-                                                                                设置
-                                                                            </Button>
-                                                                        ) : null}
+                                                                        <div className="plugin-card-actions">
+                                                                            <Switch
+                                                                                className="plugin-state-switch"
+                                                                                size="sm"
+                                                                                disabled={!state?.canToggle}
+                                                                                checked={enabled}
+                                                                                aria-label={`${plugin.manifest.name}，当前${enabled ? "已启用，点击停用" : "已停用，点击启用"}`}
+                                                                                title={state?.blockedReason}
+                                                                                onChange={(checked) => void togglePlugin(plugin, checked)}
+                                                                            />
+                                                                            <span role="status" className={`settings-channel-status ${enabled ? "is-ready" : ""}`} title={state?.blockedReason}>
+                                                                                {!state?.platformAvailable && state?.blockedReason ? state.blockedReason : enabled ? "已启用" : "已停用"}
+                                                                            </span>
+                                                                        </div>
                                                                     </div>
 
                                                                     {installation?.lastError || remote?.error ? (

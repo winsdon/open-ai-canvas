@@ -1,19 +1,21 @@
 /* Short-drama library: the shared navigation stays in workspace-navigation-theme.css. */
 .app-user-workspace .studio-collection-page.drama-library {
     --drama-library-ink: #10164d;
-    --drama-library-muted: #6573a3;
-    --drama-library-soft: #6677a1;
-    --drama-library-accent: #3473ff;
+    --drama-library-muted: var(--product-text-muted);
+    --drama-library-soft: var(--product-text-muted);
+    --drama-library-accent: var(--product-text-accent);
     --drama-library-border: #c4d3ff;
     --drama-library-glass: rgb(255 255 255 / 45%);
     --drama-library-glass-edge: rgb(255 255 255 / 90%);
     --drama-library-count-bg: #dce8ff;
+    --drama-library-step-bg: #000;
     --drama-library-button-bg: #171e36;
     --drama-library-button-hover: #283760;
     --drama-library-button-ink: #fff;
     --drama-library-secondary-bg: rgb(255 255 255 / 84%);
     --drama-library-shadow: 0 8px 28px rgb(72 110 201 / 7%);
-    --drama-library-background: #edf4ff url("/images/home/aurora-background.png") center / cover no-repeat;
+    /* Keep the image's upper-left arc away from the panel edge at workspace widths. */
+    --drama-library-background: #edf4ff url("/images/home/aurora-background.png") right center / cover no-repeat;
     --foreground: var(--drama-library-ink);
     --user-ink: var(--drama-library-ink);
     --user-ink-muted: var(--drama-library-muted);
@@ -33,16 +35,16 @@
 }
 
 .app-user-workspace .studio-collection-page.drama-library > div {
-    width: 100%;
-    margin: 0;
-    padding: 18px 28px 32px;
+    width: min(var(--product-content-max), 100%);
+    margin: 0 auto;
+    padding: var(--product-page-top) var(--product-page-gutter) var(--product-page-bottom);
 }
 
 .drama-library .drama-root {
     --drama-muted: var(--drama-library-muted);
     position: relative;
     width: 100%;
-    max-width: 1520px;
+    max-width: 100%;
     min-height: 100%;
     margin: 0 auto;
 }
@@ -96,25 +98,27 @@
 }
 
 .drama-library-heading {
+    --drama-library-title-size: 28px;
+    --drama-library-description-size: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    margin: 12px 0 24px;
+    gap: var(--product-text-gap);
+    margin: var(--product-card-gap) 0 var(--product-section-gap);
     text-align: center;
 }
 .drama-library-title {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: var(--product-control-gap);
 }
 .drama-library-title h1 {
     margin: 0;
     color: var(--drama-library-ink);
-    font-size: clamp(30px, 2.5vw, 44px);
+    font-size: var(--drama-library-title-size);
     font-weight: 700;
-    line-height: 1.4;
+    line-height: var(--product-heading-line-height);
 }
 .drama-library-count {
     display: inline-flex;
@@ -132,8 +136,8 @@
 .drama-library-heading > p {
     margin: 0;
     color: var(--drama-library-muted);
-    font-size: clamp(14px, 1.2vw, 18px);
-    line-height: 1.8;
+    font-size: var(--drama-library-description-size);
+    line-height: var(--product-body-line-height);
 }
 .drama-library-heading .collection-header-actions {
     margin-top: 8px;
@@ -170,17 +174,17 @@
     object-fit: contain;
 }
 .drama-library-upload h2 {
-    margin: 0 0 12px;
+    margin: 0 0 var(--product-text-gap);
     color: var(--drama-library-ink);
-    font-size: clamp(24px, 2vw, 34px);
-    font-weight: 700;
-    line-height: 1.5;
+    font-size: var(--fs-heading);
+    font-weight: 600;
+    line-height: var(--product-heading-line-height);
 }
 .drama-library-upload p {
     margin: 0;
     color: var(--drama-library-muted);
-    font-size: clamp(14px, 1.15vw, 18px);
-    line-height: 1.8;
+    font-size: var(--fs-caption);
+    line-height: var(--product-body-line-height);
 }
 .drama-library-explainer {
     max-width: 1000px;
@@ -189,8 +193,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 14px;
-    margin: 26px 0 16px;
+    gap: var(--product-control-gap);
+    margin: var(--product-section-gap) 0 var(--product-card-gap);
 }
 .drama-library .drama-library-upload-actions .ant-btn {
     display: inline-flex;
@@ -201,7 +205,7 @@
     gap: 10px;
     padding: 0 24px;
     border-radius: 11px;
-    font-size: 16px;
+    font-size: var(--fs-ui);
     font-weight: 500;
     box-shadow: none;
 }
@@ -229,7 +233,7 @@
 }
 .drama-library-drop-hint {
     color: var(--drama-library-soft);
-    font-size: 13px;
+    font-size: var(--fs-caption);
     line-height: 1.8;
 }
 
@@ -273,8 +277,8 @@
     place-items: center;
     border: 2px solid var(--drama-library-glass-edge);
     border-radius: var(--r-full);
-    background: var(--drama-library-accent);
-    box-shadow: 0 2px 7px color-mix(in srgb, var(--drama-library-accent) 24%, transparent);
+    background: var(--drama-library-step-bg);
+    box-shadow: 0 2px 7px color-mix(in srgb, var(--drama-library-step-bg) 24%, transparent);
     color: var(--drama-library-button-ink);
     font-size: 16px;
     line-height: 1;
@@ -321,7 +325,7 @@
 
 @media (min-width: 1800px) {
     .drama-library-heading {
-        margin-block: 10px 24px;
+        margin-block: var(--product-card-gap) var(--product-section-gap);
     }
     .drama-library-upload {
         min-height: 530px;
@@ -334,9 +338,6 @@
     }
 }
 @media (max-width: 1100px) {
-    .app-user-workspace .studio-collection-page.drama-library > div {
-        padding-inline: 20px;
-    }
     .drama-library-pipeline {
         gap: 14px;
     }
@@ -355,12 +356,9 @@
     }
 }
 @media (max-width: 720px) {
-    .app-user-workspace .studio-collection-page.drama-library > div {
-        padding: 14px 16px 28px;
-    }
     .drama-library-heading {
-        margin-top: 20px;
-        gap: 8px;
+        margin-top: var(--product-card-gap);
+        gap: var(--product-text-gap);
     }
     .drama-library-upload {
         min-height: 0;
@@ -368,9 +366,6 @@
     }
     .drama-library-book {
         width: 140px;
-    }
-    .drama-library-upload h2 {
-        font-size: 24px;
     }
     .drama-library-pipeline {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -406,23 +401,18 @@
     }
     .drama-library-heading > p {
         max-width: 28em;
-        font-size: 14px;
     }
     .drama-library-upload {
         padding-inline: 18px;
     }
-    .drama-library-upload h2 {
-        font-size: 21px;
-    }
     .drama-library-upload-actions {
         width: 100%;
-        margin-block: 22px 14px;
-        gap: 10px;
+        margin-block: var(--product-section-gap) var(--product-card-gap);
+        gap: var(--product-control-gap);
     }
     .drama-library .drama-library-upload-actions .ant-btn {
         width: 100%;
         min-width: 0;
-        font-size: 16px;
     }
     .drama-library-pipeline {
         grid-template-columns: minmax(0, 1fr);
@@ -448,8 +438,8 @@
 
 .dark .app-user-workspace .studio-collection-page.drama-library {
     --drama-library-ink: #e5edff;
-    --drama-library-muted: #a8b9df;
-    --drama-library-soft: #9aacd2;
+    --drama-library-muted: var(--product-text-muted);
+    --drama-library-soft: var(--product-text-muted);
     --drama-library-border: #4b6395;
     --drama-library-glass: rgb(24 39 71 / 62%);
     --drama-library-glass-edge: rgb(162 188 242 / 23%);

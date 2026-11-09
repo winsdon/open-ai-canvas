@@ -1,5 +1,6 @@
 /* Creation content material; shared navigation lives in workspace-navigation-theme.css. */
 .app-user-workspace.app-home-workspace {
+    --home-title-font-size: 28px;
     --user-page-bg: transparent;
     --user-surface: rgb(255 255 255 / 78%);
     --user-surface-raised: #fff;
@@ -7,11 +8,11 @@
     --user-surface-hover: rgb(215 228 255 / 70%);
     --user-control-pressed: #e0e8ff;
     --user-ink: #10164d;
-    --user-ink-muted: #626d9c;
-    --user-ink-soft: #7a85ac;
+    --user-ink-muted: var(--product-text-muted);
+    --user-ink-soft: var(--product-text-muted);
     --user-border: #dce4f7;
     --user-border-strong: #a7beff;
-    --user-accent: #3473ff;
+    --user-accent: var(--product-text-accent);
     --user-accent-soft: #e2eaff;
     --background: #f1f6ff;
     --foreground: var(--user-ink);
@@ -21,13 +22,13 @@
     --workspace-accent: var(--user-accent);
     --control-focus-ring: #749cff;
     --control-selected-bg: #e0e8ff;
-    --control-selected-fg: #2860ee;
+    --control-selected-fg: var(--product-text-accent);
     --library-surface: rgb(255 255 255 / 66%);
     --library-surface-hover: rgb(255 255 255 / 90%);
     --library-cover-surface: #e7efff;
     --library-icon-surface: #e2eaff;
     --button-height: 38px;
-    --button-font-size: 13px;
+    --button-font-size: var(--fs-ui);
     --button-radius: 10px;
     --button-primary-bg: #3473ff;
     --button-primary-hover-bg: #2463ed;
@@ -36,8 +37,8 @@
     --button-secondary-bg: rgb(255 255 255 / 80%);
     --button-secondary-fg: var(--user-ink);
     --button-secondary-border: var(--user-border);
-    --button-ghost-fg: #515e96;
-    --button-ghost-hover-fg: #255de5;
+    --button-ghost-fg: var(--product-text-muted);
+    --button-ghost-hover-fg: var(--product-text-accent);
     --button-tonal-bg: rgb(255 255 255 / 80%);
     --button-tonal-hover-bg: #eaf0ff;
     --home-glass: rgb(255 255 255 / 30%);
@@ -45,8 +46,8 @@
     --home-card-shadow: 0 5px 18px rgb(70 112 204 / 7%);
     --home-focus-shadow: 0 0 0 3px rgb(52 115 255 / 12%);
     --home-action-ink: #10164d;
-    --home-action-muted: #626d9c;
-    --home-content-background: #edf4ff url("/images/home/aurora-background.png") center / cover no-repeat;
+    --home-action-muted: var(--product-text-muted);
+    --home-content-background: #edf4ff url("/images/home/aurora-background.png") right center / cover no-repeat;
     background: var(--workspace-shell-bg);
     color: var(--user-ink);
     font-family:
@@ -66,15 +67,15 @@
     background: transparent !important;
 }
 .app-user-workspace.app-home-workspace .creation-home-scroll {
-    padding: 18px 24px 40px;
+    padding: var(--product-page-top) var(--product-page-gutter) var(--product-page-bottom);
     scrollbar-color: #bdcdec transparent;
 }
 .app-user-workspace.app-home-workspace .creation-home-scroll > * {
-    max-width: 1440px;
+    max-width: calc(var(--product-content-max) - 2 * var(--product-page-gutter));
 }
 .app-user-workspace.app-home-workspace .creation-home-scroll > .creation-launchpad {
     width: 100%;
-    max-width: 1440px;
+    max-width: calc(var(--product-content-max) - 2 * var(--product-page-gutter));
 }
 .creation-page-trail {
     display: flex;
@@ -82,7 +83,7 @@
     align-items: center;
     gap: 10px;
     color: var(--user-ink-muted);
-    font-size: 13px;
+    font-size: var(--fs-ui);
 }
 .creation-page-trail svg {
     width: 16px;
@@ -95,17 +96,18 @@
 .app-user-workspace.app-home-workspace .creation-start-heading {
     position: relative;
     justify-content: center;
-    margin: 14px 0 18px;
+    margin: var(--product-card-gap) 0 var(--product-section-gap);
     text-align: center;
 }
 .app-user-workspace.app-home-workspace .creation-start-heading h1 {
-    font-size: clamp(26px, 2.1vw, 34px);
-    line-height: 1.45;
-    letter-spacing: 0;
+    font-size: var(--home-title-font-size);
+    line-height: var(--product-heading-line-height);
+    letter-spacing: var(--product-letter-spacing);
     font-weight: 600;
 }
 .app-user-workspace.app-home-workspace .creation-start-heading p {
-    margin-top: 3px;
+    margin-top: var(--product-text-gap);
+    line-height: var(--product-body-line-height);
     font-size: 16px;
     color: var(--user-ink-muted);
 }
@@ -116,12 +118,12 @@
     height: 36px;
     border: 1px solid var(--user-border);
     background: var(--user-surface);
-    color: #4e5c97;
+    color: var(--product-text-muted);
     border-radius: var(--r-lg);
 }
 .app-user-workspace.app-home-workspace .creation-composer-stage.is-home-mode {
-    width: min(1120px, 100%);
-    margin: 0 auto 18px;
+    width: 100%;
+    margin: 0 auto var(--product-section-gap);
     border: 1px solid var(--home-glass-border);
     border-radius: 18px;
     padding: 8px;
@@ -141,10 +143,10 @@
     min-height: 37px;
     padding: 0 16px;
     font-size: 14px;
-    color: #6671a6;
+    color: var(--product-text-muted);
 }
 .app-user-workspace.app-home-workspace .creation-mode-button[aria-pressed="true"] {
-    color: #306cff !important;
+    color: var(--product-text-accent) !important;
 }
 .app-user-workspace.app-home-workspace .creation-mode-indicator {
     background: #e7edff;
@@ -189,7 +191,7 @@
 .app-user-workspace.app-home-workspace .creation-launchpad .creation-voice-trigger.ant-btn {
     border: 1px solid var(--user-border) !important;
     background: var(--button-tonal-bg) !important;
-    color: #3d4c86 !important;
+    color: var(--product-text-muted) !important;
     border-radius: var(--button-radius) !important;
 }
 .app-user-workspace.app-home-workspace .creation-launchpad .creation-submit.ant-btn .creation-submit-action {
@@ -202,13 +204,13 @@
     opacity: 0.85;
 }
 .app-user-workspace.app-home-workspace .creation-empty-suggest {
-    gap: 14px !important;
+    gap: var(--product-card-gap) !important;
 }
 .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card {
     min-height: 144px !important;
     overflow: hidden;
     align-items: center !important;
-    padding: 22px 18px !important;
+    padding: var(--product-panel-padding) !important;
     border: 1px solid var(--home-glass-border) !important;
     border-radius: 14px !important;
     background: linear-gradient(180deg, var(--suggest-fill-start), var(--suggest-fill-middle) 50%, var(--suggest-fill-end)) !important;
@@ -271,21 +273,25 @@
     pointer-events: none;
 }
 .app-user-workspace.app-home-workspace .creation-recent-canvases {
-    margin-top: 25px;
+    margin-top: var(--product-section-gap);
+}
+.app-user-workspace.app-home-workspace .creation-section-heading {
+    margin-bottom: var(--product-card-gap);
+    gap: var(--product-control-gap);
 }
 .app-user-workspace.app-home-workspace .creation-section-heading h2 {
     font-size: 19px;
-    letter-spacing: 0;
+    letter-spacing: var(--product-letter-spacing);
 }
 .app-user-workspace.app-home-workspace .creation-section-heading h2 svg {
     display: none;
 }
 .app-user-workspace.app-home-workspace .creation-section-link {
     color: var(--user-accent);
-    font-size: 13px;
+    font-size: var(--fs-ui);
 }
 .app-user-workspace.app-home-workspace .creation-canvas-strip {
-    gap: 12px;
+    gap: var(--product-card-gap);
 }
 .app-user-workspace.app-home-workspace .creation-canvas-strip-item {
     flex-grow: 0;
@@ -345,15 +351,15 @@
     margin: 0;
     border: 0;
     padding-inline: 20px;
-    background: var(--user-accent);
+    background: var(--button-primary-bg);
     color: #fff;
     border-radius: var(--r-full);
 }
 .app-user-workspace.app-home-workspace .inspiration-hall {
-    margin-top: 23px;
+    margin-top: var(--product-section-gap);
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-header {
-    margin-bottom: 12px;
+    margin-bottom: var(--product-card-gap);
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-header > div:first-child {
     display: flex;
@@ -363,7 +369,7 @@
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-header h2 {
     font-size: 20px;
-    letter-spacing: 0;
+    letter-spacing: var(--product-letter-spacing);
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-header p {
     margin: 0;
@@ -371,7 +377,7 @@
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-actions > .ant-btn:first-child {
     height: 36px;
-    background: var(--user-accent);
+    background: var(--button-primary-bg);
     color: #fff;
     border: 1px solid var(--user-accent);
     border-radius: var(--r-lg);
@@ -380,8 +386,8 @@
     background: var(--button-primary-hover-bg);
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-toolbar {
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: var(--product-control-gap);
+    margin-bottom: var(--product-card-gap);
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-modes {
     border: 1px solid var(--home-glass-border);
@@ -394,7 +400,7 @@
     border-radius: var(--r-md);
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-toolbar .app-segmented-item[aria-checked="true"] {
-    color: #426aff;
+    color: var(--product-text-accent);
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-search.ant-input-affix-wrapper {
     height: 38px;
@@ -410,8 +416,8 @@
     background: var(--user-surface);
 }
 .app-user-workspace.app-home-workspace .inspiration-gallery {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--product-card-gap);
 }
 .app-user-workspace.app-home-workspace .inspiration-card {
     border: 1px solid var(--home-glass-border);
@@ -431,19 +437,19 @@
     padding: 10px 2px 4px;
 }
 .app-user-workspace.app-home-workspace .inspiration-card-title {
-    font-size: 13px;
+    font-size: var(--fs-ui);
 }
 .app-user-workspace.app-home-workspace .inspiration-card-source {
     top: 7px;
     bottom: auto;
     left: 7px;
     background: rgb(247 250 255 / 94%);
-    color: #536299;
+    color: var(--product-text-muted);
     font-size: 12px;
 }
 .app-user-workspace.app-home-workspace .inspiration-chip {
     background: #edf1ff;
-    color: #586799;
+    color: var(--product-text-muted);
 }
 .app-user-workspace.app-home-workspace :is(button, a):focus-visible {
     outline: 2px solid var(--control-focus-ring);
@@ -451,19 +457,13 @@
 }
 
 @media (min-width: 1800px) {
-    .app-user-workspace.app-home-workspace .creation-home-scroll {
-        padding-inline: 28px;
-    }
     .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card {
         min-height: 160px !important;
     }
 }
 @media (max-width: 1350px) {
-    .app-user-workspace.app-home-workspace .creation-home-scroll {
-        padding-inline: 18px;
-    }
     .app-user-workspace.app-home-workspace .creation-empty-suggest {
-        gap: 10px !important;
+        gap: var(--product-card-gap) !important;
     }
     .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card {
         min-height: 128px !important;
@@ -474,9 +474,6 @@
     }
     .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-copy strong {
         font-size: 15px !important;
-    }
-    .app-user-workspace.app-home-workspace .inspiration-gallery {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
     .app-user-workspace.app-home-workspace .inspiration-hall-search.ant-input-affix-wrapper {
         width: 220px;
@@ -498,18 +495,12 @@
     }
 }
 @media (max-width: 640px) {
-    .app-user-workspace.app-home-workspace .creation-home-scroll {
-        padding: 12px 12px 28px;
-    }
     .app-user-workspace.app-home-workspace .creation-start-heading {
-        margin-top: 22px;
-    }
-    .app-user-workspace.app-home-workspace .creation-start-heading h1 {
-        font-size: 24px;
+        margin-top: var(--product-card-gap);
     }
     .app-user-workspace.app-home-workspace .creation-start-heading p {
-        margin-top: 7px;
-        font-size: 13px;
+        margin-top: var(--product-text-gap);
+        font-size: var(--fs-ui);
     }
     .app-user-workspace.app-home-workspace .creation-history-entry {
         top: -46px;
@@ -526,7 +517,7 @@
     }
     .app-user-workspace.app-home-workspace .creation-composer-stage.is-home-mode > .creation-mode-tabs .creation-mode-button {
         padding-inline: 10px;
-        font-size: 13px;
+        font-size: var(--fs-ui);
     }
     .app-user-workspace.app-home-workspace .creation-launchpad .creation-chat-composer.is-empty .creation-chat-writing-surface {
         min-height: 100px !important;
@@ -584,16 +575,16 @@
     --user-surface-muted: rgb(75 100 158 / 24%);
     --user-surface-hover: rgb(88 119 186 / 30%);
     --user-ink: #e5edff;
-    --user-ink-muted: #a7b6dc;
-    --user-ink-soft: #8c9fc8;
+    --user-ink-muted: var(--product-text-muted);
+    --user-ink-soft: var(--product-text-muted);
     --user-border: #3e507a;
     --home-glass: rgb(16 27 56 / 58%);
     --home-glass-border: rgb(152 178 232 / 17%);
     --button-tonal-bg: #293859;
-    --button-ghost-fg: #b7c7ed;
+    --button-ghost-fg: var(--product-text-muted);
     --library-surface: #253451;
     --library-surface-hover: #304367;
-    --home-content-background: linear-gradient(rgb(9 18 44 / 89%), rgb(9 18 44 / 89%)), url("/images/home/aurora-background.png") center / cover no-repeat;
+    --home-content-background: linear-gradient(rgb(9 18 44 / 89%), rgb(9 18 44 / 89%)), url("/images/home/aurora-background.png") right center / cover no-repeat;
 }
 .dark .app-user-workspace.app-home-workspace .creation-composer-stage.is-home-mode {
     background: rgb(29 43 76 / 66%);
@@ -605,10 +596,10 @@
     background: #30446f;
 }
 .dark .app-user-workspace.app-home-workspace .creation-mode-button[aria-pressed="true"] {
-    color: #9abbff !important;
+    color: var(--product-text-accent) !important;
 }
 .dark .app-user-workspace.app-home-workspace .creation-launchpad .creation-chat-controls .creation-chat-control {
-    color: #b7c7ed !important;
+    color: var(--product-text-muted) !important;
 }
 .dark .app-user-workspace.app-home-workspace .inspiration-card {
     background: var(--user-surface);

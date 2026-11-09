@@ -6,6 +6,14 @@
     --task-overlay-paper: var(--color-neutral-0);
 }
 
+.task-empty-illustration {
+    display: block;
+    width: 180px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
 /* ---- 状态胶囊 ---- */
 .task-center-status {
     --task-tone: var(--user-ink-soft);
@@ -87,8 +95,8 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-3);
-    margin: var(--space-4) 0 var(--space-3);
+    gap: var(--product-control-gap);
+    margin: 0 0 var(--product-card-gap);
 }
 
 .task-center-status-filter .app-segmented-count[data-tone="failed"] {
@@ -110,7 +118,7 @@
     align-items: center;
     gap: var(--space-2);
     color: var(--user-ink-muted);
-    font-size: var(--fs-caption);
+    font-size: var(--fs-ui);
     cursor: pointer;
     user-select: none;
 }
@@ -403,7 +411,7 @@
 .task-center-groups {
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
+    gap: var(--product-section-gap);
 }
 
 .task-center-group-head {
@@ -870,7 +878,7 @@
     color: var(--user-ink-soft);
     font-size: var(--fs-caption);
     font-weight: 500;
-    letter-spacing: 0.02em;
+    letter-spacing: var(--product-letter-spacing);
 }
 
 .task-detail-section-head {
@@ -1146,7 +1154,7 @@
     color: var(--user-ink-soft);
     font-size: var(--fs-label);
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: var(--product-letter-spacing);
 }
 
 .task-detail-logs > li[data-level="warn"] .task-detail-log-level {

@@ -18,6 +18,7 @@ export type WorkspaceStateKind = "first-use" | "no-results" | "error" | "forbidd
 
 export function WorkspaceState({
     icon = "empty",
+    illustration,
     kind = "first-use",
     title,
     description,
@@ -27,6 +28,7 @@ export function WorkspaceState({
     className,
 }: {
     icon?: WorkspaceSignalIconVariant;
+    illustration?: ReactNode;
     kind?: WorkspaceStateKind;
     title: string;
     description?: ReactNode;
@@ -39,15 +41,11 @@ export function WorkspaceState({
         <section
             data-kind={kind}
             role={kind === "error" ? "alert" : undefined}
-            className={cn(
-                "workspace-state grid w-full justify-items-center text-center",
-                compact ? "min-h-44 content-center py-8" : "min-h-[360px] grid-rows-[2fr_auto_3fr] py-12",
-                className,
-            )}
+            className={cn("workspace-state grid w-full justify-items-center text-center", compact ? "min-h-44 content-center py-8" : "min-h-[360px] grid-rows-[2fr_auto_3fr] py-12", className)}
         >
             {compact ? null : <span aria-hidden />}
             <div className="flex max-w-[44ch] flex-col items-center">
-                <WorkspaceSignalIcon variant={icon} size={compact ? "md" : "lg"} />
+                {illustration ?? <WorkspaceSignalIcon variant={icon} size={compact ? "md" : "lg"} />}
                 <h2 className={cn("mt-4 font-medium leading-[var(--lh-heading)] text-[var(--text-primary)]", compact ? "text-[var(--fs-body)]" : "text-[var(--fs-heading)]")}>{title}</h2>
                 {description ? <p className="mt-2 text-[var(--fs-ui)] leading-[var(--lh-body)] text-[var(--text-secondary)]">{description}</p> : null}
                 {action || secondaryAction ? (
@@ -96,7 +94,16 @@ export function WorkspaceNoResultsState({
 
 export function WorkspaceErrorState({ title, description, actionLabel, onRetry, compact = false }: { title?: string; description?: string; actionLabel?: string; onRetry?: () => void; compact?: boolean }) {
     const { t } = useTranslation();
-    return <WorkspaceState kind="error" icon="error" title={title ?? t("account.layout.state.errorTitle")} description={description || t("account.layout.state.errorDescription")} compact={compact} action={onRetry ? <Button onClick={onRetry}>{actionLabel ?? t("account.layout.state.reload")}</Button> : undefined} />;
+    return (
+        <WorkspaceState
+            kind="error"
+            icon="error"
+            title={title ?? t("account.layout.state.errorTitle")}
+            description={description || t("account.layout.state.errorDescription")}
+            compact={compact}
+            action={onRetry ? <Button onClick={onRetry}>{actionLabel ?? t("account.layout.state.reload")}</Button> : undefined}
+        />
+    );
 }
 
 /** 没有权限：说明原因，给出返回或申请的出口，不展示内容结构。 */

@@ -438,6 +438,9 @@ export default function TasksPage() {
                             </Button>
                         }
                     />
+                </div>
+
+                <div className="collection-content task-center-content">
                     {/* 第一行：状态切换和视图；第二行：搜索与筛选。分两行排，窄屏不会把控件挤成一团。 */}
                     <div className="task-center-statusbar">
                         <TaskStatusFilterBar
@@ -514,9 +517,6 @@ export default function TasksPage() {
                             options={[{ label: t("library.tasks.page.allModels"), value: "all" }, ...modelOptions.map((model) => ({ label: model, value: model }))]}
                         />
                     </CollectionToolbar>
-                </div>
-
-                <div className="collection-content task-center-content">
                     {loading && !tasks.length ? (
                         <TaskCenterSkeleton viewMode={viewMode} label={t("library.tasks.page.loading")} />
                     ) : visibleTasks.length ? (
@@ -539,6 +539,7 @@ export default function TasksPage() {
                     ) : (
                         <WorkspaceState
                             compact
+                            illustration={<img className="task-empty-illustration" src="/images/tasks/empty-history.webp" alt="" width={480} height={506} decoding="async" draggable={false} />}
                             title={taskEmptyState(statusFilter).title}
                             description={taskEmptyState(statusFilter).description}
                             action={

@@ -91,7 +91,7 @@
 
     color: var(--admin-text);
     font-family: var(--admin-font);
-    font-size: 13px;
+    font-size: var(--fs-ui);
     line-height: 1.45;
     font-feature-settings:
         "ss01" 0,

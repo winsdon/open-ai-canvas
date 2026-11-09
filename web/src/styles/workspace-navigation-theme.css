@@ -4,14 +4,15 @@
     --workspace-shell-border: rgb(255 255 255 / 88%);
     --workspace-nav-bg: #e8f0ff;
     --workspace-nav-ink: #10164d;
-    --workspace-nav-muted: #626d9c;
-    --workspace-nav-soft: #7a85ac;
-    --workspace-nav-item: #4e5ca0;
-    --workspace-nav-icon: #5c69ad;
+    --workspace-nav-muted: var(--product-text-muted);
+    --workspace-nav-soft: var(--product-text-muted);
+    --workspace-nav-item: var(--workspace-nav-ink);
+    --workspace-nav-icon: var(--product-text-muted);
+    --workspace-nav-active-icon: #000;
     --workspace-nav-border: #dce4f7;
     --workspace-nav-hover: #dfe9ff;
     --workspace-nav-selected: #d6e4ff;
-    --workspace-nav-accent: #2d68fc;
+    --workspace-nav-accent: var(--product-text-accent);
     --workspace-nav-focus: #749cff;
     background: var(--workspace-shell-bg);
 }
@@ -71,7 +72,7 @@
 }
 .app-user-workspace.app-product-workspace .app-workspace-nav-group-toggle {
     margin-bottom: 8px;
-    color: var(--workspace-nav-soft);
+    color: var(--workspace-nav-ink);
 }
 .app-user-workspace.app-product-workspace .app-workspace-nav-link {
     min-height: 45px !important;
@@ -83,6 +84,9 @@
 .app-user-workspace.app-product-workspace .app-workspace-nav-link .app-workspace-nav-main {
     gap: 14px !important;
 }
+.app-user-workspace.app-product-workspace .app-workspace-sidebar .app-workspace-nav-link .app-workspace-nav-title {
+    color: var(--workspace-nav-ink) !important;
+}
 .app-user-workspace.app-product-workspace .app-workspace-nav-link .app-workspace-nav-icon svg,
 .app-user-workspace.app-product-workspace .app-workspace-nav-link .app-workspace-nav-main > svg {
     width: 21px !important;
@@ -92,7 +96,7 @@
     background: var(--workspace-nav-selected);
 }
 .app-user-workspace.app-product-workspace .app-workspace-nav-link.is-active {
-    color: var(--workspace-nav-accent) !important;
+    color: var(--workspace-nav-active-icon) !important;
     font-weight: 600 !important;
 }
 .app-user-workspace.app-product-workspace .app-workspace-nav-link:hover:not(.is-active),
@@ -123,7 +127,7 @@
     gap: 2px !important;
 }
 .app-user-workspace.app-product-workspace .app-workspace-sidebar-nav.is-collapsed .app-workspace-nav-link.is-active .app-workspace-nav-title {
-    color: var(--workspace-nav-accent);
+    color: var(--workspace-nav-ink);
 }
 .app-user-workspace.app-product-workspace .app-workspace-topbar {
     height: 62px !important;
@@ -179,7 +183,7 @@
     padding: 0 12px;
     border-inline: 1px solid var(--workspace-nav-border);
     color: var(--workspace-nav-muted);
-    font-size: 13px;
+    font-size: var(--fs-ui);
 }
 .creation-open-window svg {
     width: 17px;
@@ -259,16 +263,17 @@
 }
 
 .dark .app-user-workspace.app-product-workspace {
+    --workspace-nav-active-icon: var(--workspace-nav-ink);
     --workspace-shell-bg: #101b38;
     --workspace-shell-border: rgb(152 178 232 / 17%);
     --workspace-nav-bg: #132140;
     --workspace-nav-ink: #e5edff;
-    --workspace-nav-muted: #a7b6dc;
-    --workspace-nav-soft: #8c9fc8;
-    --workspace-nav-item: #b7c7ed;
-    --workspace-nav-icon: #a7b6dc;
+    --workspace-nav-muted: var(--product-text-muted);
+    --workspace-nav-soft: var(--product-text-muted);
+    --workspace-nav-item: var(--workspace-nav-ink);
+    --workspace-nav-icon: var(--product-text-muted);
     --workspace-nav-border: #3e507a;
     --workspace-nav-hover: #23385d;
     --workspace-nav-selected: #2f4880;
-    --workspace-nav-accent: #9abbff;
+    --workspace-nav-accent: var(--product-text-accent);
 }

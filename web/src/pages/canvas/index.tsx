@@ -453,7 +453,9 @@ export default function CanvasPage() {
                         </div>
                     }
                 />
+            </div>
 
+            <div className="collection-content">
                 <CollectionToolbar
                     label="画布浏览工具"
                     active={Boolean(keyword || projectFilter !== "all" || sort !== "updated")}
@@ -480,9 +482,6 @@ export default function CanvasPage() {
                         </Button>
                     </Dropdown>
                 </CollectionToolbar>
-            </div>
-
-            <div className="collection-content">
                 {selectedIds.length ? (
                     <div className="collection-selection-bar">
                         <strong className="mr-auto font-medium">已选 {selectedIds.length} 个画布</strong>

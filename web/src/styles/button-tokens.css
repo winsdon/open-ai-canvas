@@ -12,9 +12,9 @@
     --button-padding-x-sm: 8px;
     --button-padding-x-lg: 16px;
     --button-gap: 6px;
-    --button-font-size: 13px;
-    --button-font-size-sm: 12px;
-    --button-font-size-lg: 14px;
+    --button-font-size: var(--fs-ui);
+    --button-font-size-sm: var(--fs-ui);
+    --button-font-size-lg: var(--fs-ui);
     --button-font-weight: 500;
     --button-icon-size: 16px;
     --button-icon-size-sm: 14px;

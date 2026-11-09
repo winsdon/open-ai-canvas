@@ -1,12 +1,14 @@
 /* Library pages retain their layout and use the skills library palette. */
 .app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) {
     --library-ink: #10164d;
-    --library-muted: #737fa9;
-    --library-accent: #3478ff;
+    --library-muted: var(--product-text-muted);
+    --library-accent: var(--product-text-accent);
     --library-selected: #dce8ff;
     --library-edge: #dbe5ff;
     --library-card: rgb(255 255 255 / 92%);
     --library-card-hover: #fff;
+    --library-content-background: linear-gradient(135deg, rgb(255 255 255 / 50%) 0%, rgb(255 255 255 / 30%) 55%, rgb(255 255 255 / 14%) 100%);
+    --library-content-radius: 15px;
     --library-primary: #1b1e2a;
     --library-primary-hover: #30374e;
     --library-background: #edf4ff url("/images/home/aurora-background.png") center / cover fixed;
@@ -53,19 +55,56 @@
 
 .dark .app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) {
     --library-ink: #e5edff;
-    --library-muted: #a4b3d6;
-    --library-accent: #88adff;
+    --library-muted: var(--product-text-muted);
+    --library-accent: var(--product-text-accent);
     --library-selected: #263c66;
     --library-edge: #34486f;
     --library-card: #1a2a49;
     --library-card-hover: #203357;
+    --library-content-background: linear-gradient(135deg, rgb(255 255 255 / 6%) 0%, rgb(255 255 255 / 3%) 55%, rgb(255 255 255 / 1%) 100%);
     --library-primary: #4177e9;
     --library-primary-hover: #5688ef;
     --library-background: radial-gradient(ellipse at top left, #233d6a, transparent 65%), #101c35;
 }
 
+.app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) .studio-band > .app-page-header {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+/* Match the skills panel without changing collection layout or hit targets. */
+.app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) > div > .collection-content {
+    position: relative;
+    isolation: isolate;
+    padding: var(--product-panel-padding);
+}
+.app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) > div > .collection-content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: var(--library-content-radius);
+    background: var(--library-content-background);
+    pointer-events: none;
+}
+
 .app-user-workspace .assets-library-page .assets-filter-item {
     color: var(--library-muted);
+}
+.app-user-workspace .assets-library-page .assets-empty-card {
+    --surface-card: color-mix(in srgb, var(--library-card) 80%, transparent);
+    --surface-card-hover: var(--library-card);
+    --elevation-card-hover: 0 10px 26px color-mix(in srgb, var(--library-accent) 18%, transparent), 0 2px 5px color-mix(in srgb, var(--library-accent) 10%, transparent);
+    --elevation-hairline: inset 0 0 0 1px color-mix(in srgb, var(--library-accent) 13%, transparent);
+    border-color: var(--library-edge);
+    background: var(--surface-card);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+.app-user-workspace .assets-library-page .assets-empty-card:hover {
+    border-color: var(--library-accent);
+    background: var(--surface-card-hover);
 }
 .app-user-workspace .assets-library-page .assets-filter-item:hover {
     background: var(--library-selected);

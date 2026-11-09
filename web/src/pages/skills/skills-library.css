@@ -1,8 +1,8 @@
 /* Skills library: compact reference layout with real catalog data and actions. */
 .app-user-workspace .skills-reference-library {
     --skills-ink: #10164d;
-    --skills-muted: #737fa9;
-    --skills-accent: #3478ff;
+    --skills-muted: var(--product-text-muted);
+    --skills-accent: var(--product-text-accent);
     --skills-selected: #dce8ff;
     --skills-edge: #dbe5ff;
     --skills-panel: rgb(255 255 255 / 62%);
@@ -35,15 +35,15 @@
 }
 .app-user-workspace .skills-reference-library.library-page > div {
     width: 100%;
-    max-width: 1920px;
+    max-width: var(--product-content-max);
     margin: 0 auto;
-    padding: 24px 28px 32px;
+    padding: var(--product-page-top) var(--product-page-gutter) var(--product-page-bottom);
 }
 .app-user-workspace .skills-reference-library .skills-library-heading .app-page-header {
     min-height: auto;
     justify-content: flex-start;
     padding: 0;
-    margin: 0 0 24px;
+    margin: 0 0 var(--product-section-gap);
     text-align: left;
 }
 .skills-library-heading .app-page-header > div,
@@ -52,20 +52,20 @@
 }
 .skills-reference-library .skills-library-heading .app-page-header-title {
     font-size: 22px;
-    line-height: 30px;
-    letter-spacing: -0.02em;
+    line-height: var(--product-heading-line-height);
+    letter-spacing: var(--product-letter-spacing);
 }
 .skills-library-heading .app-page-header p {
-    margin-top: 4px;
+    margin-top: var(--product-text-gap);
     color: var(--skills-muted);
     font-size: 12px;
-    line-height: 20px;
+    line-height: var(--product-body-line-height);
 }
 .skills-reference-library .skills-results-header {
     min-height: 36px;
     flex-wrap: wrap;
-    gap: 12px 20px;
-    margin: 0 0 16px;
+    gap: var(--product-control-gap);
+    margin: 0 0 var(--product-card-gap);
 }
 .skills-reference-library .skills-results-title {
     flex: 0 1 auto;
@@ -164,7 +164,7 @@
     border-radius: 9px;
     background: var(--skills-install);
     color: #fff;
-    font-size: 13px;
+    font-size: var(--fs-ui);
     box-shadow: none;
 }
 .skills-reference-library .skills-install-button.ant-btn:hover {
@@ -179,13 +179,14 @@
     position: relative;
     isolation: isolate;
     grid-template-columns: 200px minmax(0, 1fr);
-    gap: 24px;
+    gap: var(--product-section-gap);
+    padding: var(--product-panel-padding);
     margin: 0;
 }
 .skills-reference-library .skills-browser::before {
     content: "";
     position: absolute;
-    inset: -12px;
+    inset: 0;
     z-index: -1;
     border-radius: var(--user-radius-card);
     background: var(--skills-browser-background);
@@ -205,10 +206,10 @@
 .skills-reference-library .skills-rail .skills-rail-item {
     height: 34px;
     padding-inline: 10px;
-    gap: 10px;
+    gap: var(--product-control-gap);
     border-radius: 9px;
     color: var(--skills-muted);
-    font-size: 13px;
+    font-size: var(--fs-ui);
     font-weight: 400;
 }
 .skills-reference-library .skills-rail .skills-rail-item svg {
@@ -224,24 +225,24 @@
 .skills-reference-library .skills-rail .skills-rail-item.is-nested {
     height: 34px;
     padding-left: 47px;
-    font-size: 12px;
+    font-size: var(--fs-ui);
 }
 .skills-reference-library .skills-rail .skills-rail-item.is-hint {
-    font-size: 12px;
+    font-size: var(--fs-ui);
 }
 .skills-reference-library .skills-results {
     container: skills-results / inline-size;
 }
 .skills-reference-library .skill-tile-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
+    gap: var(--product-card-gap);
 }
 .app-user-workspace .skills-reference-library .skill-tile {
     display: flex;
     min-height: 148px;
     flex-direction: column;
     gap: 8px;
-    padding: 12px;
+    padding: var(--product-panel-padding);
     border-radius: 15px;
     background: var(--skills-card);
     box-shadow: none;
@@ -283,7 +284,7 @@
     height: 20px;
     flex-wrap: nowrap;
     gap: 6px;
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .skills-reference-library .skill-tile-author {
     max-width: 86px;
@@ -295,7 +296,7 @@
     border-radius: 6px;
     background: var(--skills-selected);
     color: var(--skills-muted);
-    font-size: 10px;
+    font-size: var(--fs-label);
 }
 .skills-reference-library .skill-tile-description {
     min-height: 36px;
@@ -308,7 +309,7 @@
     height: 24px;
     gap: 12px;
     color: var(--skills-muted);
-    font-size: 11px;
+    font-size: var(--fs-label);
 }
 .skills-reference-library .skill-tile-stat svg {
     width: 13px;
@@ -354,7 +355,7 @@
     background: var(--skills-panel);
 }
 .skills-reference-library .app-pagination-bar {
-    margin-top: 22px;
+    margin-top: var(--product-section-gap);
 }
 .skills-reference-library :is(button, a):focus-visible {
     outline: 2px solid var(--skills-accent);
@@ -363,16 +364,13 @@
 @media (max-width: 1699px) {
     .skills-reference-library .skills-browser {
         grid-template-columns: 180px minmax(0, 1fr);
-        gap: 20px;
+        gap: var(--product-section-gap);
     }
 }
 @media (max-width: 1199px) {
-    .app-user-workspace .skills-reference-library.library-page > div {
-        padding: 20px;
-    }
     .skills-reference-library .skills-browser {
         grid-template-columns: 160px minmax(0, 1fr);
-        gap: 16px;
+        gap: var(--product-section-gap);
     }
 }
 @media (max-width: 900px) {
@@ -403,14 +401,11 @@
     }
 }
 @media (max-width: 620px) {
-    .app-user-workspace .skills-reference-library.library-page > div {
-        padding: 12px;
-    }
     .skills-reference-library .skills-library-heading .app-page-header {
-        margin: 0 0 20px;
+        margin: 0 0 var(--product-section-gap);
     }
     .skills-reference-library .skills-library-controls .collection-toolbar {
-        gap: 9px;
+        gap: var(--product-control-gap);
     }
     .skills-reference-library .skills-library-controls .collection-toolbar-controls {
         width: 100%;
@@ -437,8 +432,8 @@
 }
 .dark .app-user-workspace .skills-reference-library {
     --skills-ink: #e5edff;
-    --skills-muted: #a4b3d6;
-    --skills-accent: #88adff;
+    --skills-muted: var(--product-text-muted);
+    --skills-accent: var(--product-text-accent);
     --skills-selected: #263c66;
     --skills-edge: #34486f;
     --skills-panel: rgb(22 37 64 / 80%);

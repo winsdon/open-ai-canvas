@@ -1,0 +1,1459 @@
+{
+  "sourceSha256": "d3a5718431241ca6220ca4618d5c3556f0242f5dcb67de8df035742e9ad84598",
+  "logos": [
+    {
+      "key": "a6api",
+      "name": "A6api",
+      "row": 1,
+      "column": 1,
+      "sourceBox": [
+        34,
+        50,
+        222,
+        206
+      ],
+      "foregroundBounds": [
+        27,
+        7,
+        158,
+        128
+      ],
+      "pluginIds": [
+        "a6api"
+      ]
+    },
+    {
+      "key": "adobe",
+      "name": "Adobe Firefly",
+      "row": 1,
+      "column": 2,
+      "sourceBox": [
+        257,
+        50,
+        445,
+        206
+      ],
+      "foregroundBounds": [
+        27,
+        8,
+        154,
+        123
+      ],
+      "pluginIds": [
+        "adobe-firefly"
+      ]
+    },
+    {
+      "key": "agnes",
+      "name": "Agnes",
+      "row": 1,
+      "column": 3,
+      "sourceBox": [
+        481,
+        50,
+        669,
+        206
+      ],
+      "foregroundBounds": [
+        31,
+        7,
+        156,
+        137
+      ],
+      "pluginIds": [
+        "agnes-image",
+        "agnes-video-25",
+        "agnes-video-v20"
+      ]
+    },
+    {
+      "key": "async-audio",
+      "name": "Async Audio",
+      "row": 1,
+      "column": 4,
+      "sourceBox": [
+        704,
+        50,
+        892,
+        206
+      ],
+      "foregroundBounds": [
+        18,
+        11,
+        168,
+        137
+      ],
+      "pluginIds": [
+        "async-audio"
+      ]
+    },
+    {
+      "key": "autodl",
+      "name": "AutoDL",
+      "row": 1,
+      "column": 5,
+      "sourceBox": [
+        927,
+        50,
+        1115,
+        206
+      ],
+      "foregroundBounds": [
+        19,
+        16,
+        169,
+        129
+      ],
+      "pluginIds": [
+        "autodl-comfyui"
+      ]
+    },
+    {
+      "key": "baidu",
+      "name": "Baidu Qianfan",
+      "row": 1,
+      "column": 6,
+      "sourceBox": [
+        1150,
+        50,
+        1338,
+        206
+      ],
+      "foregroundBounds": [
+        32,
+        6,
+        154,
+        133
+      ],
+      "pluginIds": [
+        "baidu-qianfan-image",
+        "baidu-video"
+      ]
+    },
+    {
+      "key": "bfl",
+      "name": "Black Forest Labs",
+      "row": 1,
+      "column": 7,
+      "sourceBox": [
+        1374,
+        50,
+        1562,
+        206
+      ],
+      "foregroundBounds": [
+        17,
+        21,
+        173,
+        122
+      ],
+      "pluginIds": [
+        "bfl-flux"
+      ]
+    },
+    {
+      "key": "cangyuan",
+      "name": "Cangyuan",
+      "row": 1,
+      "column": 8,
+      "sourceBox": [
+        1597,
+        50,
+        1785,
+        206
+      ],
+      "foregroundBounds": [
+        35,
+        21,
+        157,
+        138
+      ],
+      "pluginIds": [
+        "cangyuan-midjourney"
+      ]
+    },
+    {
+      "key": "cheaper",
+      "name": "Cheaper Inference",
+      "row": 2,
+      "column": 1,
+      "sourceBox": [
+        34,
+        300,
+        222,
+        456
+      ],
+      "foregroundBounds": [
+        33,
+        9,
+        148,
+        131
+      ],
+      "pluginIds": [
+        "cheaperinference-chat"
+      ]
+    },
+    {
+      "key": "cohere",
+      "name": "Cohere",
+      "row": 2,
+      "column": 2,
+      "sourceBox": [
+        257,
+        300,
+        445,
+        456
+      ],
+      "foregroundBounds": [
+        24,
+        25,
+        164,
+        120
+      ],
+      "pluginIds": [
+        "cohere-chat-v2"
+      ]
+    },
+    {
+      "key": "relay",
+      "name": "WAN Relay",
+      "row": 2,
+      "column": 3,
+      "sourceBox": [
+        481,
+        300,
+        669,
+        456
+      ],
+      "foregroundBounds": [
+        31,
+        17,
+        151,
+        119
+      ],
+      "pluginIds": [
+        "coolhs-wan3-relay"
+      ]
+    },
+    {
+      "key": "bailian",
+      "name": "Bailian",
+      "row": 2,
+      "column": 4,
+      "sourceBox": [
+        704,
+        300,
+        892,
+        456
+      ],
+      "foregroundBounds": [
+        24,
+        7,
+        161,
+        126
+      ],
+      "pluginIds": [
+        "dashscope-minimax-video"
+      ]
+    },
+    {
+      "key": "dola",
+      "name": "Dola",
+      "row": 2,
+      "column": 5,
+      "sourceBox": [
+        927,
+        300,
+        1115,
+        456
+      ],
+      "foregroundBounds": [
+        34,
+        16,
+        146,
+        130
+      ],
+      "pluginIds": [
+        "dola-pool"
+      ]
+    },
+    {
+      "key": "doubao",
+      "name": "Doubao",
+      "row": 2,
+      "column": 6,
+      "sourceBox": [
+        1150,
+        300,
+        1338,
+        456
+      ],
+      "foregroundBounds": [
+        34,
+        13,
+        153,
+        136
+      ],
+      "pluginIds": [
+        "doubao-streaming-tts"
+      ]
+    },
+    {
+      "key": "fal",
+      "name": "fal.ai",
+      "row": 2,
+      "column": 7,
+      "sourceBox": [
+        1374,
+        300,
+        1562,
+        456
+      ],
+      "foregroundBounds": [
+        31,
+        7,
+        157,
+        124
+      ],
+      "pluginIds": [
+        "fal-queue-image",
+        "fal-queue-video"
+      ]
+    },
+    {
+      "key": "groq",
+      "name": "Groq",
+      "row": 2,
+      "column": 8,
+      "sourceBox": [
+        1597,
+        300,
+        1785,
+        456
+      ],
+      "foregroundBounds": [
+        42,
+        17,
+        151,
+        126
+      ],
+      "pluginIds": [
+        "groq-chat"
+      ]
+    },
+    {
+      "key": "ideogram",
+      "name": "Ideogram",
+      "row": 3,
+      "column": 1,
+      "sourceBox": [
+        34,
+        550,
+        222,
+        706
+      ],
+      "foregroundBounds": [
+        33,
+        11,
+        152,
+        130
+      ],
+      "pluginIds": [
+        "ideogram-image"
+      ]
+    },
+    {
+      "key": "image-tools",
+      "name": "Image Tools",
+      "row": 3,
+      "column": 2,
+      "sourceBox": [
+        257,
+        550,
+        445,
+        706
+      ],
+      "foregroundBounds": [
+        32,
+        15,
+        160,
+        127
+      ],
+      "pluginIds": [
+        "image-tools"
+      ]
+    },
+    {
+      "key": "kacang",
+      "name": "Kacang",
+      "row": 3,
+      "column": 3,
+      "sourceBox": [
+        481,
+        550,
+        669,
+        706
+      ],
+      "foregroundBounds": [
+        20,
+        16,
+        160,
+        125
+      ],
+      "pluginIds": [
+        "kacang-midjourney"
+      ]
+    },
+    {
+      "key": "kimi",
+      "name": "Kimi",
+      "row": 3,
+      "column": 4,
+      "sourceBox": [
+        704,
+        550,
+        892,
+        706
+      ],
+      "foregroundBounds": [
+        36,
+        16,
+        150,
+        129
+      ],
+      "pluginIds": [
+        "kimi-chat"
+      ]
+    },
+    {
+      "key": "kling",
+      "name": "Kling",
+      "row": 3,
+      "column": 5,
+      "sourceBox": [
+        927,
+        550,
+        1115,
+        706
+      ],
+      "foregroundBounds": [
+        41,
+        16,
+        155,
+        129
+      ],
+      "pluginIds": [
+        "kling-image",
+        "kling-video"
+      ]
+    },
+    {
+      "key": "kemei",
+      "name": "Kemei",
+      "row": 3,
+      "column": 6,
+      "sourceBox": [
+        1150,
+        550,
+        1338,
+        706
+      ],
+      "foregroundBounds": [
+        12,
+        18,
+        173,
+        122
+      ],
+      "pluginIds": [
+        "km-kemei-seedream",
+        "km-kemei-video"
+      ]
+    },
+    {
+      "key": "litellm",
+      "name": "LiteLLM",
+      "row": 3,
+      "column": 7,
+      "sourceBox": [
+        1374,
+        550,
+        1562,
+        706
+      ],
+      "foregroundBounds": [
+        49,
+        15,
+        147,
+        128
+      ],
+      "pluginIds": [
+        "litellm-proxy-chat"
+      ]
+    },
+    {
+      "key": "localai",
+      "name": "LocalAI",
+      "row": 3,
+      "column": 8,
+      "sourceBox": [
+        1597,
+        550,
+        1785,
+        706
+      ],
+      "foregroundBounds": [
+        33,
+        11,
+        157,
+        128
+      ],
+      "pluginIds": [
+        "localai-chat"
+      ]
+    },
+    {
+      "key": "luma",
+      "name": "Luma",
+      "row": 4,
+      "column": 1,
+      "sourceBox": [
+        34,
+        800,
+        222,
+        956
+      ],
+      "foregroundBounds": [
+        33,
+        8,
+        159,
+        139
+      ],
+      "pluginIds": [
+        "luma-dream-machine"
+      ]
+    },
+    {
+      "key": "gravity",
+      "name": "Lxmone Gravity",
+      "row": 4,
+      "column": 2,
+      "sourceBox": [
+        257,
+        800,
+        445,
+        956
+      ],
+      "foregroundBounds": [
+        31,
+        10,
+        157,
+        133
+      ],
+      "pluginIds": [
+        "lxmone-video-suite"
+      ]
+    },
+    {
+      "key": "maxforai",
+      "name": "MaxForAI",
+      "row": 4,
+      "column": 3,
+      "sourceBox": [
+        481,
+        800,
+        669,
+        956
+      ],
+      "foregroundBounds": [
+        37,
+        22,
+        149,
+        128
+      ],
+      "pluginIds": [
+        "maxforai-video"
+      ]
+    },
+    {
+      "key": "metaso",
+      "name": "Metaso",
+      "row": 4,
+      "column": 4,
+      "sourceBox": [
+        704,
+        800,
+        892,
+        956
+      ],
+      "foregroundBounds": [
+        34,
+        15,
+        149,
+        132
+      ],
+      "pluginIds": [
+        "metaso-h3"
+      ]
+    },
+    {
+      "key": "minimax",
+      "name": "MiniMax",
+      "row": 4,
+      "column": 5,
+      "sourceBox": [
+        927,
+        800,
+        1115,
+        956
+      ],
+      "foregroundBounds": [
+        35,
+        19,
+        152,
+        131
+      ],
+      "pluginIds": [
+        "minimax-hailuo-video-v2",
+        "minimax-image",
+        "minimax-text-native"
+      ]
+    },
+    {
+      "key": "mistral",
+      "name": "Mistral",
+      "row": 4,
+      "column": 6,
+      "sourceBox": [
+        1150,
+        800,
+        1338,
+        956
+      ],
+      "foregroundBounds": [
+        35,
+        19,
+        152,
+        131
+      ],
+      "pluginIds": [
+        "mistral-chat"
+      ]
+    },
+    {
+      "key": "newapi",
+      "name": "NewAPI",
+      "row": 4,
+      "column": 7,
+      "sourceBox": [
+        1374,
+        800,
+        1562,
+        956
+      ],
+      "foregroundBounds": [
+        37,
+        19,
+        148,
+        128
+      ],
+      "pluginIds": [
+        "newapi-chat",
+        "newapi-media-task-v1",
+        "newapi-video-generations-v1"
+      ]
+    },
+    {
+      "key": "novita",
+      "name": "Novita",
+      "row": 4,
+      "column": 8,
+      "sourceBox": [
+        1597,
+        800,
+        1785,
+        956
+      ],
+      "foregroundBounds": [
+        30,
+        10,
+        160,
+        138
+      ],
+      "pluginIds": [
+        "novita-video"
+      ]
+    },
+    {
+      "key": "nvidia",
+      "name": "NVIDIA NIM",
+      "row": 5,
+      "column": 1,
+      "sourceBox": [
+        34,
+        1050,
+        222,
+        1206
+      ],
+      "foregroundBounds": [
+        25,
+        23,
+        160,
+        120
+      ],
+      "pluginIds": [
+        "nvidia-nim-chat"
+      ]
+    },
+    {
+      "key": "alipay",
+      "name": "Alipay",
+      "row": 5,
+      "column": 2,
+      "sourceBox": [
+        257,
+        1050,
+        445,
+        1206
+      ],
+      "foregroundBounds": [
+        26,
+        15,
+        163,
+        135
+      ],
+      "pluginIds": [
+        "official-payment-alipay-page"
+      ]
+    },
+    {
+      "key": "epay",
+      "name": "Epay",
+      "row": 5,
+      "column": 3,
+      "sourceBox": [
+        481,
+        1050,
+        669,
+        1206
+      ],
+      "foregroundBounds": [
+        28,
+        12,
+        156,
+        140
+      ],
+      "pluginIds": [
+        "official-payment-epay"
+      ]
+    },
+    {
+      "key": "wechat",
+      "name": "WeChat Pay",
+      "row": 5,
+      "column": 4,
+      "sourceBox": [
+        704,
+        1050,
+        892,
+        1206
+      ],
+      "foregroundBounds": [
+        32,
+        21,
+        159,
+        135
+      ],
+      "pluginIds": [
+        "official-payment-wechat-native"
+      ]
+    },
+    {
+      "key": "xunhu",
+      "name": "Xunhu Pay",
+      "row": 5,
+      "column": 5,
+      "sourceBox": [
+        927,
+        1050,
+        1115,
+        1206
+      ],
+      "foregroundBounds": [
+        23,
+        14,
+        145,
+        133
+      ],
+      "pluginIds": [
+        "official-payment-xunhupay"
+      ]
+    },
+    {
+      "key": "zhifufm",
+      "name": "ZhifuFM",
+      "row": 5,
+      "column": 6,
+      "sourceBox": [
+        1150,
+        1050,
+        1338,
+        1206
+      ],
+      "foregroundBounds": [
+        34,
+        16,
+        156,
+        139
+      ],
+      "pluginIds": [
+        "official-payment-zhifufm"
+      ]
+    },
+    {
+      "key": "aliyun-sms",
+      "name": "Aliyun SMS",
+      "row": 5,
+      "column": 7,
+      "sourceBox": [
+        1374,
+        1050,
+        1562,
+        1206
+      ],
+      "foregroundBounds": [
+        30,
+        21,
+        156,
+        125
+      ],
+      "pluginIds": [
+        "official-sms-aliyun"
+      ]
+    },
+    {
+      "key": "tencent-sms",
+      "name": "Tencent SMS",
+      "row": 5,
+      "column": 8,
+      "sourceBox": [
+        1597,
+        1050,
+        1785,
+        1206
+      ],
+      "foregroundBounds": [
+        19,
+        19,
+        169,
+        129
+      ],
+      "pluginIds": [
+        "official-sms-tencent"
+      ]
+    },
+    {
+      "key": "ollama",
+      "name": "Ollama",
+      "row": 6,
+      "column": 1,
+      "sourceBox": [
+        34,
+        1300,
+        222,
+        1456
+      ],
+      "foregroundBounds": [
+        39,
+        13,
+        145,
+        140
+      ],
+      "pluginIds": [
+        "ollama-chat"
+      ]
+    },
+    {
+      "key": "pika",
+      "name": "Pika",
+      "row": 6,
+      "column": 2,
+      "sourceBox": [
+        257,
+        1300,
+        445,
+        1456
+      ],
+      "foregroundBounds": [
+        34,
+        11,
+        150,
+        142
+      ],
+      "pluginIds": [
+        "pika-via-fal"
+      ]
+    },
+    {
+      "key": "pixverse",
+      "name": "PixVerse",
+      "row": 6,
+      "column": 3,
+      "sourceBox": [
+        481,
+        1300,
+        669,
+        1456
+      ],
+      "foregroundBounds": [
+        33,
+        10,
+        147,
+        141
+      ],
+      "pluginIds": [
+        "pixverse-video"
+      ]
+    },
+    {
+      "key": "qianwenai",
+      "name": "QianWenAI",
+      "row": 6,
+      "column": 4,
+      "sourceBox": [
+        704,
+        1300,
+        892,
+        1456
+      ],
+      "foregroundBounds": [
+        17,
+        35,
+        168,
+        119
+      ],
+      "pluginIds": [
+        "qianwenai-maas-image"
+      ]
+    },
+    {
+      "key": "recraft",
+      "name": "Recraft",
+      "row": 6,
+      "column": 5,
+      "sourceBox": [
+        927,
+        1300,
+        1115,
+        1456
+      ],
+      "foregroundBounds": [
+        35,
+        19,
+        150,
+        130
+      ],
+      "pluginIds": [
+        "recraft-image"
+      ]
+    },
+    {
+      "key": "replicate",
+      "name": "Replicate",
+      "row": 6,
+      "column": 6,
+      "sourceBox": [
+        1150,
+        1300,
+        1338,
+        1456
+      ],
+      "foregroundBounds": [
+        23,
+        19,
+        161,
+        130
+      ],
+      "pluginIds": [
+        "replicate-prediction-image",
+        "replicate-prediction-video"
+      ]
+    },
+    {
+      "key": "rolldek",
+      "name": "RollDek",
+      "row": 6,
+      "column": 7,
+      "sourceBox": [
+        1374,
+        1300,
+        1562,
+        1456
+      ],
+      "foregroundBounds": [
+        40,
+        19,
+        154,
+        131
+      ],
+      "pluginIds": [
+        "rolldek-wan-video"
+      ]
+    },
+    {
+      "key": "runcrate",
+      "name": "Runcrate",
+      "row": 6,
+      "column": 8,
+      "sourceBox": [
+        1597,
+        1300,
+        1785,
+        1456
+      ],
+      "foregroundBounds": [
+        38,
+        16,
+        149,
+        138
+      ],
+      "pluginIds": [
+        "runcrate-chat"
+      ]
+    },
+    {
+      "key": "runninghub",
+      "name": "RunningHub",
+      "row": 7,
+      "column": 1,
+      "sourceBox": [
+        34,
+        1550,
+        222,
+        1706
+      ],
+      "foregroundBounds": [
+        25,
+        14,
+        151,
+        141
+      ],
+      "pluginIds": [
+        "runninghub-workflow",
+        "runninghub-workflow-provider"
+      ]
+    },
+    {
+      "key": "runway",
+      "name": "Runway",
+      "row": 7,
+      "column": 2,
+      "sourceBox": [
+        257,
+        1550,
+        445,
+        1706
+      ],
+      "foregroundBounds": [
+        29,
+        25,
+        151,
+        130
+      ],
+      "pluginIds": [
+        "runway-image",
+        "runway-video"
+      ]
+    },
+    {
+      "key": "seedance",
+      "name": "Seedance",
+      "row": 7,
+      "column": 3,
+      "sourceBox": [
+        481,
+        1550,
+        669,
+        1706
+      ],
+      "foregroundBounds": [
+        33,
+        18,
+        155,
+        138
+      ],
+      "pluginIds": [
+        "seedance-videos-compatible"
+      ]
+    },
+    {
+      "key": "stability",
+      "name": "Stability AI",
+      "row": 7,
+      "column": 4,
+      "sourceBox": [
+        704,
+        1550,
+        892,
+        1706
+      ],
+      "foregroundBounds": [
+        25,
+        13,
+        148,
+        142
+      ],
+      "pluginIds": [
+        "stability-image"
+      ]
+    },
+    {
+      "key": "hunyuan",
+      "name": "Tencent Hunyuan",
+      "row": 7,
+      "column": 5,
+      "sourceBox": [
+        927,
+        1550,
+        1115,
+        1706
+      ],
+      "foregroundBounds": [
+        17,
+        42,
+        169,
+        123
+      ],
+      "pluginIds": [
+        "tencent-hunyuan-image",
+        "tencent-hunyuan-video"
+      ]
+    },
+    {
+      "key": "together",
+      "name": "Together AI",
+      "row": 7,
+      "column": 6,
+      "sourceBox": [
+        1150,
+        1550,
+        1338,
+        1706
+      ],
+      "foregroundBounds": [
+        15,
+        52,
+        172,
+        118
+      ],
+      "pluginIds": [
+        "together-chat"
+      ]
+    },
+    {
+      "key": "vertex",
+      "name": "Vertex AI",
+      "row": 7,
+      "column": 7,
+      "sourceBox": [
+        1374,
+        1550,
+        1562,
+        1706
+      ],
+      "foregroundBounds": [
+        38,
+        20,
+        151,
+        132
+      ],
+      "pluginIds": [
+        "vertex-gemini",
+        "vertex-imagen",
+        "vertex-veo"
+      ]
+    },
+    {
+      "key": "vidu",
+      "name": "Vidu",
+      "row": 7,
+      "column": 8,
+      "sourceBox": [
+        1597,
+        1550,
+        1785,
+        1706
+      ],
+      "foregroundBounds": [
+        29,
+        22,
+        164,
+        133
+      ],
+      "pluginIds": [
+        "vidu-video"
+      ]
+    },
+    {
+      "key": "vllm",
+      "name": "vLLM",
+      "row": 8,
+      "column": 1,
+      "sourceBox": [
+        34,
+        1800,
+        222,
+        1956
+      ],
+      "foregroundBounds": [
+        34,
+        17,
+        139,
+        136
+      ],
+      "pluginIds": [
+        "vllm-chat"
+      ]
+    },
+    {
+      "key": "volcengine",
+      "name": "Volcengine",
+      "row": 8,
+      "column": 2,
+      "sourceBox": [
+        257,
+        1800,
+        445,
+        1956
+      ],
+      "foregroundBounds": [
+        33,
+        22,
+        154,
+        130
+      ],
+      "pluginIds": [
+        "volcengine-ark-agent-plan-seedance",
+        "volcengine-ark-agent-plan-seedream",
+        "volcengine-ark-seedance",
+        "volcengine-ark-seedream",
+        "volcengine-jimeng-image",
+        "volcengine-jimeng-video",
+        "volcengine-mediakit"
+      ]
+    },
+    {
+      "key": "wavespeed",
+      "name": "WaveSpeed",
+      "row": 8,
+      "column": 3,
+      "sourceBox": [
+        481,
+        1800,
+        669,
+        1956
+      ],
+      "foregroundBounds": [
+        30,
+        31,
+        155,
+        134
+      ],
+      "pluginIds": [
+        "wavespeed-image-edit"
+      ]
+    },
+    {
+      "key": "xai",
+      "name": "xAI",
+      "row": 8,
+      "column": 4,
+      "sourceBox": [
+        704,
+        1800,
+        892,
+        1956
+      ],
+      "foregroundBounds": [
+        34,
+        22,
+        157,
+        137
+      ],
+      "pluginIds": [
+        "xai-grok-chat",
+        "xai-grok-images",
+        "xai-video"
+      ]
+    },
+    {
+      "key": "yi",
+      "name": "Yi",
+      "row": 8,
+      "column": 5,
+      "sourceBox": [
+        927,
+        1800,
+        1115,
+        1956
+      ],
+      "foregroundBounds": [
+        41,
+        37,
+        145,
+        136
+      ],
+      "pluginIds": [
+        "yi-chat"
+      ]
+    },
+    {
+      "key": "zhipu",
+      "name": "Zhipu",
+      "row": 8,
+      "column": 6,
+      "sourceBox": [
+        1150,
+        1800,
+        1338,
+        1956
+      ],
+      "foregroundBounds": [
+        28,
+        22,
+        157,
+        131
+      ],
+      "pluginIds": [
+        "zhipu-cogvideox",
+        "zhipu-cogview",
+        "zhipu-glm-chat"
+      ]
+    },
+    {
+      "key": "feedback",
+      "name": "User Feedback",
+      "row": 8,
+      "column": 7,
+      "sourceBox": [
+        1374,
+        1800,
+        1562,
+        1956
+      ],
+      "foregroundBounds": [
+        32,
+        14,
+        153,
+        136
+      ],
+      "pluginIds": [
+        "user-feedback"
+      ]
+    },
+    {
+      "key": "prompt",
+      "name": "Prompt Optimizer",
+      "row": 8,
+      "column": 8,
+      "sourceBox": [
+        1597,
+        1800,
+        1785,
+        1956
+      ],
+      "foregroundBounds": [
+        52,
+        12,
+        138,
+        140
+      ],
+      "pluginIds": [
+        "prompt-optimizer"
+      ]
+    },
+    {
+      "key": "eagle",
+      "name": "Eagle Assets",
+      "row": 9,
+      "column": 1,
+      "sourceBox": [
+        34,
+        2050,
+        222,
+        2190
+      ],
+      "foregroundBounds": [
+        35,
+        18,
+        152,
+        130
+      ],
+      "pluginIds": [
+        "eagle-asset-connector"
+      ]
+    },
+    {
+      "key": "critique",
+      "name": "AI Art Critique",
+      "row": 9,
+      "column": 2,
+      "sourceBox": [
+        257,
+        2050,
+        445,
+        2190
+      ],
+      "foregroundBounds": [
+        31,
+        6,
+        155,
+        129
+      ],
+      "pluginIds": [
+        "ai-art-critique"
+      ]
+    },
+    {
+      "key": "conversion",
+      "name": "Media Conversion",
+      "row": 9,
+      "column": 3,
+      "sourceBox": [
+        481,
+        2050,
+        669,
+        2190
+      ],
+      "foregroundBounds": [
+        32,
+        14,
+        149,
+        129
+      ],
+      "pluginIds": [
+        "media-conversion"
+      ]
+    },
+    {
+      "key": "editor",
+      "name": "Editing Workspace",
+      "row": 9,
+      "column": 4,
+      "sourceBox": [
+        704,
+        2050,
+        892,
+        2190
+      ],
+      "foregroundBounds": [
+        36,
+        13,
+        152,
+        127
+      ],
+      "pluginIds": [
+        "editor-shell"
+      ]
+    }
+  ]
+}

@@ -36,6 +36,8 @@ ui/base/buttons/
 
 ## 3. Token 义务（含 BoardUI 深度扩展；数值以 composio-brand-package 为权威源）
 
+当前产品字号按用户确认的表执行：标签与辅助说明 12px（`--fs-label` / `--fs-caption`），控件与正文 14px（`--fs-ui` / `--fs-body`），区块及弹窗标题 16px（`--fs-heading`），页面标题 22px（`--fs-title`），展示字 32px（`--fs-display`）。创作首页大标题固定为 28px（`--home-title-font-size`）。紧凑按钮只收紧尺寸，文字仍为 14px；7px 的缩略图示意文字不用于可读界面标签。
+
 - **数值权威源**：新 token 的色值/字号/间距/圆角一律取自规范包（`tokens.json` 优先，`DESIGN.md`/`theme.css` 对照），先翻译进 globals.css 三层 token 再被组件消费；禁止组件/页面直写规范包裸值。字体采用 Inter + 开源等宽（不采用规范包 abcDiatype）。
 
 - 只消费三层 token（Primitive→Semantic→Component 的 `var(--*)` 或其 Tailwind 映射）；**禁止裸 `text-[Npx]`、裸圆角、硬编码色**。
@@ -45,6 +47,10 @@ ui/base/buttons/
 - 明暗自适应由 CSS 变量完成；不读皮肤 ID、不分叉业务逻辑。新 token 走 globals.css 三层流程并同步 ADR-0008/本文档/实施计划。
 
 ## 4. 原语 / 图标 / 动效契约
+
+用户工作台辅助文字统一引用 `--product-text-muted`（浅色 `#626D9C`、暗色 `#A7B6DC`），强调文字统一引用 `--product-text-accent`（浅色 `#2D68FC`、暗色 `#9ABBFF`）。页面 muted / soft / accent 别名转接这两个 token，避免再次通过主文字透明度混色产生新的辅助蓝灰；状态文字继续使用独立状态语义色。
+
+用户工作台页面间距集中在 `workspace-product.css` 的 `--product-*` 变量：最大容器宽 1480px；桌面左右留白 24px，900px 以下 20px，620px 以下 16px；页顶 24px（窄屏 16px）、页底 32px、区块间距 24px、卡片间距与底板内边距 16px、控件及标题说明间距 8px。主要中文界面字间距为 0，标题行高 1.4，说明行高 1.6。首页与短剧保留各自的布局结构，卡片和内容不以背景外扩替代实际内边距。
 
 - **原语**：简单件用原生语义元素；复杂控件（Select/Modal/Drawer/Popconfirm/日期/Combobox）以 `react-aria-components` 为无障碍地基，包 Celadon 观感。不引入 Radix。
 - **图标**：统一 `lucide-react`，以组件引用传入（`icon={Move}`）；尺寸/颜色由宿主组件用语义档位决定，禁止调用方传 icon className 改尺寸。
