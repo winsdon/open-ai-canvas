@@ -26,7 +26,7 @@ describe("workspace route loading", () => {
         }
         expect(modules).toContain('projectDetail: preloadableLazy(() => import("@/pages/projects/detail"))');
         expect(modules).toContain('slug === "projects" && segments.length > 1');
-        expect(navigation).toContain("onPointerEnter={() => preloadWorkspaceRoute(linkTo)}");
+        expect(navigation).toMatch(/onPointerEnter=\{\(event\) => \{\s*preloadWorkspaceRoute\(linkTo\);/);
         expect(navigation).toContain("onPointerDown={() => preloadWorkspaceRoute(linkTo)}");
         expect(navigation).toContain("onFocus={() => preloadWorkspaceRoute(linkTo)}");
     });
