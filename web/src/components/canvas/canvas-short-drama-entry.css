@@ -15,6 +15,13 @@
     pointer-events: none;
 }
 
+.dark .canvas-entry-stage {
+    --canvas-entry-wave: color-mix(in srgb, var(--canvas-entry-text) 10%, transparent);
+    --canvas-entry-chip: color-mix(in srgb, var(--canvas-entry-surface) 80%, transparent);
+    --canvas-entry-chip-hover: color-mix(in srgb, var(--canvas-entry-text) 9%, var(--canvas-entry-surface));
+    --canvas-entry-composer-shadow: 0 12px 40px rgb(0 0 0 / 18%);
+}
+
 /* ---------- 背景涟漪 ---------- */
 .canvas-entry-ripple {
     position: absolute;
@@ -175,7 +182,7 @@
     border: 1px solid var(--canvas-entry-border);
     border-radius: var(--r-3xl);
     background: var(--canvas-entry-surface);
-    box-shadow: none;
+    box-shadow: var(--canvas-entry-composer-shadow, none);
     text-align: left;
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);

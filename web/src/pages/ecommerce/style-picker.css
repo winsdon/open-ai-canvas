@@ -259,7 +259,6 @@
 .commerce-style-card-select:hover:not(:disabled) {
     border-color: color-mix(in srgb, var(--user-accent) 55%, var(--user-border));
     box-shadow: 0 18px 40px -22px rgb(0 0 0 / 70%);
-    transform: translateY(-3px);
 }
 .commerce-style-card-select:disabled {
     cursor: not-allowed;

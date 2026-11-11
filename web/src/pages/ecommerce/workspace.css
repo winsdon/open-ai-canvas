@@ -1566,7 +1566,6 @@
     cursor: default;
 }
 .ecommerce-project-card:hover {
-    transform: translateY(-4px);
     border-color: color-mix(in srgb, var(--user-accent) 68%, var(--user-border));
     box-shadow: 0 12px 28px color-mix(in srgb, var(--user-ink) 12%, transparent);
 }
@@ -2567,7 +2566,6 @@
         transform 0.18s ease;
 }
 .flylep-platform-card:hover {
-    transform: translateY(-1px);
     background: var(--user-surface-hover);
 }
 .flylep-platform-card.is-selected {
@@ -2915,7 +2913,6 @@
     border-color: var(--user-accent);
     background: var(--user-surface-muted);
     box-shadow: 0 10px 28px rgb(0 0 0 / 18%);
-    transform: translateY(-2px);
 }
 .flylep-direction-card:disabled {
     cursor: wait;

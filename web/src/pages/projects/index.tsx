@@ -12,6 +12,7 @@ import { deleteDrama, listDramas, type DramaListItem, type DramaStatus } from "@
 import { formatCredits, MediaThumb, STATUS_LABEL } from "./drama-shared";
 import { progressFillStyle } from "@/lib/progress-fill";
 import { RelativeTime } from "@/components/ui/product/relative-time";
+import { useThemeStore } from "@/stores/use-theme-store";
 import "./drama.css";
 import "./drama-library.css";
 
@@ -230,10 +231,13 @@ export default function DramaListPage() {
 
 /** 还没有作品时的上传引导；有作品后整页都可拖入，不再常驻占位。 */
 function UploadHero({ onPick, onPaste }: { onPick: () => void; onPaste: () => void }) {
+    const theme = useThemeStore((state) => state.theme);
     return (
         <section className="drama-library-onboarding" aria-label="开始制作短剧">
             <div className="drama-library-upload">
-                <img className="drama-library-book" src="/images/drama/book.png" alt="" width={220} height={195} />
+                <div className="drama-library-book-frame">
+                    <img className="drama-library-book" src={`/images/drama/${theme === "dark" ? "book-dark" : "book"}.png`} alt="" width={220} height={195} />
+                </div>
                 <h2>拖入一本小说，开始做短剧</h2>
                 <p className="drama-library-formats">支持 TXT / Markdown，最多 600 万字。</p>
                 <p className="drama-library-explainer">确认风格、参考图方案和审阅方式后，系统自动改编、拆集、建角色、出分镜并合成成片。</p>
@@ -250,7 +254,7 @@ function UploadHero({ onPick, onPaste }: { onPick: () => void; onPaste: () => vo
             <ol className="drama-library-pipeline" aria-label="短剧制作流程">
                 {PIPELINE.map((step, index) => (
                     <li key={step.image}>
-                        <img src={`/images/drama/${step.image}-v2.png`} alt="" width={200} height={166} decoding="async" />
+                        <img src={`/images/drama/${step.image}-${theme === "dark" ? "dark" : "v2"}.png`} alt="" width={200} height={166} decoding="async" />
                         <div className="drama-library-step-copy">
                             <span className="drama-library-step-number" aria-hidden="true">
                                 {index + 1}

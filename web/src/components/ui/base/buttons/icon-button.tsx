@@ -36,7 +36,7 @@ export const iconButtonVariants = cva(
                 // 危险（文本色常驻红）
                 danger: "text-status-error hover:bg-surface-hover active:bg-surface-active",
                 // 实心（中性黑底白图标，主操作；active 反转成白底黑字 + 内描边，供选中态使用）
-                solid: "bg-foreground text-background hover:opacity-85 active:opacity-75 data-[active=true]:bg-background data-[active=true]:text-foreground data-[active=true]:ring-1 data-[active=true]:ring-inset data-[active=true]:ring-border",
+                solid: "bg-foreground text-background hover:opacity-80 active:opacity-75 data-[active=true]:bg-background data-[active=true]:text-foreground data-[active=true]:ring-1 data-[active=true]:ring-inset data-[active=true]:ring-border",
             },
             size: {
                 xs: "size-6 [&_svg]:size-3.5",

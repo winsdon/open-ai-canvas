@@ -6,14 +6,6 @@
     --task-overlay-paper: var(--color-neutral-0);
 }
 
-.task-empty-illustration {
-    display: block;
-    width: 180px;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-
 /* ---- 状态胶囊 ---- */
 .task-center-status {
     --task-tone: var(--user-ink-soft);

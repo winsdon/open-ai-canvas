@@ -716,7 +716,7 @@
     .app-product-workspace .story-launcher-input.ant-input::placeholder {
         color: var(--user-ink-soft) !important;
     }
-    /* 内容卡：默认无边无影，hover/focus-within 只把表面压深一级，不位移。 */
+    /* 内容卡默认无边无影；悬浮缩放与投影由 shared/card-interactions.css 统一管理。 */
     .app-user-workspace .product-collection-card {
         overflow: hidden;
         border: 0 !important;
@@ -735,7 +735,7 @@
         outline: 2px solid var(--user-accent);
         outline-offset: 2px;
     }
-    /* 画布卡带内嵌封面，需要一圈细描边界定外壳；hover 加深描边并给一层柔和落影（不位移，进入动画占用 transform）。 */
+    /* 画布卡用细描边界定封面；共享悬浮 scale 不占用进入动画的 transform。 */
     .app-user-workspace .product-collection-card.canvas-collection-card {
         box-shadow: inset 0 0 0 1px var(--user-border) !important;
         transition:
@@ -942,7 +942,7 @@
     --product-heading-line-height: 1.4;
     --product-body-line-height: 1.6;
     --product-text-muted: #626d9c;
-    --product-text-accent: #2d68fc;
+    --product-text-accent: #000;
     --product-focus-ring: var(--control-focus-ring);
     --product-accent-blue: #4167bf;
     --product-accent-green: #287f65;
@@ -967,8 +967,8 @@
 .dark .app-user-workspace,
 .dark .app-product-workspace,
 .dark .app-product-overlays {
-    --product-text-muted: #a7b6dc;
-    --product-text-accent: #9abbff;
+    --product-text-muted: var(--product-dark-muted);
+    --product-text-accent: var(--product-dark-ink);
     --product-accent-blue: #96b4ff;
     --product-accent-green: #79cfb1;
     --product-accent-orange: #edb77c;
@@ -2341,7 +2341,8 @@
         background var(--product-state) var(--product-ease),
         color var(--product-state) var(--product-ease),
         border-color var(--product-state) var(--product-ease),
-        box-shadow var(--product-state) var(--product-ease) !important;
+        box-shadow var(--product-state) var(--product-ease),
+        opacity var(--product-state) var(--product-ease) !important;
 }
 
 /* 圆角与 Button/Input/Select token 同值；紧凑尺寸单独收小，避免 28px 控件看起来像胶囊。 */
@@ -2361,11 +2362,12 @@
 }
 
 /* 次要按钮 hover：与 Button token 同值，压过页面遗留的同名覆盖，保证所有内容库一致。 */
-.app-product-workspace .ant-btn-default:not(:disabled):not(.ant-btn-dangerous):not([aria-pressed="true"]):hover,
-.app-product-overlays .ant-btn-default:not(:disabled):not(.ant-btn-dangerous):not([aria-pressed="true"]):hover {
-    border-color: var(--button-secondary-hover-border) !important;
+.app-product-workspace .ant-btn-default:not(:disabled, .ant-btn-disabled, .ant-btn-loading, .ant-btn-dangerous, [aria-pressed="true"]):hover,
+.app-product-overlays .ant-btn-default:not(:disabled, .ant-btn-disabled, .ant-btn-loading, .ant-btn-dangerous, [aria-pressed="true"]):hover {
+    border-color: var(--button-secondary-border) !important;
     color: var(--button-secondary-fg) !important;
-    background: var(--button-secondary-hover-bg) !important;
+    background: var(--button-secondary-bg) !important;
+    opacity: var(--button-hover-opacity);
 }
 
 /* Floating surfaces and their enter/leave lifecycle belong to app-theme.ts.

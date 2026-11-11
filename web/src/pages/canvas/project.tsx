@@ -1,4 +1,5 @@
 import { CanvasWorkspacePanel } from "@/components/canvas/canvas-workspace-panel";
+import "@/styles/canvas-theme.css";
 import { CanvasNodeResizeMotionProvider } from "@/components/canvas/canvas-node-resize-motion";
 import "@/lib/plugins/builtin/ai-art-critique";
 import "@/lib/plugins/builtin/media-conversion";
@@ -2894,6 +2895,7 @@ function CanvasViewportPage() {
             </a>
             <main
                 id="canvas-main"
+                data-canvas-theme={colorTheme}
                 tabIndex={-1}
                 className={`relative flex h-full min-h-0 overflow-clip outline-none ${!focusMode && !dramaCanvas ? `canvas-main-with-workspace ${workspaceOpen ? "canvas-workspace-expanded" : ""}` : ""}`}
                 style={{ background: resolvedCanvasAppearance.background, color: theme.node.text }}

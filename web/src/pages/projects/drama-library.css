@@ -165,12 +165,19 @@
     content: "";
     pointer-events: none;
 }
-.drama-library-book {
+.drama-library-book-frame {
+    position: relative;
+    isolation: isolate;
     display: block;
     width: clamp(138px, 10vw, 200px);
-    height: auto;
+    aspect-ratio: 220 / 195;
     flex: 0 0 auto;
     margin: -8px 0 8px;
+}
+.drama-library-book {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 .drama-library-upload h2 {
@@ -364,7 +371,7 @@
         min-height: 0;
         padding: 24px 20px;
     }
-    .drama-library-book {
+    .drama-library-book-frame {
         width: 140px;
     }
     .drama-library-pipeline {
@@ -437,15 +444,36 @@
 }
 
 .dark .app-user-workspace .studio-collection-page.drama-library {
-    --drama-library-ink: #e5edff;
+    --drama-library-ink: var(--product-dark-ink);
     --drama-library-muted: var(--product-text-muted);
     --drama-library-soft: var(--product-text-muted);
-    --drama-library-border: #4b6395;
-    --drama-library-glass: rgb(24 39 71 / 62%);
-    --drama-library-glass-edge: rgb(162 188 242 / 23%);
-    --drama-library-count-bg: #273f6d;
-    --drama-library-button-bg: #3976f3;
-    --drama-library-button-hover: #5089ff;
-    --drama-library-secondary-bg: rgb(30 47 81 / 88%);
-    --drama-library-background: linear-gradient(rgb(9 18 44 / 88%), rgb(9 18 44 / 88%)), url("/images/home/aurora-background.png") center / cover no-repeat;
+    --drama-library-border: var(--product-dark-edge);
+    --drama-library-glass: var(--product-dark-surface);
+    --drama-library-glass-edge: var(--product-dark-edge);
+    --drama-library-count-bg: var(--product-dark-selected);
+    --drama-library-step-bg: var(--product-dark-ink);
+    --drama-library-button-bg: var(--product-dark-ink);
+    --drama-library-button-hover: var(--product-dark-primary-hover);
+    --drama-library-button-ink: var(--product-dark-page);
+    --drama-library-secondary-bg: var(--product-dark-raised);
+    --drama-library-shadow: 0 8px 28px rgb(0 0 0 / 16%);
+    --drama-library-background: var(--product-dark-page);
+}
+
+.dark .drama-library-book-frame::before {
+    position: absolute;
+    z-index: -1;
+    /* Match the glass rectangle baked into the light illustration. */
+    inset: 9.2% 7.8% 8.1% 9.5%;
+    border: 1px solid color-mix(in srgb, var(--drama-library-ink) 18%, transparent);
+    border-radius: 20% / 23%;
+    background: linear-gradient(145deg, color-mix(in srgb, var(--drama-library-ink) 9%, transparent), color-mix(in srgb, var(--drama-library-ink) 3%, transparent));
+    box-shadow:
+        inset 0 1px 0 color-mix(in srgb, var(--drama-library-ink) 16%, transparent),
+        inset 0 -1px 0 color-mix(in srgb, var(--drama-library-ink) 5%, transparent),
+        0 8px 20px color-mix(in srgb, var(--drama-library-button-ink) 20%, transparent);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    content: "";
+    pointer-events: none;
 }

@@ -54,6 +54,7 @@
     --button-danger-soft-bg: rgb(220 38 38 / 0.07);
     --button-danger-soft-border: rgb(220 38 38 / 0.28);
 
+    --button-hover-opacity: 0.8;
     --button-disabled-opacity: 0.42;
 }
 

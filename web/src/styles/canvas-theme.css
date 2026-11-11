@@ -1,0 +1,21 @@
+/* Canvas appearance owns its palette independently of the workspace preference. */
+#canvas-main[data-canvas-theme="dark"] {
+    --background: var(--product-dark-page);
+    --foreground: var(--product-dark-ink);
+    --card: var(--product-dark-surface);
+    --popover: var(--product-dark-raised);
+    --border: rgb(255 255 255 / 10%);
+    --bg-tertiary: var(--product-dark-raised);
+    --workspace-surface: var(--product-dark-surface);
+    --workspace-surface-strong: var(--product-dark-raised);
+    --workspace-canvas-deep: var(--product-dark-page);
+    --cn-text: var(--product-dark-ink);
+    --cn-muted: var(--product-dark-muted);
+    --cn-fill: var(--product-dark-surface);
+    --cn-stroke: var(--border);
+    --cn-spatial-surface: var(--product-dark-surface);
+    --cn-spatial-surface-strong: var(--product-dark-raised);
+    --cn-spatial-elevated: var(--product-dark-raised);
+    --cn-spatial-glow: rgb(255 255 255 / 8%);
+    --cn-spatial-glow-strong: rgb(255 255 255 / 16%);
+}

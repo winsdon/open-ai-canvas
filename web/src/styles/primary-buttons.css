@@ -12,8 +12,9 @@
     box-shadow: var(--button-primary-shadow) !important;
 }
 
-:root .ant-btn.ant-btn-color-primary.ant-btn-variant-solid:not(:disabled, .ant-btn-disabled, [aria-pressed="true"]):hover {
-    background: var(--button-primary-hover-bg) !important;
+:root .ant-btn.ant-btn-color-primary.ant-btn-variant-solid:not(:disabled, .ant-btn-disabled, .ant-btn-loading, [aria-pressed="true"]):hover {
+    background: var(--button-primary-bg) !important;
+    opacity: var(--button-hover-opacity);
 }
 
 :root .ant-btn.ant-btn-color-primary.ant-btn-variant-solid:not(:disabled, .ant-btn-disabled, [aria-pressed="true"]):active {

@@ -18,6 +18,7 @@ import { useUserStore, type FeatureAvailability } from "@/stores/use-user-store"
 import { WorkspaceAccountCard } from "./workspace-account-card";
 import { WorkspaceSidebarCheckin } from "./workspace-sidebar-checkin";
 import { WorkspaceSidebarStorageMeter } from "./workspace-sidebar-storage-meter";
+import { WorkspaceCanvasNavIcon } from "./workspace-canvas-nav-icon";
 import { useWorkspaceNavIndicator } from "./workspace-sidebar-indicator";
 import { openWorkspaceWallet } from "@/lib/workspace-wallet";
 
@@ -165,12 +166,14 @@ function NavItem({
     const hasChildren = Boolean(item.children?.length);
     const [isOpen, setIsOpen] = useState(false);
 
+    const [isIconAnimating, setIsIconAnimating] = useState(false);
+
     // 激活分支自动展开（如设置分区子项），保证当前位置可见。
     useEffect(() => {
         if (isActive && hasChildren) setIsOpen(true);
     }, [isActive, hasChildren]);
 
-    const Icon = item.icon;
+    const Icon = item.id === "canvas" ? WorkspaceCanvasNavIcon : item.icon;
     const rowStyle = collapsed ? undefined : ({ paddingLeft: `${level * 12 + 10}px` } as CSSProperties);
 
     const collapsedTitle = COLLAPSED_TITLE_KEYS[item.id] ? t(COLLAPSED_TITLE_KEYS[item.id]) : item.title.slice(0, 2);
@@ -178,7 +181,38 @@ function NavItem({
         <>
             <span className="app-workspace-nav-main flex min-w-0 items-center gap-2">
                 {Icon ? (
-                    <span className="app-workspace-nav-icon" aria-hidden>
+                    <span
+                        className={cn(
+                            "app-workspace-nav-icon",
+                            isIconAnimating &&
+                                (item.id === "home"
+                                    ? "is-writing"
+                                    : item.id === "projects"
+                                      ? "is-clapping"
+                                      : item.id === "skills"
+                                        ? "is-tipping"
+                                        : item.id === "plugins"
+                                          ? "is-joining"
+                                          : item.id === "tasks"
+                                            ? "is-tracing"
+                                            : item.id === "assets"
+                                              ? "is-stacking"
+                                              : "is-separating"),
+                        )}
+                        aria-hidden
+                        onAnimationEnd={(event) => {
+                            if (
+                                event.target === event.currentTarget ||
+                                event.animationName === "workspace-clapper-snap" ||
+                                event.animationName === "workspace-canvas-assemble" ||
+                                event.animationName === "workspace-skills-tip" ||
+                                event.animationName === "workspace-plugins-join" ||
+                                event.animationName === "workspace-history-trace" ||
+                                event.animationName === "workspace-assets-stack"
+                            )
+                                setIsIconAnimating(false);
+                        }}
+                    >
                         <Icon className="size-4 shrink-0" strokeWidth={1.8} />
                     </span>
                 ) : (
@@ -233,7 +267,16 @@ function NavItem({
                     onClick={handleClick}
                     onFocus={() => preloadWorkspaceRoute(linkTo)}
                     onPointerDown={() => preloadWorkspaceRoute(linkTo)}
-                    onPointerEnter={() => preloadWorkspaceRoute(linkTo)}
+                    onPointerEnter={(event) => {
+                        preloadWorkspaceRoute(linkTo);
+                        if (
+                            ["home", "projects", "canvas", "skills", "plugins", "tasks", "assets"].includes(item.id) &&
+                            event.pointerType === "mouse" &&
+                            window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches
+                        ) {
+                            setIsIconAnimating(true);
+                        }
+                    }}
                 >
                     {rowContent}
                 </Link>

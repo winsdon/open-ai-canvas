@@ -539,7 +539,7 @@ export default function TasksPage() {
                     ) : (
                         <WorkspaceState
                             compact
-                            illustration={<img className="task-empty-illustration" src="/images/tasks/empty-history.webp" alt="" width={480} height={506} decoding="async" draggable={false} />}
+                            icon="tasks"
                             title={taskEmptyState(statusFilter).title}
                             description={taskEmptyState(statusFilter).description}
                             action={

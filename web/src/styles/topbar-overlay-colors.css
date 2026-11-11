@@ -64,15 +64,20 @@ body.app-product-overlays :is(.workspace-language-popup, .workspace-account-popo
     color: var(--topbar-overlay-ink);
 }
 .dark body.app-product-overlays :is(.workspace-language-popup, .workspace-account-popover, .workspace-wallet-modal, .workspace-announcement-modal, .app-changelog-modal, .settings-page) {
-    --topbar-overlay-bg: #101b38;
-    --topbar-overlay-paper: #222e50;
-    --topbar-overlay-muted: #253451;
-    --topbar-overlay-hover: #304367;
-    --topbar-overlay-ink: #e5edff;
+    --topbar-overlay-bg: var(--product-dark-page);
+    --topbar-overlay-paper: var(--product-dark-raised);
+    --topbar-overlay-muted: var(--product-dark-surface);
+    --topbar-overlay-hover: var(--product-dark-hover);
+    --topbar-overlay-ink: var(--product-dark-ink);
     --topbar-overlay-secondary: var(--product-text-muted);
     --topbar-overlay-soft: var(--product-text-muted);
-    --topbar-overlay-edge: #3e507a;
+    --topbar-overlay-edge: var(--product-dark-edge);
     --topbar-overlay-accent: var(--product-text-accent);
+    --primary-foreground: var(--product-dark-page);
+    --button-primary-bg: var(--product-dark-ink);
+    --button-primary-hover-bg: var(--product-dark-primary-hover);
+    --button-primary-active-bg: var(--product-dark-primary-hover);
+    --button-primary-fg: var(--product-dark-page);
 }
 body.app-product-overlays :is(.workspace-wallet-modal, .workspace-announcement-modal, .app-changelog-modal) .ant-modal-container {
     background: var(--topbar-overlay-bg) !important;
@@ -113,9 +118,7 @@ body.app-product-overlays .settings-page {
     background: var(--topbar-overlay-bg) url("/images/home/aurora-background.png") center / cover !important;
 }
 .dark body.app-product-overlays .settings-page {
-    background:
-        linear-gradient(rgb(16 27 56 / 94%), rgb(16 27 56 / 97%)),
-        url("/images/home/aurora-background.png") center / cover !important;
+    background: var(--topbar-overlay-bg) !important;
 }
 body.app-product-overlays .settings-page .settings-library-frame,
 body.app-product-overlays .settings-page .settings-content {

@@ -478,7 +478,6 @@ html.dark :is(.ecommerce-page, .flylep-popover, .commerce-market-layer, .commerc
     border-color: var(--cm-line-strong);
     background: var(--user-surface);
     box-shadow: var(--cm-float-shadow);
-    transform: translateY(-1px);
 }
 .commerce-direction-message .flylep-direction-card.is-chosen,
 .commerce-direction-message .flylep-direction-card.is-chosen:hover:not(:disabled) {

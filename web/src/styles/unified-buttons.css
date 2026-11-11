@@ -33,6 +33,14 @@
     box-shadow: var(--button-secondary-shadow);
 }
 
+/* 黑白实底按钮统一用整体透明度表达悬停，保留默认配色。 */
+:root .ant-btn.ant-btn-color-default:is(.ant-btn-variant-outlined, .ant-btn-variant-dashed):not(:disabled, .ant-btn-disabled, .ant-btn-loading, .ant-btn-background-ghost, [aria-pressed="true"]):hover {
+    background: var(--button-secondary-bg) !important;
+    border-color: var(--button-secondary-border) !important;
+    color: var(--button-secondary-fg) !important;
+    opacity: var(--button-hover-opacity);
+}
+
 :root .ant-btn.ant-btn-color-default:is(.ant-btn-variant-outlined, .ant-btn-variant-dashed):not(:disabled, .ant-btn-disabled, .ant-btn-background-ghost, [aria-pressed="true"]):active {
     box-shadow: none;
 }

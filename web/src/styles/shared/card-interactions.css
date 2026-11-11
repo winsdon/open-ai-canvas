@@ -1,0 +1,90 @@
+/* Theme sublayer: shared interaction properties take priority over legacy !important
+   surface rules. Enumerate card shells so inner artwork and canvas nodes stay put. */
+@layer theme.card-interactions {
+    :root {
+        --card-hover-scale: 1.02;
+        --card-hover-duration: 180ms;
+        --card-hover-ease: cubic-bezier(0.2, 0.85, 0.18, 1);
+        --card-hover-shadow: 0 8px 24px rgb(15 23 42 / 10%);
+    }
+
+    .dark {
+        --card-hover-shadow: 0 8px 24px rgb(0 0 0 / 24%);
+    }
+
+    :is(
+        .product-collection-card,
+        .app-collection-card,
+        .app-canvas-create-card,
+        .app-canvas-project-card,
+        .canvas-folder-card,
+        .library-card,
+        .library-create-card,
+        .project-library-card,
+        .project-asset-folder-card,
+        .skill-library-card,
+        .skill-tile,
+        .plugin-card,
+        .style-center-card,
+        .asset-library-card,
+        .assets-empty-card,
+        .suggest-card,
+        .creation-featured-card,
+        .creation-canvas-tile,
+        .inspiration-card,
+        .home-stat-card,
+        .task-center-card,
+        .drama-cast-card,
+        .drama-library-card,
+        .wb-tile,
+        .wb-scene-card,
+        .ecommerce-project-card,
+        .flylep-platform-card,
+        .flylep-direction-card,
+        .commerce-material-tile,
+        .commerce-output-card,
+        .ecommerce-model-card,
+        .commerce-style-card-select,
+        .asset-picker-card,
+        .pose-card,
+        .wallet-topup-card,
+        .language-option-card,
+        .canvas-agent-skill-card,
+        .previs-template-card,
+        .pv-prop-card,
+        .previs-add-dialog__card,
+        .admin-appearance-skin-card,
+        .admin-skin-card,
+        .admin-banner-type-card,
+        .pcw-card
+    ) {
+        /* Individual scale leaves entrance/drag transforms and artwork intact. */
+        transition:
+            scale var(--card-hover-duration) var(--card-hover-ease),
+            box-shadow var(--card-hover-duration) ease,
+            background-color var(--card-hover-duration) ease,
+            border-color var(--card-hover-duration) ease !important;
+
+        &:focus-visible:not(:hover) {
+            outline: 2px solid var(--user-ink, var(--foreground)) !important;
+            outline-offset: 3px;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover:not(:disabled, [aria-disabled="true"], [aria-busy="true"], [aria-grabbed="true"], .is-dragging, .dragging, .is-opening) {
+                /* Retain rings used to communicate selection. */
+                &:not(.is-selected, .is-chosen, .is-active, [data-selected], [aria-current="true"], [aria-selected="true"], [aria-pressed="true"]) {
+                    box-shadow: var(--card-hover-shadow) !important;
+                }
+
+                @media (prefers-reduced-motion: no-preference) {
+                    scale: var(--card-hover-scale) !important;
+                }
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none !important;
+        }
+    }
+}

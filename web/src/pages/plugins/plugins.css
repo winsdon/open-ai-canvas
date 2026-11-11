@@ -17,7 +17,7 @@
     --plugins-tab-active-ink: #fff;
     --plugins-card-shadow: 0 2px 12px rgb(45 104 252 / 4%);
     --plugins-card-hover-shadow: 0 6px 24px rgb(45 104 252 / 12%);
-    --collection-grid-min-width: 260px;
+    --collection-grid-min-width: max(200px, calc((100% - 3 * var(--product-card-gap)) / 4));
     --user-control-height: 40px;
     --user-ink: var(--plugins-ink);
     --user-ink-muted: var(--plugins-muted);
@@ -43,17 +43,22 @@
 }
 
 .dark .app-user-workspace .plugins-page {
-    --plugins-ink: #e5edff;
+    --plugins-ink: var(--product-dark-ink);
     --plugins-muted: var(--product-text-muted);
     --plugins-accent: var(--product-text-accent);
-    --plugins-selected: #263c66;
-    --plugins-edge: #34486f;
-    --plugins-card: #1a2a49;
-    --plugins-card-hover: #203357;
-    --plugins-content-background: linear-gradient(135deg, rgb(255 255 255 / 6%) 0%, rgb(255 255 255 / 3%) 55%, rgb(255 255 255 / 1%) 100%);
-    --plugins-page-background: radial-gradient(ellipse at top left, #233d6a, transparent 65%), #101c35;
-    --plugins-primary: #4177e9;
-    --plugins-primary-hover: #5688ef;
+    --plugins-selected: var(--product-dark-selected);
+    --plugins-edge: var(--product-dark-edge);
+    --plugins-card: var(--product-dark-raised);
+    --plugins-card-hover: var(--product-dark-hover);
+    --plugins-content-background: var(--product-dark-surface);
+    --plugins-page-background: var(--product-dark-page);
+    --plugins-primary: var(--product-dark-ink);
+    --plugins-primary-hover: var(--product-dark-primary-hover);
+    --plugins-primary-ink: var(--product-dark-page);
+    --plugins-tab-active: var(--product-dark-selected);
+    --plugins-tab-active-ink: var(--product-dark-ink);
+    --plugins-card-shadow: 0 2px 12px rgb(0 0 0 / 10%);
+    --plugins-card-hover-shadow: 0 6px 24px rgb(0 0 0 / 24%);
     --plugins-success: #7bd6a8;
     --plugins-tab-background: rgb(255 255 255 / 5%);
 }
@@ -407,7 +412,7 @@
 
 .plugins-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--collection-grid-min-width)), 1fr));
     align-items: stretch;
     gap: var(--product-card-gap);
     margin-top: var(--space-4);

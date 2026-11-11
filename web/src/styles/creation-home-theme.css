@@ -213,32 +213,28 @@
     padding: var(--product-panel-padding) !important;
     border: 1px solid var(--home-glass-border) !important;
     border-radius: 14px !important;
-    background: linear-gradient(180deg, var(--suggest-fill-start), var(--suggest-fill-middle) 50%, var(--suggest-fill-end)) !important;
+    background: var(--suggest-background, linear-gradient(180deg, var(--suggest-fill-start), var(--suggest-fill-middle) 50%, var(--suggest-fill-end))) !important;
     box-shadow: var(--home-card-shadow) !important;
+    transform: none !important;
+    transition:
+        transform 180ms cubic-bezier(0.2, 0.85, 0.18, 1),
+        box-shadow 180ms ease !important;
 }
 .app-user-workspace.app-home-workspace .suggest-card-0 {
-    --suggest-fill-start: #f8fdff;
-    --suggest-fill-middle: #f7fbfe;
-    --suggest-fill-end: #f9fbfe;
+    --suggest-background: linear-gradient(105deg, #fffbf0 0%, #fff7e2 24%, #fef1cf 48%, #fdeec7 68%, #fdedc4 100%);
 }
 .app-user-workspace.app-home-workspace .suggest-card-1 {
-    --suggest-fill-start: #faf9fe;
-    --suggest-fill-middle: #f9f8fe;
-    --suggest-fill-end: #f9fbfe;
+    --suggest-background: linear-gradient(105deg, #f5f9ff 0%, #e8f2ff 24%, #d1e5fe 48%, rgb(191 218 253) 68%, #bbd8fd 100%);
 }
 .app-user-workspace.app-home-workspace .suggest-card-2 {
-    --suggest-fill-start: #f9fefd;
-    --suggest-fill-middle: #f7fefc;
-    --suggest-fill-end: #fcfefe;
+    --suggest-background: linear-gradient(105deg, #faf8ff 0%, #f1ecfc 24%, #e3dbf8 48%, #d7cef4 68%, #d3c9f1 100%);
 }
 .app-user-workspace.app-home-workspace .suggest-card-3 {
-    --suggest-fill-start: #fefefc;
-    --suggest-fill-middle: #fefefc;
-    --suggest-fill-end: #fefefc;
+    --suggest-background: linear-gradient(105deg, #fff8f7 0%, #fdf1ef 24%, #fce9e5 48%, #fbe3db 68%, #fbe1d7 100%);
 }
 .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card:is(:hover, :focus-visible) {
-    border-color: var(--user-border-strong) !important;
-    box-shadow: 0 8px 22px rgb(70 112 204 / 14%) !important;
+    border-color: var(--home-glass-border) !important;
+    box-shadow: var(--home-card-shadow) !important;
 }
 .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card-hover {
     display: none;
@@ -271,6 +267,21 @@
     object-fit: contain;
     object-position: right center;
     pointer-events: none;
+}
+.app-user-workspace.app-home-workspace .suggest-card-0 .suggest-art,
+.app-user-workspace.app-home-workspace .suggest-card-1 .suggest-art,
+.app-user-workspace.app-home-workspace .suggest-card-2 .suggest-art,
+.app-user-workspace.app-home-workspace .suggest-card-3 .suggest-art {
+    max-width: 48%;
+    mask-image: linear-gradient(to right, transparent, rgb(0 0 0 / 15%) 6%, rgb(0 0 0 / 50%) 12%, rgb(0 0 0 / 85%) 18%, #000 24%);
+}
+.app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card-2 .suggest-copy,
+.app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card-3 .suggest-copy {
+    width: 52%;
+}
+.app-user-workspace.app-home-workspace .suggest-card-2 .suggest-art {
+    transform: scale(0.85);
+    transform-origin: right center;
 }
 .app-user-workspace.app-home-workspace .creation-recent-canvases {
     margin-top: var(--product-section-gap);
@@ -376,10 +387,13 @@
     font-size: 12px;
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-actions > .ant-btn:first-child {
+    --button-primary-bg: #000;
+    --button-primary-hover-bg: #262626;
+    --button-primary-active-bg: #171717;
     height: 36px;
     background: var(--button-primary-bg);
     color: #fff;
-    border: 1px solid var(--user-accent);
+    border: 1px solid var(--button-primary-bg);
     border-radius: var(--r-lg);
 }
 .app-user-workspace.app-home-workspace .inspiration-hall-actions > .ant-btn:first-child:hover {
@@ -427,7 +441,7 @@
 }
 .app-user-workspace.app-home-workspace .inspiration-card:hover {
     background: #fff;
-    border-color: var(--user-border-strong);
+    border-color: var(--home-glass-border);
 }
 .app-user-workspace.app-home-workspace .inspiration-card-cover {
     aspect-ratio: 16 / 10;
@@ -569,31 +583,50 @@
 }
 
 .dark .app-user-workspace.app-home-workspace {
-    --background: #101b38;
-    --user-surface: rgb(29 39 73 / 88%);
-    --user-surface-raised: #222e50;
-    --user-surface-muted: rgb(75 100 158 / 24%);
-    --user-surface-hover: rgb(88 119 186 / 30%);
-    --user-ink: #e5edff;
+    --background: var(--product-dark-page);
+    --user-surface: var(--product-dark-surface);
+    --user-surface-raised: var(--product-dark-raised);
+    --user-surface-muted: var(--product-dark-raised);
+    --user-surface-hover: var(--product-dark-hover);
+    --user-control-pressed: var(--product-dark-selected);
+    --user-ink: var(--product-dark-ink);
     --user-ink-muted: var(--product-text-muted);
     --user-ink-soft: var(--product-text-muted);
-    --user-border: #3e507a;
-    --home-glass: rgb(16 27 56 / 58%);
-    --home-glass-border: rgb(152 178 232 / 17%);
-    --button-tonal-bg: #293859;
+    --user-border: var(--product-dark-edge);
+    --user-border-strong: var(--product-dark-edge-strong);
+    --user-accent-soft: var(--product-dark-selected);
+    --primary-foreground: var(--product-dark-page);
+    --control-focus-ring: var(--product-dark-muted);
+    --control-selected-bg: var(--product-dark-selected);
+    --home-glass: var(--product-dark-surface);
+    --home-glass-border: var(--product-dark-edge);
+    --home-card-shadow: 0 5px 18px rgb(0 0 0 / 12%);
+    --home-focus-shadow: 0 0 0 3px rgb(255 255 255 / 8%);
+    --home-action-ink: var(--product-dark-ink);
+    --home-action-muted: var(--product-text-muted);
+    --button-primary-bg: var(--product-dark-ink);
+    --button-primary-hover-bg: var(--product-dark-primary-hover);
+    --button-primary-active-bg: var(--product-dark-primary-hover);
+    --button-primary-fg: var(--product-dark-page);
+    --button-secondary-bg: var(--product-dark-raised);
+    --button-tonal-bg: var(--product-dark-raised);
+    --button-tonal-hover-bg: var(--product-dark-hover);
     --button-ghost-fg: var(--product-text-muted);
-    --library-surface: #253451;
-    --library-surface-hover: #304367;
-    --home-content-background: linear-gradient(rgb(9 18 44 / 89%), rgb(9 18 44 / 89%)), url("/images/home/aurora-background.png") right center / cover no-repeat;
+    --library-surface: var(--product-dark-surface);
+    --library-surface-hover: var(--product-dark-hover);
+    --library-cover-surface: var(--product-dark-raised);
+    --library-icon-surface: var(--product-dark-raised);
+    --home-content-background: var(--product-dark-page);
 }
 .dark .app-user-workspace.app-home-workspace .creation-composer-stage.is-home-mode {
-    background: rgb(29 43 76 / 66%);
+    background: var(--product-dark-raised);
 }
 .dark .app-user-workspace.app-home-workspace .creation-launchpad .creation-chat-composer {
     background: var(--user-surface) !important;
 }
 .dark .app-user-workspace.app-home-workspace .creation-mode-indicator {
-    background: #30446f;
+    background: var(--product-dark-selected);
+    box-shadow: inset 0 -2px 0 var(--product-dark-muted);
 }
 .dark .app-user-workspace.app-home-workspace .creation-mode-button[aria-pressed="true"] {
     color: var(--product-text-accent) !important;
@@ -609,6 +642,94 @@
 }
 .dark .app-user-workspace.app-home-workspace .creation-canvas-tile.is-create {
     background: var(--home-glass);
+    border-color: var(--user-border-strong);
+}
+.dark .app-user-workspace.app-home-workspace .creation-home-scroll {
+    scrollbar-color: var(--product-dark-edge-strong) transparent;
+}
+.dark .app-user-workspace.app-home-workspace .creation-mode-spark {
+    box-shadow: 0 0 0 3px var(--product-dark-selected);
+}
+.dark .app-user-workspace.app-home-workspace .creation-launchpad .creation-submit.ant-btn:disabled .creation-submit-action {
+    background: var(--product-dark-selected);
+    color: var(--product-dark-muted);
+}
+.dark .app-user-workspace.app-home-workspace :is(.creation-canvas-thumbnail.is-create, .inspiration-chip, .inspiration-hall-toolbar .app-segmented-thumb) {
+    background: var(--product-dark-selected);
+}
+.dark .app-user-workspace.app-home-workspace .inspiration-card-source {
+    background: var(--product-dark-raised);
+    color: var(--product-dark-ink);
+}
+.dark .app-user-workspace.app-home-workspace .inspiration-hall-actions > .ant-btn:first-child {
+    --button-primary-bg: var(--product-dark-ink);
+    --button-primary-hover-bg: var(--product-dark-primary-hover);
+    --button-primary-active-bg: var(--product-dark-primary-hover);
+    color: var(--button-primary-fg);
+}
+.dark .app-user-workspace.app-home-workspace .creation-canvas-strip-state button {
+    color: var(--button-primary-fg);
+}
+
+.dark .app-user-workspace.app-home-workspace .suggest-card-0 {
+    --suggest-tint: #e9a633;
+}
+.dark .app-user-workspace.app-home-workspace .suggest-card-1 {
+    --suggest-tint: #4eabf5;
+}
+.dark .app-user-workspace.app-home-workspace .suggest-card-2 {
+    --suggest-tint: #a36bf1;
+}
+.dark .app-user-workspace.app-home-workspace .suggest-card-3 {
+    --suggest-tint: #36bbdf;
+}
+.dark .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card {
+    --home-glass-border: color-mix(in srgb, var(--suggest-tint) 22%, rgb(255 255 255 / 5%));
+    --home-card-shadow: inset 0 1px 0 rgb(255 255 255 / 5%), 0 4px 16px rgb(0 0 0 / 14%);
+    --card-hover-shadow: var(--home-card-shadow), 0 8px 24px rgb(0 0 0 / 24%);
+    --suggest-background:
+        radial-gradient(ellipse at 90% 12%, color-mix(in srgb, var(--suggest-tint) 18%, transparent), transparent 72%), radial-gradient(ellipse at 80% 105%, color-mix(in srgb, var(--suggest-tint) 10%, transparent), transparent 65%),
+        linear-gradient(120deg, rgb(255 255 255 / 3%), transparent 48%), linear-gradient(125deg, var(--product-dark-surface), var(--product-dark-page));
+    isolation: isolate;
+}
+.dark .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card::before,
+.dark .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card::after {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    pointer-events: none;
+}
+.dark .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card::before {
+    top: 42%;
+    left: -16%;
+    width: 150%;
+    height: 150%;
+    border-radius: 50%;
+    transform: rotate(-18deg);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--suggest-tint) 9%, transparent), transparent 52%);
+    filter: blur(12px);
+}
+.dark .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-card::after {
+    right: 8%;
+    bottom: 10%;
+    width: 30%;
+    height: 16%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, color-mix(in srgb, var(--suggest-tint) 26%, transparent), transparent 72%);
+    filter: blur(6px);
+}
+.dark .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-art {
+    max-width: 43%;
+    mask-image: none;
+}
+.dark .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-copy {
+    width: 60%;
+}
+
+@media (min-width: 1024px) and (max-width: 1350px) {
+    .dark .app-user-workspace.app-home-workspace .creation-empty-suggest .suggest-copy {
+        width: 54%;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

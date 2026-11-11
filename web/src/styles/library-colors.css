@@ -54,17 +54,18 @@
 }
 
 .dark .app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) {
-    --library-ink: #e5edff;
+    --library-ink: var(--product-dark-ink);
     --library-muted: var(--product-text-muted);
     --library-accent: var(--product-text-accent);
-    --library-selected: #263c66;
-    --library-edge: #34486f;
-    --library-card: #1a2a49;
-    --library-card-hover: #203357;
-    --library-content-background: linear-gradient(135deg, rgb(255 255 255 / 6%) 0%, rgb(255 255 255 / 3%) 55%, rgb(255 255 255 / 1%) 100%);
-    --library-primary: #4177e9;
-    --library-primary-hover: #5688ef;
-    --library-background: radial-gradient(ellipse at top left, #233d6a, transparent 65%), #101c35;
+    --library-selected: var(--product-dark-selected);
+    --library-edge: var(--product-dark-edge);
+    --library-card: var(--product-dark-raised);
+    --library-card-hover: var(--product-dark-hover);
+    --library-content-background: var(--product-dark-surface);
+    --library-primary: var(--product-dark-ink);
+    --library-primary-hover: var(--product-dark-primary-hover);
+    --library-background: var(--product-dark-page);
+    --button-primary-fg: var(--product-dark-page);
 }
 
 .app-user-workspace :is(.assets-library-page, .task-center-page, .canvas-library-colors) .studio-band > .app-page-header {

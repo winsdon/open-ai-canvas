@@ -967,6 +967,18 @@
 }
 
 .dark {
+    /* Neutral charcoal palette shared by workspace pages and portal surfaces. */
+    --product-dark-page: #141414;
+    --product-dark-nav: #111111;
+    --product-dark-surface: #1f1f1f;
+    --product-dark-raised: #262626;
+    --product-dark-hover: #2c2c2c;
+    --product-dark-selected: #333333;
+    --product-dark-edge: #333333;
+    --product-dark-edge-strong: #525252;
+    --product-dark-ink: #f7f7f7;
+    --product-dark-muted: #a3a3a3;
+    --product-dark-primary-hover: #dedede;
     --background: #0f0f11;
     --auth-page-bg: #08090c;
     --auth-panel-bg: #0b0c10;
@@ -5580,7 +5592,6 @@
     .canvas-folder-card:hover,
     .canvas-folder-card:focus-within {
         background: var(--card-surface-hover);
-        transform: translateY(-2px);
     }
 
     .canvas-folder-card:active {
@@ -8989,10 +9000,6 @@
         color: var(--foreground);
         padding: 0;
         transition: transform var(--motion-state) var(--motion-ease-out);
-    }
-    .project-asset-folder-card:hover,
-    .project-asset-folder-card:focus-within {
-        transform: translateY(var(--library-hover-offset));
     }
     .project-asset-folder-card:focus-visible {
         outline: 2px solid var(--ring);
@@ -26475,17 +26482,17 @@ html:not(.dark) .creation-home .creation-user-message-copy-wrap {
 
 .dark .app-user-workspace,
 .dark .app-user-overlays {
-    --user-page-bg: #151517;
-    --user-surface: #1c1c1f;
-    --user-surface-raised: #222226;
-    --user-surface-muted: #26262a;
-    --user-surface-hover: #303036;
-    --user-control-pressed: #3a3a40;
+    --user-page-bg: var(--product-dark-page);
+    --user-surface: var(--product-dark-surface);
+    --user-surface-raised: var(--product-dark-raised);
+    --user-surface-muted: var(--product-dark-raised);
+    --user-surface-hover: var(--product-dark-hover);
+    --user-control-pressed: var(--product-dark-selected);
     --user-border: rgba(255, 255, 255, 0.09);
     --user-border-strong: rgba(255, 255, 255, 0.16);
-    --user-ink: #f3f3f5;
-    --user-ink-muted: color-mix(in srgb, var(--user-ink) 72%, transparent);
-    --user-ink-soft: color-mix(in srgb, var(--user-ink) 56%, transparent);
+    --user-ink: var(--product-dark-ink);
+    --user-ink-muted: var(--product-dark-muted);
+    --user-ink-soft: var(--product-dark-muted);
     --user-shadow-card: none;
     --user-shadow-hover: none;
 }

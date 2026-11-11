@@ -95,6 +95,175 @@
 .app-user-workspace.app-product-workspace .app-workspace-nav-active-pill {
     background: var(--workspace-nav-selected);
 }
+
+/* Move the intact nib as a rigid pen; finish the gesture even on pointer leave. */
+.app-user-workspace .app-workspace-nav-link:is([data-nav-id="projects"], [data-nav-id="canvas"], [data-nav-id="skills"]) .app-workspace-nav-icon svg {
+    overflow: visible;
+}
+
+.canvas-nav-parts {
+    display: none;
+}
+.canvas-nav-top {
+    --panel-x: 0px;
+    --panel-y: -3px;
+}
+.canvas-nav-left {
+    --panel-x: -2.5px;
+    --panel-y: 2px;
+}
+.canvas-nav-right {
+    --panel-x: 2.5px;
+    --panel-y: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .app-workspace-nav-icon.is-separating .canvas-nav-rest {
+        display: none;
+    }
+    .app-workspace-nav-icon.is-separating .canvas-nav-parts {
+        display: inline;
+    }
+    .app-workspace-nav-icon.is-separating .canvas-nav-piece {
+        animation: workspace-canvas-assemble 620ms cubic-bezier(0.2, 0.8, 0.2, 1) 1;
+    }
+    .app-user-workspace .app-workspace-nav-link[data-nav-id="home"] .app-workspace-nav-icon.is-writing {
+        transform-origin: 25% 25%;
+        animation: workspace-create-write 620ms cubic-bezier(0.45, 0, 0.25, 1) 1;
+    }
+
+    /* Lucide Clapperboard: paths 1, 2 and 4 form the intact top bar.
+       Its lower-left corner (3, 11) stays attached to the stationary base. */
+    .app-user-workspace .app-workspace-nav-link[data-nav-id="projects"] .app-workspace-nav-icon.is-clapping svg > path:is(:nth-child(1), :nth-child(2), :nth-child(4)) {
+        transform-box: view-box;
+        transform-origin: 3px 11px;
+        animation: workspace-clapper-snap 740ms cubic-bezier(0.2, 0.8, 0.2, 1) 1;
+    }
+
+    /* LibraryBig's last path is the intact leaning book; anchor its lower edge. */
+    .app-user-workspace .app-workspace-nav-link[data-nav-id="skills"] .app-workspace-nav-icon.is-tipping svg > path:last-child {
+        transform-box: view-box;
+        transform-origin: 18px 20px;
+        animation: workspace-skills-tip 700ms cubic-bezier(0.2, 0.8, 0.2, 1) 1;
+    }
+
+    /* Blocks' detached square fits the empty upper-right cell at (10, 6). */
+    .app-user-workspace .app-workspace-nav-link[data-nav-id="plugins"] .app-workspace-nav-icon.is-joining svg > rect {
+        animation: workspace-plugins-join 620ms cubic-bezier(0.2, 0.8, 0.2, 1) 1;
+    }
+
+    /* The original rounded rect runs clockwise. 72 covers its 68.57-unit perimeter. */
+    .app-user-workspace .app-workspace-nav-link[data-nav-id="tasks"] .app-workspace-nav-icon.is-tracing svg > rect {
+        stroke-dasharray: 72 72;
+        animation: workspace-history-trace 680ms cubic-bezier(0.3, 0.1, 0.3, 1) 1;
+    }
+
+    /* Images: move the landscape, sun and frame together onto the stationary back sheet. */
+    .app-user-workspace .app-workspace-nav-link[data-nav-id="assets"] .app-workspace-nav-icon.is-stacking svg > :is(path:first-child, circle, rect) {
+        animation: workspace-assets-stack 620ms cubic-bezier(0.2, 0.8, 0.2, 1) 1;
+    }
+}
+
+@keyframes workspace-assets-stack {
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+    45% {
+        transform: translate(-6px, 6px);
+    }
+    68% {
+        transform: translate(-6px, 6px);
+        animation-timing-function: cubic-bezier(0.65, 0, 0.3, 1);
+    }
+}
+
+@keyframes workspace-history-trace {
+    from {
+        stroke-dashoffset: 72;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes workspace-plugins-join {
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+    45% {
+        transform: translate(-4px, 4px);
+    }
+    68% {
+        transform: translate(-4px, 4px);
+        animation-timing-function: cubic-bezier(0.65, 0, 0.3, 1);
+    }
+}
+
+@keyframes workspace-skills-tip {
+    0%,
+    68%,
+    100% {
+        transform: rotate(0deg);
+    }
+    38% {
+        transform: rotate(19.9deg);
+    }
+    50% {
+        transform: rotate(19.9deg);
+        animation-timing-function: cubic-bezier(0.65, 0, 1, 0.5);
+    }
+    81% {
+        transform: rotate(2deg);
+    }
+}
+
+@keyframes workspace-canvas-assemble {
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+    45% {
+        transform: translate(var(--panel-x), var(--panel-y));
+    }
+    70% {
+        transform: translate(var(--panel-x), var(--panel-y));
+        animation-timing-function: cubic-bezier(0.65, 0, 0.3, 1);
+    }
+}
+
+@keyframes workspace-clapper-snap {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    32% {
+        transform: rotate(-16deg);
+    }
+    44% {
+        transform: rotate(-16deg);
+        animation-timing-function: cubic-bezier(0.7, 0, 1, 0.6);
+    }
+    59%,
+    66% {
+        /* atan(5 / 17.2): the source top bar meets the horizontal base. */
+        transform: rotate(16.21deg);
+    }
+}
+
+@keyframes workspace-create-write {
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    55% {
+        transform: translate(6px, 0) rotate(0deg);
+    }
+    72% {
+        transform: translate(6px, -2px) rotate(-6deg);
+    }
+}
 .app-user-workspace.app-product-workspace .app-workspace-nav-link.is-active {
     color: var(--workspace-nav-active-icon) !important;
     font-weight: 600 !important;
@@ -264,16 +433,17 @@
 
 .dark .app-user-workspace.app-product-workspace {
     --workspace-nav-active-icon: var(--workspace-nav-ink);
-    --workspace-shell-bg: #101b38;
-    --workspace-shell-border: rgb(152 178 232 / 17%);
-    --workspace-nav-bg: #132140;
-    --workspace-nav-ink: #e5edff;
+    --workspace-shell-bg: var(--product-dark-page);
+    --workspace-shell-border: var(--product-dark-edge);
+    --workspace-nav-bg: var(--product-dark-nav);
+    --workspace-nav-ink: var(--product-dark-ink);
     --workspace-nav-muted: var(--product-text-muted);
     --workspace-nav-soft: var(--product-text-muted);
     --workspace-nav-item: var(--workspace-nav-ink);
     --workspace-nav-icon: var(--product-text-muted);
-    --workspace-nav-border: #3e507a;
-    --workspace-nav-hover: #23385d;
-    --workspace-nav-selected: #2f4880;
+    --workspace-nav-border: var(--product-dark-edge);
+    --workspace-nav-hover: var(--product-dark-hover);
+    --workspace-nav-selected: var(--product-dark-raised);
+    --workspace-nav-focus: var(--product-dark-muted);
     --workspace-nav-accent: var(--product-text-accent);
 }

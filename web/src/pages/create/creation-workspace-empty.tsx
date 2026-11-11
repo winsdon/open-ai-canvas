@@ -5,12 +5,12 @@ import type { CreationMode } from "./creation-assets";
 import { ArrowUp, ChevronDown, Clapperboard, FileText, Image as ImageIcon, Blocks, Bookmark } from "lucide-react";
 import { LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
-import { aceternityMotion } from "@/lib/aceternity-motion";
 import { curatedInspirations, inspirationSourceOf, inspirationSources } from "@/lib/inspirations/catalog";
 import { modeLabels } from "./creation-types";
 import { Button } from "antd";
 import { useTranslation } from "react-i18next";
 import { translate } from "@/i18n";
+import { useThemeStore } from "@/stores/use-theme-store";
 
 export const creationEmptyBannerFrames = [
     {
@@ -103,17 +103,22 @@ export const creationEmptySuggestions: Array<{ mode: CreationMode; icon: typeof 
 export function CreationEmptySuggest({ onStartPrompt, onOpenLibrary }: { onStartPrompt: (mode: CreationMode, prompt: string) => void; onOpenLibrary: () => void }) {
     const { t } = useTranslation();
     const reducedMotion = useReducedMotion();
+    const theme = useThemeStore((state) => state.theme);
+    const [hoveredSuggestion, setHoveredSuggestion] = useState<number | null>(null);
     return (
         <LayoutGroup id="creation-empty-suggest">
             <div className="creation-empty-suggest" aria-label={t("create.empty.suggestLabel")}>
                 {creationEmptySuggestions.map((item, index) => {
                     const Icon = item.icon;
+                    const artName = ["first-shot", "reference", "story", "skills"][index];
+                    const animate = hoveredSuggestion === index && !reducedMotion;
+                    const artSuffix = theme === "dark" ? (animate ? "dark-hover.webp" : "dark-poster.webp") : animate ? "hover.gif" : "poster.webp";
                     const start = () => {
                         if (item.openLibrary) onOpenLibrary();
                         else onStartPrompt(item.mode, item.prompt);
                     };
                     return (
-                        <motion.button key={item.title} type="button" className={`suggest-card suggest-card-${index}`} onClick={start} whileHover={reducedMotion ? undefined : { y: -2 }} transition={aceternityMotion.spring.surface}>
+                        <motion.button key={item.title} type="button" className={`suggest-card suggest-card-${index}`} onClick={start} onHoverStart={() => setHoveredSuggestion(index)} onHoverEnd={() => setHoveredSuggestion(null)}>
                             <span className="library-icon-tile suggest-icon">
                                 <Icon size={18} strokeWidth={2} />
                             </span>
@@ -121,7 +126,7 @@ export function CreationEmptySuggest({ onStartPrompt, onOpenLibrary }: { onStart
                                 <strong>{item.title}</strong>
                                 <span>{item.hint}</span>
                             </span>
-                            <img className="suggest-art" src={`/images/home/${["first-shot", "reference", "story", "skills"][index]}-card.png`} alt="" aria-hidden="true" width="1200" height="600" />
+                            <img className="suggest-art" src={`/images/home/${artName}-${artSuffix}`} alt="" aria-hidden="true" width={512} height={512} />
                         </motion.button>
                     );
                 })}

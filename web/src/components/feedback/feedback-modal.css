@@ -43,15 +43,19 @@
     --unified-input-placeholder: var(--feedback-soft);
 }
 .dark .feedback-modal-root {
-    --feedback-background: linear-gradient(rgb(16 27 56 / 94%), rgb(16 27 56 / 97%)), url("/images/home/aurora-background.png") center / cover;
-    --feedback-paper: rgb(29 39 73 / 88%);
-    --feedback-edge: #3e507a;
-    --feedback-selected: #30446f;
-    --feedback-accent: #9abbff;
-    --feedback-ink: #e5edff;
-    --feedback-muted: #a7b6dc;
-    --feedback-soft: #8c9fc8;
-    --background: #101b38;
+    --feedback-background: var(--product-dark-page);
+    --feedback-paper: var(--product-dark-raised);
+    --feedback-edge: var(--product-dark-edge);
+    --feedback-selected: var(--product-dark-selected);
+    --feedback-accent: var(--product-dark-ink);
+    --feedback-ink: var(--product-dark-ink);
+    --feedback-muted: var(--product-dark-muted);
+    --feedback-soft: var(--product-dark-muted);
+    --background: var(--product-dark-page);
+    --button-primary-bg: var(--product-dark-ink);
+    --button-primary-hover-bg: var(--product-dark-primary-hover);
+    --button-primary-active-bg: var(--product-dark-primary-hover);
+    --button-primary-fg: var(--product-dark-page);
 }
 .feedback-modal-root .feedback-modal .ant-modal-container {
     background: var(--feedback-background) !important;

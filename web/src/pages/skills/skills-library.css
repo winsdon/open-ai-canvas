@@ -13,6 +13,7 @@
     --skills-success-bg: #ecfaf3;
     --skills-install: #1b1e2a;
     --skills-install-hover: #30374e;
+    --skills-install-ink: #fff;
     --user-ink: var(--skills-ink);
     --user-ink-muted: var(--skills-muted);
     --user-ink-soft: var(--skills-muted);
@@ -163,13 +164,13 @@
     border: 0;
     border-radius: 9px;
     background: var(--skills-install);
-    color: #fff;
+    color: var(--skills-install-ink);
     font-size: var(--fs-ui);
     box-shadow: none;
 }
 .skills-reference-library .skills-install-button.ant-btn:hover {
     background: var(--skills-install-hover);
-    color: #fff;
+    color: var(--skills-install-ink);
 }
 .skills-install-button svg {
     width: 21px;
@@ -431,20 +432,21 @@
     }
 }
 .dark .app-user-workspace .skills-reference-library {
-    --skills-ink: #e5edff;
+    --skills-ink: var(--product-dark-ink);
     --skills-muted: var(--product-text-muted);
     --skills-accent: var(--product-text-accent);
-    --skills-selected: #263c66;
-    --skills-edge: #34486f;
-    --skills-panel: rgb(22 37 64 / 80%);
-    --skills-browser-background: linear-gradient(135deg, rgb(255 255 255 / 6%) 0%, rgb(255 255 255 / 3%) 55%, rgb(255 255 255 / 1%) 100%);
-    --skills-card: #1a2a49;
-    --skills-card-hover: #203357;
+    --skills-selected: var(--product-dark-selected);
+    --skills-edge: var(--product-dark-edge);
+    --skills-panel: var(--product-dark-surface);
+    --skills-browser-background: var(--product-dark-surface);
+    --skills-card: var(--product-dark-raised);
+    --skills-card-hover: var(--product-dark-hover);
     --skills-success: #7bd6a8;
     --skills-success-bg: #1b493d;
-    --skills-install: #4177e9;
-    --skills-install-hover: #5688ef;
-    background: radial-gradient(ellipse at top left, #233d6a, transparent 65%), #101c35 !important;
+    --skills-install: var(--product-dark-ink);
+    --skills-install-hover: var(--product-dark-primary-hover);
+    --skills-install-ink: var(--product-dark-page);
+    background: var(--product-dark-page) !important;
 }
 @media (prefers-reduced-motion: reduce) {
     .skills-reference-library :is(.skill-tile, .skills-rail-item, .skill-tile-add) {

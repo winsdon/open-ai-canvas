@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-import type { CanvasTheme } from "@/lib/canvas-theme";
+import { canvasThemes, type CanvasTheme } from "@/lib/canvas-theme";
 
 export function canvasDockStyle(theme: CanvasTheme, color: string = theme.toolbar.item): CSSProperties {
     return {
@@ -8,6 +8,7 @@ export function canvasDockStyle(theme: CanvasTheme, color: string = theme.toolba
         borderColor: "var(--dock-border)",
         color,
         boxShadow: "var(--elevation-overlay)",
+        ...(theme === canvasThemes.dark ? { "--dock-surface": theme.toolbar.panel, "--dock-border": theme.toolbar.border } : {}),
         "--dock-command-bg": theme.spatial.surface,
         "--dock-command-hover": theme.toolbar.itemHover,
         "--dock-command-active": theme.toolbar.activeBg,

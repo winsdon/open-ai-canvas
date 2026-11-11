@@ -2046,9 +2046,6 @@ html:not(.dark) .commerce-platform-logo[data-monochrome="true"] {
         background 0.18s ease,
         transform 0.18s ease;
 }
-.commerce-material-tile:hover {
-    transform: translateY(-1px);
-}
 .commerce-material-tile.is-selected {
     border-color: color-mix(in srgb, var(--user-accent) 55%, transparent);
     background: color-mix(in srgb, var(--user-accent) 13%, var(--user-surface-muted));
@@ -3197,7 +3194,6 @@ html:not(.dark) .commerce-platform-logo[data-monochrome="true"] {
     border-radius: 10px;
 }
 .commerce-material-tile:hover {
-    transform: translateY(-2px);
     border-color: color-mix(in srgb, var(--user-ink) 16%, var(--user-border));
 }
 .commerce-material-tile.is-selected {

@@ -22,11 +22,16 @@ let originalWindow: PropertyDescriptor | undefined;
 beforeEach(() => {
     originalWindow = Object.getOwnPropertyDescriptor(globalThis, "window");
     storage.clear();
-    Object.defineProperty(globalThis, "window", { configurable: true, value: { localStorage: {
-        getItem: (key: string) => storage.get(key) ?? null,
-        setItem: (key: string, value: string) => storage.set(key, value),
-        removeItem: (key: string) => storage.delete(key),
-    } } });
+    Object.defineProperty(globalThis, "window", {
+        configurable: true,
+        value: {
+            localStorage: {
+                getItem: (key: string) => storage.get(key) ?? null,
+                setItem: (key: string, value: string) => storage.set(key, value),
+                removeItem: (key: string) => storage.delete(key),
+            },
+        },
+    });
 });
 afterEach(() => {
     if (originalWindow) Object.defineProperty(globalThis, "window", originalWindow);
@@ -121,7 +126,7 @@ describe("canvas appearance persistence and presets", () => {
 
     test("changing tone switches background, grid and interface together and preserves the other tone", () => {
         const switched = updateCustomCanvasAppearance(custom, { baseTheme: "dark" }, "light");
-        expect(switched.custom).toEqual({ baseTheme: "dark", backgroundColor: "#000000", backgroundBrightness: 0, gridColor: "#FFFFFF", gridOpacity: 32 });
+        expect(switched.custom).toEqual({ baseTheme: "dark", backgroundColor: "#141414", backgroundBrightness: 0, gridColor: "#FFFFFF", gridOpacity: 24 });
         expect(switchCanvasAppearanceTheme(switched, "light").custom).toEqual(custom.custom);
     });
 
@@ -215,7 +220,7 @@ describe("canvas appearance persistence and presets", () => {
             const restored = switchCanvasAppearanceTheme(reopened, theme);
             expect(canvasAppearanceValues(restored, opposite)).toEqual(visible);
             expect(restored.custom).toEqual(savedCustom.custom);
-            expect(restored.preset?.values.gridOpacity).toBe(theme === "light" ? 80 : 32);
+            expect(restored.preset?.values.gridOpacity).toBe(theme === "light" ? 80 : 24);
             expect(canvasAppearanceValues(switchCanvasAppearanceTheme(restored, opposite), theme)).toEqual(canvasAppearanceValues(away, theme));
         }
     });
