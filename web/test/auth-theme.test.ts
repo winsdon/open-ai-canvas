@@ -10,7 +10,8 @@ describe("authentication follows the application theme", () => {
         // globals.css 在不同平台上可能是 LF 或 CRLF；先归一化再分段，
         // 否则按字面换行查找 .dark 段会返回 -1，把断言变成永远失败。
         const css = source("styles/globals.css").replace(/\r\n/g, "\n");
-        const dark = css.slice(css.indexOf(".dark {\n    --background:"));
+        const dark = css.match(/^\.dark\s*\{([^}]+)\}/m)?.[1];
+        expect(dark).toBeDefined();
         for (const [mode, background, panel, card] of [
             ["light", "#ffffff", "#f7f7f7", "#ffffff"],
             ["dark", "#08090c", "#0b0c10", "#121318"],

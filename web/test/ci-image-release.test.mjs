@@ -9,6 +9,10 @@ const scripts = fileURLToPath(new URL("../../.github/scripts/", import.meta.url)
 const temporaryDirectories = [];
 const sha = "a".repeat(40);
 const digest = "b".repeat(64);
+// Windows may resolve bash to the WSL launcher; Git's sh is Bash and accepts Windows paths.
+const gitExecPath = process.platform === "win32" ? spawnSync("git", ["--exec-path"], { encoding: "utf8" }).stdout?.trim() : "";
+const gitShell = gitExecPath ? path.resolve(gitExecPath, "../../..", "usr/bin/sh.exe") : "";
+const shell = gitShell && existsSync(gitShell) ? gitShell : "bash";
 afterEach(() => {
     for (const directory of temporaryDirectories.splice(0)) rmSync(directory, { recursive: true, force: true });
 });
@@ -29,7 +33,7 @@ function fixture(overrides = {}) {
     writeFileSync(output, "");
     const env = {
         ...process.env,
-        PATH: `${bin}${path.delimiter}${process.env.PATH}`,
+        PATH: [bin, ...(shell === gitShell ? [path.dirname(gitShell)] : []), process.env.PATH].join(path.delimiter),
         GITHUB_OUTPUT: output.replaceAll("\\", "/"),
         GITHUB_SHA: sha,
         GITHUB_REF: "refs/heads/main",
@@ -49,7 +53,7 @@ function fixture(overrides = {}) {
         run: (script, ...args) => {
             const executable = path.join(root, script);
             writeFileSync(executable, readFileSync(path.join(scripts, script), "utf8").replaceAll("\r\n", "\n"));
-            return spawnSync("bash", [executable.replaceAll("\\", "/"), ...args], { env, encoding: "utf8" });
+            return spawnSync(shell, [executable.replaceAll("\\", "/"), ...args], { env, encoding: "utf8" });
         },
         output: () => readFileSync(output, "utf8"),
         call: () => (existsSync(env.MOCK_CALL) ? readFileSync(env.MOCK_CALL, "utf8") : ""),

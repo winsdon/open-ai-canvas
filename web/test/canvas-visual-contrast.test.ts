@@ -10,7 +10,7 @@ describe("canvas visual contrast", () => {
         }
     });
 
-    test("changes only the canvas substrate while retaining original surfaces", () => {
+    test("uses layered charcoal dark surfaces and retains the light palette", () => {
         expect(canvasThemes.light.canvas.background).toBe("#f0f0f0");
         expect(canvasThemes.light.node.fill).toBe("#ffffff");
         expect(canvasThemes.light.node.edge).toBe("rgba(15,23,42,.16)");
@@ -19,21 +19,21 @@ describe("canvas visual contrast", () => {
         expect(canvasThemes.light.toolbar.panel).toBe("rgba(255,255,255,.94)");
         expect(canvasThemes.light.spatial.elevated).toBe("rgba(255,255,255,.94)");
 
-        expect(canvasThemes.dark.canvas.background).toBe("#000000");
-        expect(canvasThemes.dark.node.fill).toBe("#181818");
+        expect(canvasThemes.dark.canvas.background).toBe("#141414");
+        expect(canvasThemes.dark.node.fill).toBe("#1f1f1f");
         expect(canvasThemes.dark.node.edge).toBe("rgba(255,255,255,.18)");
         expect(canvasThemes.dark.node.shadow).toBe("0 8px 24px rgba(0,0,0,.34)");
         expect(canvasThemes.dark.node.hoverShadow).toBe("0 12px 30px rgba(0,0,0,.46)");
-        expect(canvasThemes.dark.toolbar.panel).toBe("rgba(20,20,20,.97)");
+        expect(canvasThemes.dark.toolbar.panel).toBe("rgba(31,31,31,.94)");
         expect(canvasThemes.dark.toolbar.border).toBe("rgba(255,255,255,.1)");
-        expect(canvasThemes.dark.spatial.elevated).toBe("rgba(15,15,15,.97)");
+        expect(canvasThemes.dark.spatial.elevated).toBe("rgba(38,38,38,.97)");
     });
 
     test("pins intentional grid tokens while retaining canvas grid opacity", async () => {
         expect(canvasThemes.light.canvas.dot).toBe("rgba(0,0,0,.80)");
         expect(canvasThemes.light.canvas.line).toBe("rgba(0,0,0,.80)");
-        expect(canvasThemes.dark.canvas.dot).toBe("rgba(255,255,255,.32)");
-        expect(canvasThemes.dark.canvas.line).toBe("rgba(255,255,255,.32)");
+        expect(canvasThemes.dark.canvas.dot).toBe("rgba(255,255,255,.24)");
+        expect(canvasThemes.dark.canvas.line).toBe("rgba(255,255,255,.24)");
 
         const source = await Bun.file(new URL("../src/components/canvas/canvas-viewport.tsx", import.meta.url)).text();
         expect(source).toContain('opacity: mode === "dots" ? 0.62 : 0.4');
